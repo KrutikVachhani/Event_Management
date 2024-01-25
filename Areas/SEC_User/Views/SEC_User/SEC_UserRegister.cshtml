@@ -1,0 +1,179 @@
+﻿﻿@{
+    Layout = "~/Views/Shared/_RegisterLayout.cshtml";
+}
+
+@using Event_Management.Areas.SEC_User.Models;
+@model SEC_UserModel
+
+
+<div class="wrapper vh-100">
+    <div class="row align-items-center h-100">
+        <form class="col-lg-6 col-md-8 col-10 mx-auto" asp-area="SEC_User" asp-controller="SEC_User" asp-action="Register">
+            <div class="mx-auto text-center my-4">
+                <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="./index.html">
+                    <svg version="1.1" id="logo" class="navbar-brand-img brand-md" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 120 120" xml:space="preserve">
+                    <g>
+                    <polygon class="st0" points="78,105 15,105 24,87 87,87 	" />
+                    <polygon class="st0" points="96,69 33,69 42,51 105,51 	" />
+                    <polygon class="st0" points="78,33 15,33 24,15 87,15 	" />
+                </g>
+              </svg>
+                </a>
+                <h2 class="my-3">Register</h2>
+            </div>
+            <div class="form-group">
+                <label>UserName</label>
+                <input type="text" class="form-control" asp-for="UserName" id="inputName">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="firstname">Firstname</label>
+                    <input type="text" id="firstname" asp-for="FirstName" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="lastname">Lastname</label>
+                    <input type="text" id="lastname" asp-for="LastName" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" id="inputEmail" asp-for="EmailAddress" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Photopath</label>
+                    <input type="text" asp-for="PhotoPath" class="form-control">
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="inputPassword5">New Password</label>
+                        <input type="password" class="form-control" asp-for="Password" id="inputPassword5">
+                    </div>
+                    @* <div class="form-group">
+                    <label for="inputPassword6">Confirm Password</label>
+                    <input type="password" class="form-control" id="inputPassword6">
+                    </div> *@
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-2">Password requirements</p>
+                    <p class="small text-muted mb-2"> To create a new password, you have to meet all of the following requirements: </p>
+                    <ul class="small text-muted pl-4 mb-0">
+                        <li> Minimum 8 character </li>
+                        <li>At least one special character</li>
+                        <li>At least one number</li>
+                        <li>Can’t be the same as a previous password </li>
+                    </ul>
+                </div>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+            <div class="col-md-6">
+                <p class="mb-2">Already have an account? <a asp-area="SEC_User" asp-controller="SEC_User" asp-action="SEC_UserLogin">Log in</a></p>
+            </div>
+            <p class="mt-5 mb-3 text-muted text-center">© 2020</p>
+        </form>
+    </div>
+</div>
+@*
+<section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                <div class="d-flex justify-content-center py-4">
+                    <a href="index.html" class="logo d-flex align-items-center w-auto">
+                        <img src="assets/img/logo.png" alt="">
+                        <span class="d-none d-lg-block">NiceAdmin</span>
+                    </a>
+                </div><!-- End Logo -->
+
+                <div class="card mb-3">
+
+                    <div class="card-body">
+
+                        <div class="pt-4 pb-2">
+                            <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                            <p class="text-center small">Enter your personal details to create account</p>
+                        </div>
+
+                        <form class="row g-3 needs-validation" novalidate asp-area="SEC_User" asp-controller="SEC_User" asp-action="Register">
+
+                            <div class="col-12">
+                                <label for="yourUsername" class="form-label">Username</label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text" id="inputGroupPrepend"></span>
+                                    <input type="text" name="username" asp-for="UserName" class="form-control" id="yourUsername" required>
+                                    <div class="invalid-feedback">Please choose a username.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="yourPassword" class="form-label">Password</label>
+                                <input type="password" name="password" asp-for="Password" class="form-control" id="yourPassword" required>
+                                <div class="invalid-feedback">Please enter your password!</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="yourName" class="form-label">First Name</label>
+                                <input type="text" name="name" asp-for="FirstName" class="form-control" id="yourName" required>
+                                <div class="invalid-feedback">Please, enter your name!</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="yourName" class="form-label">Last Name</label>
+                                <input type="text" name="name" asp-for="LastName" class="form-control" id="yourName" required>
+                                <div class="invalid-feedback">Please, enter your name!</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="yourName" class="form-label">Photopath</label>
+                                <input type="text" name="name" asp-for="PhotoPath" class="form-control" id="yourName" required>
+                                <div class="invalid-feedback">Please, enter your name!</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="yourEmail" class="form-label">Your Email</label>
+                                <input type="email" name="email" asp-for="EmailAddress" class="form-control" id="yourEmail" required>
+                                <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                            </div>
+
+
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                                    <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
+                                    <div class="invalid-feedback">You must agree before submitting.</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                            </div>
+                            <div class="col-12">
+                                <p class="small mb-0">Already have an account? <a asp-area="SEC_User" asp-controller="SEC_User" asp-action="SEC_UserLogin">Log in</a></p>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="credits">
+                    <!-- All the links in the footer should remain intact. -->
+                    <!-- You can delete the links only if you purchased the pro version. -->
+                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section> *@
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

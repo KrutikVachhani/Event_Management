@@ -1,0 +1,100 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using System.Data;
+@using Event_Management.Areas.Venue.Models;
+@model VenueModel
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>Tiny Dashboard - A Bootstrap Dashboard Template</title>
+    <!-- Simple bar CSS -->
+    <link rel="stylesheet" href="~/admin/css/simplebar.css">
+    <!-- Fonts CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Icons CSS -->
+    <link rel="stylesheet" href="~/admin/css/feather.css">
+    <!-- Date Range Picker CSS -->
+    <link rel="stylesheet" href="~/admin/css/daterangepicker.css">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="~/admin/css/app-light.css" id="lightTheme" disabled>
+    <link rel="stylesheet" href="~/admin/css/app-dark.css" id="darkTheme">
+</head>
+<body>
+
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h2 class="page-title">Add/Edit Venue</h2>
+                <form method="post" asp-area="Venue" asp-controller="Venue" asp-action="VenueSave">
+            <div class="card shadow mb-4">
+                <div class="card-header">
+                    <strong class="card-title">Enter Details</strong>
+                </div>
+                @Html.HiddenFor(x => x.VenueID)
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="simpleinput" asp-for="VenueName">Venue Name</label>
+                                <input type="text" id="simpleinput" class="form-control" placeholder="Enter Venue Name" asp-for="VenueName">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="simpleinput">Location</label>
+                                <input type="text" class="form-control" placeholder="Enter Location" asp-for="Location">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="simpleinput">Capacity</label>
+                                <input type="text" class="form-control" placeholder="Enter Capacity" asp-for="Capacity">
+                            </div>
+
+                        </div> <!-- /.col -->
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="simpleinput">Contact Person</label>
+                                <input type="text" class="form-control" placeholder="Enter Contact Person Name" asp-for="ContactPerson">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="simpleinput">Contact Number</label>
+                                <input type="text" class="form-control" placeholder="Enter Contact Number" asp-for="ContactNumber">
+                            </div>
+                            <div class="form-group mb-3">
+                                <button type="submit" class="btn mb-2 btn-info">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- / .card -->
+                </form>
+        </div>
+    </div>
+
+    <script src="~/admin/js/jquery.min.js"></script>
+    <script src="~/admin/js/popper.min.js"></script>
+    <script src="~/admin/js/moment.min.js"></script>
+    <script src="~/admin/js/bootstrap.min.js"></script>
+    <script src="~/admin/js/simplebar.min.js"></script>
+    <script src='~/admin/js/daterangepicker.js'></script>
+    <script src='~/admin/js/jquery.stickOnScroll.js'></script>
+    <script src="~/admin/js/tinycolor-min.js"></script>
+    <script src="~/admin/js/config.js"></script>
+    <script src="~/admin/js/apps.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-56159088-1');
+    </script>
+</body>
+</html>
