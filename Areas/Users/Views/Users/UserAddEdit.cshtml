@@ -3,9 +3,10 @@
 }
 
 @using System.Data;
-@using Event_Management.Areas.Event.Models;
-@using Event_Management.Areas.Venue.Models;
-@model EventModel
+@using System.Data.SqlClient;
+@using Event_Management.Areas.Users.Models;
+@model UserModel
+
 
 
 <!doctype html>
@@ -34,47 +35,50 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <h2 class="page-title">Add/Edit Event</h2>
-            <form method="post" asp-area="Event" asp-controller="Event" asp-action="EventSave">
+            <form method="post" asp-area="Users" asp-controller="Users" asp-action="UsersSave">
                 <div class="card shadow mb-4">
                     <div class="card-header">
-                        <strong class="card-title">Enter Details</strong>
+                        <strong class="card-title">User Details</strong>
                     </div>
-                    @Html.HiddenFor(x => x.EventID)
+                    @Html.HiddenFor(x => x.UserID)
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <label for="simpleinput">Event Name</label>
-                                    <input type="text" id="simpleinput" class="form-control" placeholder="Enter Event Name" asp-for="EventName">
+                                    <label for="simpleinput">User Name</label>
+                                    <input type="text" id="simpleinput" class="form-control" placeholder="Enter User Name" asp-for="UserName">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="simpleinput">Event Date</label>
-                                    <input type="text" class="form-control" placeholder="Enter Location" asp-for="EventDateTime">
+                                    <label for="simpleinput">Password</label>
+                                    <input type="password" class="form-control" placeholder="Enter Password" asp-for="Password">
                                 </div>
-                                
+                                <div class="form-group mb-3">
+                                    <label for="simpleinput">Email</label>
+                                    <input type="text" class="form-control" placeholder="Enter Email" asp-for="EmailAddress">
+                                </div>
+
                             </div> <!-- /.col -->
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <label for="simpleinput">IsPrivate</label>
-                                    <input type="text" class="form-control" placeholder="Enter Event is Private Or Not" asp-for="IsPrivate">
+                                    <label for="simpleinput">First Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter User Name" asp-for="FirstName">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="example-select">Select Venue</label>
-                                    <select class="form-control" id="VenueID" name="VenueID" asp-for="@Model.VenueID">
-                                        <option value="">- - -</option>
-                                        @foreach(VenueModel VenueName in ViewBag.VenueList)
-                                        {
-                                            <option value="@VenueName.VenueID">@VenueName.VenueName</option>
-                                        }
-                                    </select>
+                                    <label for="simpleinput">Last Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter Last Name" asp-for="LastName">
                                 </div>
-                                
+                                <div class="form-group mb-3">
+                                    <label for="simpleinput">Upload Photo</label>
+                                    <input type="text" class="form-control" placeholder="Upload Photo" asp-for="PhotoPath">
+                                </div>
                             </div>
-                            <br/>
-                            <br/>
-                                <div class="form-group col-md-6">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+
                                     <button type="submit" class="btn mb-2 btn-info">Save</button>
-                                    <a asp-area="Event" asp-controller="Event" asp-action="EventList" class="btn mb-2 btn-info" >Cancel</a>
+
+                                    <a asp-area="Users" asp-controller="Users" asp-action="UserList" class="btn mb-2 btn-info">Cancel</a>
+                                    </div>
                                 </div>
                         </div>
                     </div>
@@ -104,6 +108,5 @@
         gtag('js', new Date());
         gtag('config', 'UA-56159088-1');
     </script>
-
 </body>
 </html>

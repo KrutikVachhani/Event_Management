@@ -122,7 +122,7 @@
                                             <table>
                                                 <thead>
                                                     <tr>
-                                                        <th></th>
+                                                        <th>No.</th>
                                                         <th>
                                                             <strong>Event Name</strong>
                                                         </th>
@@ -138,23 +138,42 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach(DataRow dr in Model.Rows)
+                                                    @foreach (DataRow dr in Model.Rows)
                                                     {
-                                                    <tr>
-                                                        <td class="event-time">@dr["EventID"]</td>
-                                                        <td class="break hover-bg">
-                                                            <h5>@dr["EventName"]</h5>
-                                                        </td>
-                                                        <td class="break hover-bg">
-                                                            <h5>@dr["EventDateTime"]</h5>
-                                                        </td>
-                                                        <td class="break hover-bg">
-                                                            <h5>@dr["IsPrivate"]</h5>
-                                                        </td>
-                                                        <td class="break hover-bg">
-                                                            <h5>@dr["VenueName"]</h5>
-                                                        </td>
-                                                    </tr>   
+                                                        <tr>
+                                                            <form asp-area="" asp-controller="Home" asp-action="EventByID" asp-route-..="@dr["EventID"]">
+                                                            <td>
+                                                                    @* <input type="hidden" name="EventID" value="@int.Parse(@dr["EventID"].ToString())"> *@
+                                                                <button> type="submit">@dr["EventID"]</button>
+                                                            </td>
+                                                            </form>
+
+                                                            @* <td class="event-time">
+                                                        <a asp-controller="Home" asp-action="EventDetails">
+                                                        @dr["EventID"]
+                                                        </a>
+                                                        </td> *@
+                                                            <td class="break hover-bg">
+                                                                <a asp-controller="Home" asp-action="EventDetails">
+                                                                    <h5>@dr["EventName"]</h5>
+                                                                </a>
+                                                            </td>
+                                                            <td class="break hover-bg">
+                                                                <a asp-controller="Home" asp-action="EventDetails">
+                                                                    <h5>@dr["EventDateTime"]</h5>
+                                                                </a>
+                                                            </td>
+                                                            <td class="break hover-bg">
+                                                                <a asp-controller="Home" asp-action="EventDetails">
+                                                                    <h5>@dr["IsPrivate"]</h5>
+                                                                </a>
+                                                            </td>
+                                                            <td class="break hover-bg">
+                                                                <a asp-controller="Home" asp-action="EventDetails">
+                                                                    <h5>@dr["VenueName"]</h5>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
                                                     }
                                                 </tbody>
                                             </table>

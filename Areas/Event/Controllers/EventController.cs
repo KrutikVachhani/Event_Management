@@ -7,6 +7,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Reflection;
 
 namespace Event_Management.Areas.Event.Controllers
 {
@@ -29,6 +30,21 @@ namespace Event_Management.Areas.Event.Controllers
             return View(dataTable);
         }
         #endregion
+
+
+        public IActionResult EventByID(int EventID)
+        {
+            EventModel eventModel = eventDALBase.PR_Event_SelectByID(EventID);
+
+            if (eventModel != null)
+            {
+                return View("EventByID", eventModel);
+            }
+            else
+            {
+                return RedirectToAction("EventList");
+            }
+        }
 
         #region Event By ID
         public IActionResult EventAdd(int EventID)

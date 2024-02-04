@@ -53,6 +53,8 @@ namespace Event_Management.DAL.Event
                     eventModel.EventDateTime = DateTime.Parse(dr["EventDateTime"].ToString());
                     eventModel.IsPrivate = Convert.ToBoolean(dr["IsPrivate"]);
                     eventModel.VenueID = Convert.ToInt32(dr["VenueID"]);
+                    eventModel.Created = DateTime.Parse(dr["Created"].ToString());
+                    eventModel.Modified = DateTime.Parse(dr["Modified"].ToString());
                 }
                 return eventModel;
             }

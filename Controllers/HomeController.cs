@@ -60,5 +60,20 @@ namespace Event_Management.Controllers
         {
             return View();
         }
+
+        public IActionResult EventDetails()
+        {
+            return View();
+        }
+
+        public IActionResult EventByID()
+        {
+            return View();
+        }
+
+        public IActionResult FeedbackSave()
+        {
+            return View();
+        }
     }
 }
