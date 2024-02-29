@@ -24,25 +24,30 @@
             <div class="form-group">
                 <label>UserName</label>
                 <input type="text" class="form-control" asp-for="UserName" id="inputName">
+                <span asp-validation-for="UserName"></span>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="firstname">Firstname</label>
                     <input type="text" id="firstname" asp-for="FirstName" class="form-control">
+                    <span asp-validation-for="FirstName"></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="lastname">Lastname</label>
                     <input type="text" id="lastname" asp-for="LastName" class="form-control">
+                    <span asp-validation-for="LastName"></span>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Email</label>
                     <input type="email" id="inputEmail" asp-for="EmailAddress" class="form-control">
+                    <span asp-validation-for="EmailAddress"></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label>Photopath</label>
                     <input type="text" asp-for="PhotoPath" class="form-control">
+                    <span asp-validation-for="PhotoPath"></span>
                 </div>
             </div>
             <hr class="my-4">
@@ -51,6 +56,7 @@
                     <div class="form-group">
                         <label for="inputPassword5">New Password</label>
                         <input type="password" class="form-control" asp-for="Password" id="inputPassword5">
+                        <span asp-validation-for="Password"></span>
                     </div>
                     @* <div class="form-group">
                     <label for="inputPassword6">Confirm Password</label>

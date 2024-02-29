@@ -1,5 +1,4 @@
 ﻿using Event_Management.Areas.Venue.Models;
-using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data;
 using System.Data.Common;
@@ -30,6 +29,7 @@ namespace Event_Management.DAL.Venue
         }
         #endregion
 
+
         #region SelectByID
         public VenueModel PR_Venue_SelectByID(int VenueID)
         {
@@ -57,7 +57,7 @@ namespace Event_Management.DAL.Venue
                 }
                 return venueModel;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -101,6 +101,7 @@ namespace Event_Management.DAL.Venue
             }
         }
         #endregion
+
 
         #region Delete
         public bool PR_Venue_Delete(int VenueID)

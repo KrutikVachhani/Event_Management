@@ -23,13 +23,13 @@
 
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="../manup/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="../manup/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../manup/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="../manup/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../manup/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="../manup/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../manup/css/style.css" type="text/css">
+    <link rel="stylesheet" href="~/manup/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/manup/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/manup/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/manup/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/manup/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="~/manup/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/manup/css/style.css" type="text/css">
 </head>
 <body>
     @Html.HiddenFor(x => x.EventID)
@@ -112,7 +112,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="about-pic">
-                                <img src="../manup/img/about-us.jpg" alt="">
+                                <img src="~/manup/img/about-us.jpg" alt="">
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -183,7 +183,7 @@
             </section>
             <!-- Story Section End -->
             <!-- Pricing Section Begin -->
-            <section class="pricing-section set-bg spad" data-setbg="img/pricing-bg.jpg">
+            <section class="pricing-section set-bg spad" data-setbg="../manup/img/pricing-bg.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
@@ -266,16 +266,15 @@
                         <div class="col-lg-12">
                             <form class="comment-form contact-form" asp-area="Comment" asp-controller="Comment" asp-action="CommentSave">
                                 <div class="row">
-                                    <div class="col-lg-3">
-                                        <input type="text" placeholder="EventID" asp-for="EventID" value="@Model.EventID">
-                                    </div>
-                                    <div class="col-lg-3">
+                                        <input type="hidden" placeholder="EventID" asp-for="EventID" value="@Model.EventID">
+                                    
+                                    <div class="col-lg-4">
                                         <input type="text" placeholder="Name" asp-for="Name">
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-4">
                                         <input type="text" placeholder="Email" asp-for="Email">
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-4">
                                         <input type="text" placeholder="Phone" asp-for="PhoneNumber">
                                     </div>
                                     <div class="col-lg-12 text-center">
@@ -314,12 +313,12 @@
             </main>
             </div>
             
-            <script src="../manup/js/jquery-3.3.1.min.js"></script>
-            <script src="../manup/js/bootstrap.min.js"></script>
-            <script src="../manup/js/jquery.magnific-popup.min.js"></script>
-            <script src="../manup/js/jquery.countdown.min.js"></script>
-            <script src="../manup/js/jquery.slicknav.js"></script>
-            <script src="../manup/js/owl.carousel.min.js"></script>
-            <script src="../manup/js/main.js"></script>
+            <script src="~/manup/js/jquery-3.3.1.min.js"></script>
+            <script src="~/manup/js/bootstrap.min.js"></script>
+            <script src="~/manup/js/jquery.magnific-popup.min.js"></script>
+            <script src="~/manup/js/jquery.countdown.min.js"></script>
+            <script src="~/manup/js/jquery.slicknav.js"></script>
+            <script src="~/manup/js/owl.carousel.min.js"></script>
+            <script src="~/manup/js/main.js"></script>
 </body>
 </html>

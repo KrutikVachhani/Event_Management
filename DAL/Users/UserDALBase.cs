@@ -2,6 +2,10 @@
 using System.Data.Common;
 using System.Data;
 using Event_Management.Areas.Users.Models;
+using Event_Management.Areas.Venue.Models;
+using Microsoft.AspNetCore.Mvc;
+using DocumentFormat.OpenXml.Spreadsheet;
+using MessagePack;
 
 namespace Event_Management.DAL.Users
 {
@@ -65,7 +69,6 @@ namespace Event_Management.DAL.Users
         }
         #endregion
 
-
         #region Insert/Update
         public bool UsersSave(UserModel userModel)
         {
@@ -74,6 +77,26 @@ namespace Event_Management.DAL.Users
             {
                 if (userModel.UserID == 0)
                 {
+                    #region File Upload
+                    if (userModel.File != null)
+                    {
+                        string FilePath = "wwwroot\\Upload";
+                        string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+                        string fileNameWithPath = Path.Combine(path, userModel.File.FileName);
+
+                        userModel.PhotoPath = "~" + FilePath.Replace("wwwroot\\", "/") + "/" + userModel.File.FileName;
+
+                        using (FileStream fileStream = new FileStream(fileNameWithPath, FileMode.Create))
+                        {
+                            userModel.File.CopyTo(fileStream);
+                        }
+                    }
+                    #endregion
+
                     DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Users_Insert");
                     sqlDatabase.AddInParameter(dbCommand, "@UserName", DbType.String, userModel.UserName);
                     sqlDatabase.AddInParameter(dbCommand, "@Password", DbType.String, userModel.Password);
@@ -86,6 +109,26 @@ namespace Event_Management.DAL.Users
                 }
                 else
                 {
+                    #region File Upload
+                    if (userModel.File != null)
+                    {
+                        string FilePath = "wwwroot\\Upload";
+                        string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+                        string fileNameWithPath = Path.Combine(path, userModel.File.FileName);
+
+                        userModel.PhotoPath = "~" + FilePath.Replace("wwwroot\\", "/") + "/" + userModel.File.FileName;
+
+                        using (FileStream fileStream = new FileStream(fileNameWithPath, FileMode.Create))
+                        {
+                            userModel.File.CopyTo(fileStream);
+                        }
+                    }
+                    #endregion
+
                     DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Users_Update");
                     sqlDatabase.AddInParameter(dbCommand, "@UserID", DbType.Int32, userModel.UserID);
                     sqlDatabase.AddInParameter(dbCommand, "@UserName", DbType.String, userModel.UserName);
@@ -122,6 +165,51 @@ namespace Event_Management.DAL.Users
             }
 
         }
+        #endregion
+
+        #region User Filter
+
+        public DataTable UserFilter(UserModel model)
+        {
+            SqlDatabase sqlDatabase = new SqlDatabase(connectionstr);
+            DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Users_Filter");
+
+            if (model.UserName == null)
+            {
+                sqlDatabase.AddInParameter(dbCommand, "UserName", DbType.String, DBNull.Value);
+            }
+            else
+            {
+                sqlDatabase.AddInParameter(dbCommand, "UserName", DbType.String, model.UserName);
+            }
+
+            if (model.FirstName == null)
+            {
+                sqlDatabase.AddInParameter(dbCommand, "FirstName", DbType.String, DBNull.Value);
+            }
+            else
+            {
+                sqlDatabase.AddInParameter(dbCommand, "FirstName", DbType.String, model.FirstName);
+            }
+
+            if (model.LastName == null)
+            {
+                sqlDatabase.AddInParameter(dbCommand, "LastName", DbType.String, DBNull.Value);
+            }
+            else
+            {
+                sqlDatabase.AddInParameter(dbCommand, "LastName", DbType.String, model.LastName);
+            }
+
+            DataTable dt = new DataTable();
+
+            using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+            {
+                dt.Load(dataReader);
+            }
+            return dt;
+        }
+
         #endregion
     }
 }

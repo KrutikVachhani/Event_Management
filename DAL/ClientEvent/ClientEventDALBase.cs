@@ -3,18 +3,19 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data.Common;
 using System.Data;
 using Event_Management.Areas.Event.Models;
+using Event_Management.Areas.ClientEvent.Models;
 
-namespace Event_Management.DAL.Event
+namespace Event_Management.DAL.ClientEvent
 {
-    public class EventDALBase : DAL_Helper
+    public class ClientEventDALBase : DAL_Helper
     {
         #region SelectAll
-        public DataTable PR_Event_SelectAll()
+        public DataTable PR_ClientEvent_SelectAll()
         {
             try
             {
                 SqlDatabase sqlDatabase = new SqlDatabase(connectionstr);
-                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Event_SelectAll");
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_ClientEvent_SelectAll");
                 DataTable dataTable = new DataTable();
 
                 using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
@@ -32,14 +33,14 @@ namespace Event_Management.DAL.Event
 
 
         #region SelectByID
-        public EventModel PR_Event_SelectByID(int EventID)
+        public ClientEventModel PR_ClientEvent_SelectByID(int ClientEventID)
         {
-            EventModel eventModel = new EventModel();
+            ClientEventModel eventModel = new ClientEventModel();
             try
             {
                 SqlDatabase sqlDatabase = new SqlDatabase(connectionstr);
-                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Event_SelectByID");
-                sqlDatabase.AddInParameter(dbCommand, "EventID", DbType.Int32, EventID);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_ClientEvent_SelectByID");
+                sqlDatabase.AddInParameter(dbCommand, "@ClientEventID", DbType.Int32, ClientEventID);
                 DataTable dataTable = new DataTable();
 
                 using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
@@ -49,10 +50,10 @@ namespace Event_Management.DAL.Event
 
                 foreach (DataRow dr in dataTable.Rows)
                 {
-                    eventModel.EventID = Convert.ToInt32(dr["EventID"]);
-                    eventModel.EventName = dr["EventName"].ToString();
-                    eventModel.EventDateTime = DateTime.Parse(dr["EventDateTime"].ToString());
-                    eventModel.IsPrivate = Convert.ToBoolean(dr["IsPrivate"]);
+                    eventModel.ClientEventID = Convert.ToInt32(dr["ClientEventID"]);
+                    eventModel.CEventName = dr["CEventName"].ToString();
+                    eventModel.CEventDateTime = DateTime.Parse(dr["CEventDateTime"].ToString());
+                    eventModel.CIsPrivate = Convert.ToBoolean(dr["CIsPrivate"]);
                     eventModel.VenueID = Convert.ToInt32(dr["VenueID"]);
                     eventModel.Created = DateTime.Parse(dr["Created"].ToString());
                     eventModel.Modified = DateTime.Parse(dr["Modified"].ToString());
@@ -68,28 +69,28 @@ namespace Event_Management.DAL.Event
 
 
         #region Insert/Update
-        public bool EventSave(EventModel eventModel)
+        public bool ClientEventSave(ClientEventModel eventModel)
         {
             SqlDatabase sqlDatabase = new SqlDatabase(connectionstr);
             try
             {
-                if (eventModel.EventID == 0)
+                if (eventModel.ClientEventID == 0)
                 {
-                    DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Event_Insert");
-                    sqlDatabase.AddInParameter(dbCommand, "@EventName", DbType.String, eventModel.EventName);
-                    sqlDatabase.AddInParameter(dbCommand, "@EventDateTime", DbType.DateTime, eventModel.EventDateTime);
-                    sqlDatabase.AddInParameter(dbCommand, "@IsPrivate", DbType.Int32, eventModel.IsPrivate);
+                    DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_ClientEvent_Insert");
+                    sqlDatabase.AddInParameter(dbCommand, "@CEventName", DbType.String, eventModel.CEventName);
+                    sqlDatabase.AddInParameter(dbCommand, "@CEventDateTime", DbType.DateTime, eventModel.CEventDateTime);
+                    sqlDatabase.AddInParameter(dbCommand, "@CIsPrivate", DbType.Int32, eventModel.CIsPrivate);
                     sqlDatabase.AddInParameter(dbCommand, "@VenueID", DbType.String, eventModel.VenueID);
                     bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
                     return isSuccess;
                 }
                 else
                 {
-                    DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Event_Update");
-                    sqlDatabase.AddInParameter(dbCommand, "@EventID", DbType.Int32, eventModel.EventID);
-                    sqlDatabase.AddInParameter(dbCommand, "@EventName", DbType.String, eventModel.EventName);
-                    sqlDatabase.AddInParameter(dbCommand, "@EventDateTime", DbType.DateTime, eventModel.EventDateTime);
-                    sqlDatabase.AddInParameter(dbCommand, "@IsPrivate", DbType.Int32, eventModel.IsPrivate);
+                    DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_ClientEvent_Update");
+                    sqlDatabase.AddInParameter(dbCommand, "@ClientEventID", DbType.Int32, eventModel.ClientEventID);
+                    sqlDatabase.AddInParameter(dbCommand, "@CEventName", DbType.String, eventModel.CEventName);
+                    sqlDatabase.AddInParameter(dbCommand, "@CEventDateTime", DbType.DateTime, eventModel.CEventDateTime);
+                    sqlDatabase.AddInParameter(dbCommand, "@CIsPrivate", DbType.Int32, eventModel.CIsPrivate);
                     sqlDatabase.AddInParameter(dbCommand, "@VenueID", DbType.String, eventModel.VenueID);
                     bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
                     return isSuccess;
@@ -104,13 +105,13 @@ namespace Event_Management.DAL.Event
 
 
         #region Delete
-        public bool PR_Event_Delete(int EventID)
+        public bool PR_ClientEvent_Delete(int ClientEventID)
         {
             try
             {
                 SqlDatabase sqlDatabase = new SqlDatabase(connectionstr);
-                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Event_Delete");
-                sqlDatabase.AddInParameter(dbCommand, "@EventID", DbType.Int32, EventID);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_ClientEvent_Delete");
+                sqlDatabase.AddInParameter(dbCommand, "@ClientEventID", DbType.Int32, ClientEventID);
                 bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
                 return isSuccess;
             }

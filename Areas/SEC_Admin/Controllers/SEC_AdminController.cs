@@ -6,9 +6,11 @@ namespace Event_Management.Areas.SEC_Admin.Controllers
     [Route("SEC_Admin/[controller]/[action]")]
     public class SEC_AdminController : Controller
     {
+        #region AdminView
         public IActionResult SEC_AdminView()
         {
             return View();
         }
+        #endregion
     }
 }

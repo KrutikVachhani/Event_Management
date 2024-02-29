@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Event_Management.Areas.Comment.Models;
-using Event_Management.Areas.Users.Models;
 using Event_Management.DAL.Comment;
 using System.Data;
 
@@ -10,6 +9,8 @@ namespace Event_Management.Areas.Comment.Controllers
     [Route("Comment/[Controller]/[Action]")]
     public class CommentController : Controller
     {
+        #region Configuration
+
         public IConfiguration Configuration;
         public CommentController(IConfiguration configuration)
         {
@@ -18,7 +19,10 @@ namespace Event_Management.Areas.Comment.Controllers
 
         CommentDALBase commentDALBase = new CommentDALBase();
 
-        #region User List
+        #endregion
+
+
+        #region Comment List
         public IActionResult CommentView()
         {
             DataTable dataTable = commentDALBase.PR_Comment_SelectAll();
@@ -32,7 +36,8 @@ namespace Event_Management.Areas.Comment.Controllers
         }
         #endregion
 
-        #region User By ID
+
+        #region Comment Add
         public IActionResult CommentAdd(int CommentID)
         {
             CommentModel commentModel = commentDALBase.PR_Comment_SelectByID(CommentID);
@@ -48,7 +53,7 @@ namespace Event_Management.Areas.Comment.Controllers
         #endregion
 
 
-        #region Event Save
+        #region Comment Save
         public IActionResult CommentSave(CommentModel commentModel)
         {
             if (ModelState.IsValid)
@@ -66,7 +71,7 @@ namespace Event_Management.Areas.Comment.Controllers
         #endregion
 
 
-        #region Event Delete
+        #region Comment Delete
         public IActionResult CommentDelete(int CommentID)
         {
             bool isSuccess = commentDALBase.PR_Comment_Delete(CommentID);

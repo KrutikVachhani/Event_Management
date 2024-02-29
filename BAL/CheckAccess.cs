@@ -15,7 +15,7 @@ namespace Event_Management.BAL
             string currentController = rd.Values["controller"].ToString();
 
             if (filterContext.HttpContext.Session.GetString("UserID") == null)
-                filterContext.Result = new RedirectResult("~/SEC_User/SEC_User/SEC_UserRegister");
+                filterContext.Result = new RedirectResult("~/SEC_User/SEC_User/SEC_UserLogin");
         }
         // Once we logout (session is cleared) then we can not go back to the previous screen
         // We must login to proceed further.

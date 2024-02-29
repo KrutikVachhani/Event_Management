@@ -2,6 +2,7 @@
 using Event_Management.DAL.Venue;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Event_Management.Areas.Venue.Controllers
 {
@@ -9,6 +10,13 @@ namespace Event_Management.Areas.Venue.Controllers
     [Route("Venue/[Controller]/[Action]")]
     public class VenueController : Controller
     {
+
+        public IConfiguration Configuration;
+        public VenueController(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         VenueDALBase venueDALBase = new VenueDALBase();
 
         #region Venue List
@@ -62,6 +70,54 @@ namespace Event_Management.Areas.Venue.Controllers
         }
         #endregion
 
+        #region Venue Filter
 
+        public IActionResult VenueFilter(VenueModel model)
+        {
+            string connectionstr = this.Configuration.GetConnectionString("myConnectionString");
+            SqlConnection sqlConnection = new SqlConnection(connectionstr);
+            sqlConnection.Open();
+
+            SqlCommand ObjCmd = sqlConnection.CreateCommand();
+
+            ObjCmd.CommandType = CommandType.StoredProcedure;
+            ObjCmd.CommandText = "PR_Venue_Filter";
+
+            if (model.VenueName == null)
+            {
+                ObjCmd.Parameters.AddWithValue("@VenueName", DBNull.Value);
+            }
+            else
+            {
+                ObjCmd.Parameters.AddWithValue("@VenueName", model.VenueName);
+            }
+
+            if (model.Capacity == 0)
+            {
+                ObjCmd.Parameters.AddWithValue("@Capacity", DBNull.Value);
+            }
+            else
+            {
+                ObjCmd.Parameters.AddWithValue("@Capacity", model.Capacity);
+            }
+
+            if (model.Location == null)
+            {
+                ObjCmd.Parameters.AddWithValue("@Location", DBNull.Value);
+            }
+            else
+            {
+                ObjCmd.Parameters.AddWithValue("@Location", model.Location);
+            }
+
+
+            SqlDataReader sqlDataReader = ObjCmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(sqlDataReader);
+
+            return View("VenueList", dt);
+        }
+
+        #endregion
     }
 }

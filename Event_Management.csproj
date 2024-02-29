@@ -7,20 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.102.2" />
     <PackageReference Include="EnterpriseLibrary.Common" Version="6.0.1304" />
     <PackageReference Include="EnterpriseLibrary.Data" Version="6.0.1304" />
     <PackageReference Include="EnterpriseLibrary.Data.NetCore" Version="6.3.2" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.27" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.27">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Practices.EnterpriseLibrary.2008" Version="4.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\ClientEvent\Data\" />
     <Folder Include="Areas\Feedback\Controllers\" />
     <Folder Include="Areas\Feedback\Views\" />
     <Folder Include="Areas\Schedule\Controllers\" />
     <Folder Include="Areas\Schedule\Views\" />
     <Folder Include="Areas\SEC_Admin\Models\" />
+    <Folder Include="Areas\SEC_Client\Models\" />
   </ItemGroup>
 
 </Project>

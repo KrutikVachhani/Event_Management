@@ -1,10 +1,10 @@
 ﻿@{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
 }
 
 @using System.Data;
 @using System.Data.SqlClient;
-@using Event_Management.Areas.Venue.Models;
+@using Event_Management.Areas.ClientEvent.Models;
 @model DataTable
 
 <!doctype html>
@@ -39,11 +39,11 @@
 
     <div class="row justify-content-center">
         <div class="col-12">
-            <h2 class="mb-2 page-title">Venue List</h2>
+            <h2 class="mb-2 page-title">Event List</h2>
+            @* <p class="card-text">DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, built upon the foundations of progressive enhancement, that adds all of these advanced features to any HTML table. </p> *@
             <div class="row my-4">
-                <!-- Small table -->
-                <div class="col-md-12">
-                    <form method="post" asp-area="Venue" asp-controller="Venue" asp-action="VenueFilter">
+                <!-- Small table --><div class="col-md-12">
+                    <form method="post" asp-area="ClientEvent" asp-controller="ClientEvent" asp-action="EventFilter">
                         <div class="card shadow mb-4">
                             <div class="card-header">
                                 <h4 class="card-title">Filter</h4>
@@ -52,25 +52,27 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group mb-6">
+                                            <label for="simpleinput">Event Name</label>
+                                            <input type="text" id="simpleinput" class="form-control" placeholder="Venue Name" name="CEventName">
+                                        </div>
+                                        <div class="form-group mb-6">
                                             <label for="simpleinput">Venue Name</label>
-                                            <input type="text" id="simpleinput" class="form-control" placeholder="Venue Name" name="VenueName">
+                                            <input type="text" id="simpleinput" class="form-control" placeholder="Venue Name" name="CVenueName">
                                         </div>
 
-                                        <div class="form-group mb-6">
-                                            <label for="simpleinput">Capacity</label>
-                                            <input type="text" class="form-control" placeholder="Enter Capacity" name="Capacity">
-                                        </div>
 
                                     </div> <!-- /.col -->
                                     <div class="col-md-6">
                                         <div class="form-group mb-6">
-                                            <label for="simpleinput">Location</label>
-                                            <input type="text" class="form-control" placeholder="Enter Location" name="Location">
+                                            <label for="simpleinput">Event Date</label>
+                                            <input type="text" id="simpleinput" class="form-control" placeholder="Event Date" name="CEventDateTime">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group mb-6">
-                                            <button value="Filter" type="submit" class="btn mb-2 btn-info">Filter</button>
+                                        <div class="form-group mb-3">
+
+                                            <button value="Filter" type="submit" class="btn mb-2 btn-info">Search</button>
+
                                         </div>
                                     </div>
                                 </div>
@@ -78,27 +80,28 @@
                         </div> <!-- / .card -->
                     </form>
                 </div>
+
+               
                 <div class="col-md-12">
                     <div class="card shadow">
                         <div class="card-body">
-                            <a asp-area="Venue" asp-controller="Venue" asp-action="VenueAdd" class="btn mb-2 btn-info">Add Venue</a>
+                            <a asp-area="ClientEvent" asp-controller="ClientEvent" asp-action="EventAdd" class="btn mb-2 btn-info">Add Event</a>
                             <!-- table -->
-                            <table class="table datatables" id="dataTable-1">
-                                <thead class="justify-content-center">
+                            <table class="table datatables">
+                                <thead>
                                     <tr>
                                         <th></th>
                                         <th>#</th>
-                                        <th>VenueName</th>
-                                        <th>Location</th>
-                                        <th>Capacity</th>
-                                        <th>ContactPerson</th>
-                                        <th>ContactNumber</th>
+                                        <th>EventName</th>
+                                        <th>EventDateTime</th>
+                                        <th>IsPrivate</th>
+                                        <th>Venue Name</th>
                                         <th>Created</th>
                                         <th>Modified</th>
                                         <th colspan="2">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody id="sample_2">
+                                <tbody>
                                     @foreach (DataRow dr in Model.Rows)
                                     {
                                         <tr>
@@ -108,24 +111,23 @@
                                                     <label class="custom-control-label"></label>
                                                 </div>
                                             </td>
-                                            <td>@dr["VenueID"]</td>
+                                            <td>@dr["ClientEventID"]</td>
+                                            <td>@dr["CEventName"]</td>
+                                            <td>@dr["CEventDateTime"]</td>
+                                            <td>@dr["CIsPrivate"]</td>
                                             <td>@dr["VenueName"]</td>
-                                            <td>@dr["Location"]</td>
-                                            <td>@dr["Capacity"]</td>
-                                            <td>@dr["ContactPerson"]</td>
-                                            <td>@dr["ContactNumber"]</td>
                                             <td>@dr["Created"]</td>
                                             <td>@dr["Modified"]</td>
                                             <td>
                                                 @* <a class="btn mb-2 btn-info" asp-area="Venue" asp-controller="Venue" asp-action="VenueAdd" asp-route-productid="@Convert.ToInt32(dr["VenueID"])">Edit</a> *@
-                                                <form method="post" asp-area="Venue" asp-controller="Venue" asp-action="VenueAdd">
-                                                    <input type="hidden" name="VenueID" value="@int.Parse(@dr["VenueID"].ToString())">
+                                                <form method="post" asp-area="ClientEvent" asp-controller="ClientEvent" asp-action="EventAdd">
+                                                    <input type="hidden" name="ClientEventID" value="@int.Parse(@dr["ClientEventID"].ToString())">
                                                     <button type="submit" class="btn mb-2 btn-info">Edit</button>
                                                 </form>
                                             </td>
                                             <td>
-                                                <form method="post" asp-area="Venue" asp-controller="Venue" asp-action="VenueDelete">
-                                                    <input type="hidden" name="VenueID" value="@int.Parse(@dr["VenueID"].ToString())">
+                                                <form method="post" asp-area="ClientEvent" asp-controller="ClientEvent" asp-action="EventDelete">
+                                                    <input type="hidden" name="ClientEventID" value="@int.Parse(@dr["ClientEventID"].ToString())">
                                                     <button type="submit" value="Delete" class="btn mb-2 btn-danger">Delete</button>
                                                 </form>
                                             </td>
@@ -140,20 +142,17 @@
             </div>
         </div>
     </div>
-
-
-
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/moment.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/simplebar.min.js"></script>
-    <script src='js/daterangepicker.js'></script>
-    <script src='js/jquery.stickOnScroll.js'></script>
-    <script src="js/tinycolor-min.js"></script>
-    <script src="js/config.js"></script>
-    <script src='js/jquery.dataTables.min.js'></script>
-    <script src='js/dataTables.bootstrap4.min.js'></script>
+    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+    <script src="~/admin/js/jquery.min.js"></script>
+    <script src="~/admin/js/popper.min.js"></script>
+    <script src="~/admin/js/moment.min.js"></script>
+    <script src="~/admin/js/bootstrap.min.js"></script>
+    <script src="~/admin/js/simplebar.min.js"></script>
+    <script src='~/admin/js/daterangepicker.js'></script>
+    <script src='~/admin/js/jquery.stickOnScroll.js'></script>
+    <script src="~/admin/js/tinycolor-min.js"></script>
+    <script src="~/admin/js/config.js"></script>
+    <script src="~/admin/js/apps.js"></script>
 
     @section Scripts
         {
@@ -168,18 +167,7 @@
             });
         </script>
     }
-
-    <script>
-        $('#dataTable-1').DataTable(
-            {
-                autoWidth: true,
-                "lengthMenu": [
-                    [16, 32, 64, -1],
-                    [16, 32, 64, "All"]
-                ]
-            });
-    </script>
-    <script src="js/apps.js"></script>
+    <script src="~/admin/js/apps.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
     <script>

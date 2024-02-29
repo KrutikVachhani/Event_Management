@@ -1,14 +1,7 @@
-﻿using Event_Management.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data.Common;
 using System.Data;
-using System.Diagnostics;
-using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
-using System.Data.Common;
-using System.Data;
-using Event_Management.Areas.Event.Models;
-using Event_Management.DAL;
 
 namespace Event_Management.Controllers
 {

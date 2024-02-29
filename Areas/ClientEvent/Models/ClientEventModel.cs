@@ -1,23 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Event_Management.Areas.Event.Models
+namespace Event_Management.Areas.ClientEvent.Models
 {
-    public class EventModel
+    public class ClientEventModel
     {
-        public int EventID { get; set; }
+        public int ClientEventID { get; set; }
 
 
         //[Required(ErrorMessage = "Event name is required.")]
-        public string EventName { get; set; }
+        public string CEventName { get; set; }
 
 
         //[Required(ErrorMessage = "Event date and time is required.")]
         //[FutureDate(ErrorMessage = "Event date and time must be in the future.")]
-        public DateTime EventDateTime { get; set; }
+        public DateTime CEventDateTime { get; set; }
 
 
         //[Required(ErrorMessage = "Is private field is required.")]
-        public bool IsPrivate { get; set; }
+        public bool CIsPrivate { get; set; }
         //[Required]
 
         public int VenueID { get; set; }

@@ -29,6 +29,7 @@ namespace Event_Management.DAL.Comment
         }
         #endregion
 
+
         #region SelectByID
         public CommentModel PR_Comment_SelectByID(int CommentID)
         {
@@ -99,6 +100,7 @@ namespace Event_Management.DAL.Comment
             }
         }
         #endregion
+
 
         #region Delete
         public bool PR_Comment_Delete(int CommentID)

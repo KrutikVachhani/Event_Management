@@ -141,10 +141,10 @@
                                                     @foreach (DataRow dr in Model.Rows)
                                                     {
                                                         <tr>
-                                                            <form asp-area="" asp-controller="Home" asp-action="EventByID" asp-route-..="@dr["EventID"]">
+                                                            <form asp-area="Event" asp-controller="Event" asp-action="EventByID" asp-route-..="@dr["EventID"]">
                                                             <td>
-                                                                    @* <input type="hidden" name="EventID" value="@int.Parse(@dr["EventID"].ToString())"> *@
-                                                                <button> type="submit">@dr["EventID"]</button>
+                                                                    <input type="hidden" name="EventID" value="@int.Parse(@dr["EventID"].ToString())">
+                                                                <button type="submit">@dr["EventID"]</button>
                                                             </td>
                                                             </form>
 

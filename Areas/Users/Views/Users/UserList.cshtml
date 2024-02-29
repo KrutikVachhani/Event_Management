@@ -2,10 +2,15 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+
+@* @model IEnumerable<Event_Management.Areas.Users.Models.UserModel> *@
 @using System.Data;
 @using System.Data.SqlClient;
 @using Event_Management.Areas.Users.Models;
+@using Event_Management.CF;
+@using Microsoft.EntityFrameworkCore;
 @model DataTable
+
 
 <!doctype html>
 <html lang="en">
@@ -39,69 +44,194 @@
 
     <div class="row justify-content-center">
         <div class="col-12">
-            <h2 class="mb-2 page-title">Data table</h2>
-            <p class="card-text">DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, built upon the foundations of progressive enhancement, that adds all of these advanced features to any HTML table. </p>
+            <h2 class="mb-2 page-title">User Table</h2>
+            @* <p class="card-text">DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, built upon the foundations of progressive enhancement, that adds all of these advanced features to any HTML table. </p> *@
             <div class="row my-4">
-                <!-- Small table -->
-                @* <form method="post" asp-area="Venue" asp-controller="Venue" asp-action="VenueAdd">
-                <button type="button" class="btn mb-2 btn-info">Info</button>
-                </form> *@
+
                 <div class="col-md-12">
-                    <a asp-area="Users" asp-controller="Users" asp-action="UserAdd" class="btn mb-2 btn-info">Add User</a>
+                    <form method="post" asp-area="Users" asp-controller="Users" asp-action="UsersFilter">
+                        <div class="card shadow mb-4">
+                            <div class="card-header">
+                                <h4 class="card-title">Filter</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-6">
+                                            <label for="simpleinput">User Name</label>
+                                            <input type="text" id="simpleinput" class="form-control" placeholder="User Name" name="UserName">
+                                        </div>
+                                        <div class="form-group mb-6">
+                                            <label for="simpleinput">First Name</label>
+                                            <input type="text" id="simpleinput" class="form-control" placeholder="First Name" name="FirstName">
+                                        </div>
+
+
+                                    </div> <!-- /.col -->
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-6">
+                                            <label for="simpleinput">Last Name</label>
+                                            <input type="text" id="simpleinput" class="form-control" placeholder="Last Name" name="LastName">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+
+                                            <button value="Filter" type="submit" class="btn mb-2 btn-info">Search</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- / .card -->
+                    </form>
+                </div>
+
+                <div class="col-md-12">
                     <div class="card shadow">
                         <div class="card-body">
-                            <!-- table -->
-                            <table class="table datatables" id="dataTable-1">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>#</th>
-                                        <th>User Name</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email Address</th>
-                                        <th>PhotoPath</th>
-                                        <th>Created</th>
-                                        <th>Modified</th>
-                                        <th colspan="2">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (DataRow dr in Model.Rows)
-                                    {
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <label class="custom-control-label"></label>
-                                                </div>
-                                            </td>
-                                            <td>@dr["UserID"]</td>
-                                            <td>@dr["UserName"]</td>
-                                            <td>@dr["FirstName"]</td>
-                                            <td>@dr["LastName"]</td>
-                                            <td>@dr["EmailAddress"]</td>
-                                            <td>@dr["PhotoPath"]</td>
-                                            <td>@dr["Created"]</td>
-                                            <td>@dr["Modified"]</td>
-                                            <td>
-                                                @* <a class="btn mb-2 btn-info" asp-area="Venue" asp-controller="Venue" asp-action="VenueAdd" asp-route-productid="@Convert.ToInt32(dr["VenueID"])">Edit</a> *@
-                                                <form method="post" asp-area="Users" asp-controller="Users" asp-action="UserAdd">
-                                                    <input type="hidden" name="UserID" value="@int.Parse(@dr["UserID"].ToString())">
-                                                    <button type="submit" class="btn mb-2 btn-info">Edit</button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form method="post" asp-area="Users" asp-controller="Users" asp-action="UserDelete">
-                                                    <input type="hidden" name="UserID" value="@int.Parse(@dr["UserID"].ToString())">
-                                                    <button type="submit" value="Delete" class="btn mb-2 btn-danger">Delete</button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                            <a asp-area="Users" asp-controller="Users" asp-action="UserAdd" class="btn mb-2 btn-info">Add User</a>
+                            
+                            <a class="btn btn-success mb-2" asp-area="Users" asp-controller="Users" asp-action="ExportStudentsToExcel">Export Excel</a>
+                            <div id="dataTable-1_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                @* <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                <div class="dataTables_length" id="dataTable-1_length">
+                                <label>
+                                Show
+                                <select name="dataTable-1_length" aria-controls="dataTable-1" class="custom-select custom-select-sm form-control form-control-sm"><option value="16">16</option><option value="32">32</option><option value="64">64</option><option value="-1">All</option></select> entries
+                                </label>
+                                </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                <div id="dataTable-1_filter" class="dataTables_filter">
+                                <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable-1"></label>
+                                </div>
+                                </div>
+                                </div> *@
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table datatables dataTable no-footer" id="dataTable-1" role="grid" aria-describedby="dataTable-1_info">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>#</th>
+                                                    <th>Image</th>
+                                                    <th>User Name</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Email Address</th>
+                                                    <th>Created</th>
+                                                    <th>Modified</th>
+                                                    <th colspan="2">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (DataRow dr in Model.Rows)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input">
+                                                                <label class="custom-control-label"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>@dr["UserID"]</td>
+                                                        <td>
+                                                            <a class="symbol symbol-50px">
+                                                                <img src="@Url.Content(@dr["PhotoPath"].ToString())" style="width: 100px; height: 100px; object-fit:cover;  border-radius: 10px;" />
+                                                            </a>
+                                                        </td>
+                                                        <td>@dr["UserName"]</td>
+                                                        <td>@dr["FirstName"]</td>
+                                                        <td>@dr["LastName"]</td>
+                                                        <td>@dr["EmailAddress"]</td>
+                                                        <td>@dr["Created"]</td>
+                                                        <td>@dr["Modified"]</td>
+                                                        <td>
+                                                            @* <a class="btn mb-2 btn-info" asp-area="Venue" asp-controller="Venue" asp-action="VenueAdd" asp-route-productid="@Convert.ToInt32(dr["VenueID"])">Edit</a> *@
+                                                            <form method="post" asp-area="Users" asp-controller="Users" asp-action="UserAdd">
+                                                                <input type="hidden" name="UserID" value="@int.Parse(@dr["UserID"].ToString())">
+                                                                <button type="submit" class="btn mb-2 btn-info">Edit</button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form method="post" asp-area="Users" asp-controller="Users" asp-action="UserDelete">
+                                                                <input type="hidden" name="UserID" value="@int.Parse(@dr["UserID"].ToString())">
+                                                                <button type="submit" value="Delete" class="btn mb-2 btn-danger">Delete</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                @* <div class="row">
+                                <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="dataTable-1_info" role="status" aria-live="polite">Showing 1 to 16 of 63 entries</div>
+                                </div>
+                                <div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTable-1_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dataTable-1_previous"><a href="#" aria-controls="dataTable-1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTable-1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable-1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable-1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable-1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item next" id="dataTable-1_next"><a href="#" aria-controls="dataTable-1" data-dt-idx="5" tabindex="0" class="page-link">Next</a></li></ul></div></div>
+                                </div> *@
+                            </div>
 
-                                    }
-                                </tbody>
-                            </table>
+                            <br />
+                            <!-- table -->
+                            @* <table class="table datatables" id="dataTable-1">
+                            <thead>
+                            <tr>
+                            <th></th>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>User Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email Address</th>
+                            <th>Created</th>
+                            <th>Modified</th>
+                            <th colspan="2">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (DataRow dr in Model.Rows)
+                            {
+                            <tr>
+                            <td>
+                            <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label"></label>
+                            </div>
+                            </td>
+                            <td>@dr["UserID"]</td>
+                            <td>
+                            <a class="symbol symbol-50px">
+                            <img src="@Url.Content(@dr["PhotoPath"].ToString())" style="width: 100px; height: 100px; object-fit:cover;  border-radius: 10px;" />
+                            </a>
+                            </td>
+                            <td>@dr["UserName"]</td>
+                            <td>@dr["FirstName"]</td>
+                            <td>@dr["LastName"]</td>
+                            <td>@dr["EmailAddress"]</td>
+                            <td>@dr["Created"]</td>
+                            <td>@dr["Modified"]</td>
+                            <td>
+
+                            <form method="post" asp-area="Users" asp-controller="Users" asp-action="UserAdd">
+                            <input type="hidden" name="UserID" value="@int.Parse(@dr["UserID"].ToString())">
+                            <button type="submit" class="btn mb-2 btn-info">Edit</button>
+                            </form>
+                            </td>
+                            <td>
+                            <form method="post" asp-area="Users" asp-controller="Users" asp-action="UserDelete">
+                            <input type="hidden" name="UserID" value="@int.Parse(@dr["UserID"].ToString())">
+                            <button type="submit" value="Delete" class="btn mb-2 btn-danger">Delete</button>
+                            </form>
+                            </td>
+                            </tr>
+                            }
+                            </tbody>
+                            </table> *@
+
                         </div>
                     </div>
                 </div>
@@ -110,7 +240,7 @@
     </div>
 
 
-
+    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
     <script src="~/admin/js/jquery.min.js"></script>
     <script src="~/admin/js/popper.min.js"></script>
     <script src="~/admin/js/moment.min.js"></script>
@@ -120,223 +250,33 @@
     <script src='~/admin/js/jquery.stickOnScroll.js'></script>
     <script src="~/admin/js/tinycolor-min.js"></script>
     <script src="~/admin/js/config.js"></script>
-    <script src="~/admin/js/d3.min.js"></script>
-    <script src="~/admin/js/topojson.min.js"></script>
-    <script src="~/admin/js/datamaps.all.min.js"></script>
-    <script src="~/admin/js/datamaps-zoomto.js"></script>
-    <script src="~/admin/js/datamaps.custom.js"></script>
-    <script src="~/admin/js/Chart.min.js"></script>
-    <script>
-        /* defind global options */
-        Chart.defaults.global.defaultFontFamily = base.defaultFontFamily;
-        Chart.defaults.global.defaultFontColor = colors.mutedColor;
-    </script>
-    <script src="~/admin/js/gauge.min.js"></script>
-    <script src="~/admin/js/jquery.sparkline.min.js"></script>
-    <script src="~/admin/js/apexcharts.min.js"></script>
-    <script src="~/admin/js/apexcharts.custom.js"></script>
-    <script src='~/admin/js/jquery.mask.min.js'></script>
-    <script src='~/admin/js/select2.min.js'></script>
-    <script src='~/admin/js/jquery.steps.min.js'></script>
-    <script src='~/admin/js/jquery.validate.min.js'></script>
-    <script src='~/admin/js/jquery.timepicker.js'></script>
-    <script src='~/admin/js/dropzone.min.js'></script>
-    <script src='~/admin/js/uppy.min.js'></script>
-    <script src='~/admin/js/quill.min.js'></script>
-    <script>
-        $('.select2').select2(
-            {
-                theme: 'bootstrap4',
-            });
-        $('.select2-multi').select2(
-            {
-                multiple: true,
-                theme: 'bootstrap4',
-            });
-        $('.drgpicker').daterangepicker(
-            {
-                singleDatePicker: true,
-                timePicker: false,
-                showDropdowns: true,
-                locale:
-                {
-                    format: 'MM/DD/YYYY'
-                }
-            });
-        $('.time-input').timepicker(
-            {
-                'scrollDefault': 'now',
-                'zindex': '9999' /* fix modal open */
-            });
-        /** date range picker */
-        if ($('.datetimes').length) {
-            $('.datetimes').daterangepicker(
-                {
-                    timePicker: true,
-                    startDate: moment().startOf('hour'),
-                    endDate: moment().startOf('hour').add(32, 'hour'),
-                    locale:
-                    {
-                        format: 'M/DD hh:mm A'
-                    }
-                });
-        }
-        var start = moment().subtract(29, 'days');
-        var end = moment();
-
-        function cb(start, end) {
-            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        }
-        $('#reportrange').daterangepicker(
-            {
-                startDate: start,
-                endDate: end,
-                ranges:
-                {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                }
-            }, cb);
-        cb(start, end);
-        $('.input-placeholder').mask("00/00/0000",
-            {
-                placeholder: "__/__/____"
-            });
-        $('.input-zip').mask('00000-000',
-            {
-                placeholder: "____-___"
-            });
-        $('.input-money').mask("#.##0,00",
-            {
-                reverse: true
-            });
-        $('.input-phoneus').mask('(000) 000-0000');
-        $('.input-mixed').mask('AAA 000-S0S');
-        $('.input-ip').mask('0ZZ.0ZZ.0ZZ.0ZZ',
-            {
-                translation:
-                {
-                    'Z':
-                    {
-                        pattern: /[0-9]/,
-                        optional: true
-                    }
-                },
-                placeholder: "___.___.___.___"
-            });
-        // editor
-        var editor = document.getElementById('editor');
-        if (editor) {
-            var toolbarOptions = [
-                [
-                    {
-                        'font': []
-                    }],
-                [
-                    {
-                        'header': [1, 2, 3, 4, 5, 6, false]
-                    }],
-                ['bold', 'italic', 'underline', 'strike'],
-                ['blockquote', 'code-block'],
-                [
-                    {
-                        'header': 1
-                    },
-                    {
-                        'header': 2
-                    }],
-                [
-                    {
-                        'list': 'ordered'
-                    },
-                    {
-                        'list': 'bullet'
-                    }],
-                [
-                    {
-                        'script': 'sub'
-                    },
-                    {
-                        'script': 'super'
-                    }],
-                [
-                    {
-                        'indent': '-1'
-                    },
-                    {
-                        'indent': '+1'
-                    }], // outdent/indent
-                [
-                    {
-                        'direction': 'rtl'
-                    }], // text direction
-                [
-                    {
-                        'color': []
-                    },
-                    {
-                        'background': []
-                    }], // dropdown with defaults from theme
-                [
-                    {
-                        'align': []
-                    }],
-                ['clean'] // remove formatting button
-            ];
-            var quill = new Quill(editor,
-                {
-                    modules:
-                    {
-                        toolbar: toolbarOptions
-                    },
-                    theme: 'snow'
-                });
-        }
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-    </script>
-    <script>
-        var uptarg = document.getElementById('drag-drop-area');
-        if (uptarg) {
-            var uppy = Uppy.Core().use(Uppy.Dashboard,
-                {
-                    inline: true,
-                    target: uptarg,
-                    proudlyDisplayPoweredByUppy: false,
-                    theme: 'dark',
-                    width: 770,
-                    height: 210,
-                    plugins: ['Webcam']
-                }).use(Uppy.Tus,
-                    {
-                        endpoint: 'https://master.tus.io/files/'
-                    });
-            uppy.on('complete', (result) => {
-                console.log('Upload complete! We’ve uploaded these files:', result.successful)
-            });
-        }
-    </script>
+    @* <script src='~/admin/js/jquery.dataTables.min.js'></script> *@
+    @* <script src='~/admin/js/dataTables.bootstrap4.min.js'></script> *@
     <script src="~/admin/js/apps.js"></script>
+
+    <script>
+        $('#dataTable-1').DataTable(
+            {
+                autoWidth: true,
+                "lengthMenu": [
+                    [8, 16, 32, -1],
+                    [8, 16, 32, "All"]
+                ]
+            });
+    </script>
+    <script>
+        function previewImage(event) {
+            var input = event.target;
+            var image = document.getElementById('preview');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    image.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
     <script>

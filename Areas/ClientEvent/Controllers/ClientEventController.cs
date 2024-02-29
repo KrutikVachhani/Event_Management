@@ -1,5 +1,6 @@
-﻿using Event_Management.Areas.Event.Models;
+﻿using Event_Management.Areas.ClientEvent.Models;
 using Event_Management.Areas.Venue.Models;
+using Event_Management.DAL.ClientEvent;
 using Event_Management.DAL.Event;
 using Event_Management.DAL.Venue;
 using Microsoft.AspNetCore.Mvc;
@@ -9,16 +10,16 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Reflection;
 
-namespace Event_Management.Areas.Event.Controllers
+namespace Event_Management.Areas.ClientEvent.Controllers
 {
-    [Area("Event")]
-    [Route("Event/[Controller]/[Action]")]
-    public class EventController : Controller
+    [Area("ClientEvent")]
+    [Route("ClientEvent/[Controller]/[Action]")]
+    public class ClientEventController : Controller
     {
         #region Configuration
 
         public IConfiguration Configuration;
-        public EventController(IConfiguration configuration)
+        public ClientEventController(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -26,22 +27,22 @@ namespace Event_Management.Areas.Event.Controllers
 
         #region DAL Object
 
-        EventDALBase eventDALBase = new EventDALBase();
+        ClientEventDALBase clientEventDALBase = new ClientEventDALBase();
 
         #endregion
 
         #region Event List
-        public IActionResult EventList()
+        public IActionResult ClientEventList()
         {
-            DataTable dataTable = eventDALBase.PR_Event_SelectAll();
+            DataTable dataTable = clientEventDALBase.PR_ClientEvent_SelectAll();
             return View(dataTable);
         }
         #endregion
 
         #region EventByID
-        public IActionResult EventByID(int EventID)
+        public IActionResult EventByID(int ClientEventID)
         {
-            EventModel eventModel = eventDALBase.PR_Event_SelectByID(EventID);
+            ClientEventModel eventModel = clientEventDALBase.PR_ClientEvent_SelectByID(ClientEventID);
 
             if (eventModel != null)
             {
@@ -49,13 +50,13 @@ namespace Event_Management.Areas.Event.Controllers
             }
             else
             {
-                return RedirectToAction("EventList");
+                return RedirectToAction("ClientEventList");
             }
         }
         #endregion
 
         #region Event Add
-        public IActionResult EventAdd(int EventID)
+        public IActionResult EventAdd(int ClientEventID)
         {
             #region Venue DropDown
             string connectionstr = this.Configuration.GetConnectionString("myConnectionString");
@@ -81,45 +82,45 @@ namespace Event_Management.Areas.Event.Controllers
             ViewBag.VenueList = venueModels;
             #endregion
 
-            EventModel eventModel = eventDALBase.PR_Event_SelectByID(EventID);
+            ClientEventModel eventModel = clientEventDALBase.PR_ClientEvent_SelectByID(ClientEventID);
             if (eventModel != null)
             {
-                return View("EventAddEdit", eventModel);
+                return View("ClientEventAddEdit", eventModel);
             }
             else
             {
-                return View("EventAddEdit");
+                return View("ClientEventAddEdit");
             }
         }
         #endregion
 
         #region Event Save
-        public IActionResult EventSave(EventModel eventModel)
+        public IActionResult EventSave(ClientEventModel eventModel)
         {
-                if (eventDALBase.EventSave(eventModel))
+                if (clientEventDALBase.ClientEventSave(eventModel))
 
-                    return RedirectToAction("EventList");
+                    return RedirectToAction("ClientEventList");
 
             
-            return View("EventAddEdit");
+            return View("ClientEventAddEdit");
         }
         #endregion
         
         #region Event Delete
-        public IActionResult EventDelete(int EventID)
+        public IActionResult EventDelete(int ClientEventID)
         {
-            bool isSuccess = eventDALBase.PR_Event_Delete(EventID);
+            bool isSuccess = clientEventDALBase.PR_ClientEvent_Delete(ClientEventID);
             if (isSuccess)
             {
-                return RedirectToAction("EventList");
+                return RedirectToAction("ClientEventList");
             }
-            return RedirectToAction("EventList");
+            return RedirectToAction("ClientEventList");
         }
         #endregion
 
         #region Event Filter
 
-        public IActionResult EventFilter(EventModel model)
+        public IActionResult EventFilter(ClientEventModel model)
         {
             string connectionstr = this.Configuration.GetConnectionString("myConnectionString");
             SqlConnection sqlConnection = new SqlConnection(connectionstr);
@@ -128,15 +129,15 @@ namespace Event_Management.Areas.Event.Controllers
             SqlCommand ObjCmd = sqlConnection.CreateCommand();
 
             ObjCmd.CommandType = CommandType.StoredProcedure;
-            ObjCmd.CommandText = "PR_EventDetails_Filter";
+            ObjCmd.CommandText = "PR_ClientEvent_Filter";
 
-            if (model.EventName == null)
+            if (model.CEventName == null)
             {
-                ObjCmd.Parameters.AddWithValue("@EventName", DBNull.Value);
+                ObjCmd.Parameters.AddWithValue("@CEventName", DBNull.Value);
             }
             else
             {
-                ObjCmd.Parameters.AddWithValue("@EventName", model.EventName);
+                ObjCmd.Parameters.AddWithValue("@CEventName", model.CEventName);
             }
 
             //if (model.EventDateTime == null)
@@ -162,7 +163,7 @@ namespace Event_Management.Areas.Event.Controllers
             DataTable dt = new DataTable();
             dt.Load(sqlDataReader);
 
-            return View("EventList", dt);
+            return View("ClientEventList", dt);
         }
 
         #endregion

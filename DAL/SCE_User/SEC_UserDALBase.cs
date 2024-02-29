@@ -7,7 +7,7 @@ namespace Event_Management.DAL.SCE_User
 {
     public class SEC_UserDALBase : DAL_Helper
     {
-        #region Method: dbo_PR_SEC_User_SelectByPK
+        #region SelectByUserNamePassword
         public DataTable dbo_PR_User_SelectByUserNamePassword(string UserName, string Password)
         {
             try
@@ -33,7 +33,7 @@ namespace Event_Management.DAL.SCE_User
         #endregion
 
 
-        #region Method: dbo_PR_SEC_User_Register
+        #region User_Register
         public bool dbo_PR_SEC_User_Register(string UserName, string Password, string FirstName, string LastName, string PhotoPath, string EmailAddress)
         {
             try

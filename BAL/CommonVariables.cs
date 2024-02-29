@@ -23,5 +23,24 @@
         {
             return _HttpContextAccessor.HttpContext.Session.GetString("FirstName");
         }
+
+        public static string LastName()
+        {
+            return _HttpContextAccessor.HttpContext.Session.GetString("LastName");
+        }
+
+        public static string EmailAddress()
+        {
+            return _HttpContextAccessor.HttpContext.Session.GetString("EmailAddress");
+        }
+
+        public static string PhotoPath()
+        {
+            return _HttpContextAccessor.HttpContext.Session.GetString("PhotoPath");
+        }
+        public static string Password()
+        {
+            return _HttpContextAccessor.HttpContext.Session.GetString("Password");
+        }
     }
 }
