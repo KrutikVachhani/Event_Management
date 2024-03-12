@@ -53,7 +53,7 @@
                                     <input type="date" class="form-control" placeholder="Enter Location" asp-for="EventDateTime">
                                     @* <span asp-validation-for="EventDateTime"></span> *@
                                 </div>
-                                
+
                             </div> <!-- /.col -->
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
@@ -63,22 +63,32 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="example-select">Select Venue</label>
-                                    <select class="form-control" id="VenueID" name="VenueID" >
+                                    <select class="form-control" id="VenueID" name="VenueID">
                                         <option value="">- - -</option>
-                                        @foreach(VenueModel VenueName in ViewBag.VenueList)
+                                        @foreach (VenueModel VenueName in ViewBag.VenueList)
                                         {
                                             <option value="@VenueName.VenueID">@VenueName.VenueName</option>
                                         }
                                     </select>
                                 </div>
-                                
-                            </div>
-                            <br/>
-                            <br/>
-                                <div class="form-group col-md-6">
-                                    <button type="submit" class="btn mb-2 btn-info">Save</button>
-                                    <a asp-area="Event" asp-controller="Event" asp-action="EventList" class="btn mb-2 btn-info" >Cancel</a>
+                                <div class="form-group mb-3">
+                                    <label>Selected Services:</label><br />
+                                    @foreach (ServiceModel ServiceName in ViewBag.ServiceList)
+                                    {
+                                        <div>
+                                        <input type="checkbox" id="@ServiceName.ServiceID" name="SelectedService" value="@ServiceName.ServiceID" />
+                                        <label>@ServiceName.ServiceName</label>
+                                        </div>
+                                    }
                                 </div>
+
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group col-md-6">
+                                <button type="submit" class="btn mb-2 btn-info">Save</button>
+                                <a asp-area="Event" asp-controller="Event" asp-action="EventList" class="btn mb-2 btn-info">Cancel</a>
+                            </div>
                         </div>
                     </div>
                 </div> <!-- / .card -->

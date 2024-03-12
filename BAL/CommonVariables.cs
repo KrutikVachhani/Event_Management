@@ -14,6 +14,11 @@
             return Convert.ToInt32(_HttpContextAccessor.HttpContext.Session.GetString("UserID"));
         }
 
+        public static int? ClientID()
+        {
+            return Convert.ToInt32(_HttpContextAccessor.HttpContext.Session.GetString("ClientID"));
+        }
+
         public static string UserName()
         {
             return _HttpContextAccessor.HttpContext.Session.GetString("UserName");

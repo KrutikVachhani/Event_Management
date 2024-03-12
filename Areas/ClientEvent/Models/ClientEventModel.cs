@@ -22,7 +22,9 @@ namespace Event_Management.Areas.ClientEvent.Models
 
         public int VenueID { get; set; }
 
+        public int ClientID { get; set; }
 
+        public List<string> SelectedService { get; set; }
         public DateTime Created { get; set; }
 
         public DateTime Modified { get; set; }
@@ -39,6 +41,25 @@ namespace Event_Management.Areas.ClientEvent.Models
         public string Message { get; set; }
     }
 
+    // Custom Validation Attribute for Future Date
+    //public class FutureDateAttribute : ValidationAttribute
+    //{
+    //    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+    //    {
+    //        if (value == null || !(value is DateTime))
+    //        {
+    //            return new ValidationResult("Invalid date.");
+    //        }
+
+    //        DateTime eventDateTime = (DateTime)value;
+    //        if (eventDateTime <= DateTime.Now)
+    //        {
+    //            return new ValidationResult(ErrorMessage ?? "The date must be in the future.");
+    //        }
+
+    //        return ValidationResult.Success;
+    //    }
+    //}
     // Custom Validation Attribute for Future Date
     //public class FutureDateAttribute : ValidationAttribute
     //{

@@ -22,7 +22,7 @@ namespace Event_Management.Areas.Event.Models
 
         public int VenueID { get; set; }
 
-
+        public List<string> SelectedService { get; set; }
         public DateTime Created { get; set; }
 
         public DateTime Modified { get; set; }

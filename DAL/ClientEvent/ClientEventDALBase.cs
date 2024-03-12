@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.Data;
 using Event_Management.Areas.Event.Models;
 using Event_Management.Areas.ClientEvent.Models;
+using Newtonsoft.Json;
 
 namespace Event_Management.DAL.ClientEvent
 {
@@ -81,6 +82,9 @@ namespace Event_Management.DAL.ClientEvent
                     sqlDatabase.AddInParameter(dbCommand, "@CEventDateTime", DbType.DateTime, eventModel.CEventDateTime);
                     sqlDatabase.AddInParameter(dbCommand, "@CIsPrivate", DbType.Int32, eventModel.CIsPrivate);
                     sqlDatabase.AddInParameter(dbCommand, "@VenueID", DbType.String, eventModel.VenueID);
+                    sqlDatabase.AddInParameter(dbCommand, "@ClientID", DbType.String, eventModel.ClientID);
+                    //string selectValue = string.Join(",", eventModel.SelectedService);
+                    //sqlDatabase.AddInParameter(dbCommand, "@SelectedService", DbType.String, selectValue);
                     bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
                     return isSuccess;
                 }
@@ -92,6 +96,8 @@ namespace Event_Management.DAL.ClientEvent
                     sqlDatabase.AddInParameter(dbCommand, "@CEventDateTime", DbType.DateTime, eventModel.CEventDateTime);
                     sqlDatabase.AddInParameter(dbCommand, "@CIsPrivate", DbType.Int32, eventModel.CIsPrivate);
                     sqlDatabase.AddInParameter(dbCommand, "@VenueID", DbType.String, eventModel.VenueID);
+                    //string selectedValues = JsonConvert.SerializeObject(eventModel.SelectedService);
+                    //sqlDatabase.AddInParameter(dbCommand, "@SelectedService", DbType.String, selectedValues);
                     bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
                     return isSuccess;
                 }

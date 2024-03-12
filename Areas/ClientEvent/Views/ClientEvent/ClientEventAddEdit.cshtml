@@ -5,6 +5,7 @@
 @using System.Data;
 @using Event_Management.Areas.ClientEvent.Models;
 @using Event_Management.Areas.Venue.Models;
+@using Event_Management.BAL;
 @model ClientEventModel
 
 
@@ -43,6 +44,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
+                                @* <input type="hidden" value="@CommonVariables.UserID()" /> *@
+                                <input type="text" value="@CommonVariables.ClientID()" asp-for="ClientID" />
                                 <div class="form-group mb-3">
                                     <label for="simpleinput">Event Name</label>
                                     <input type="text" id="simpleinput" class="form-control" placeholder="Enter Event Name" asp-for="CEventName">
@@ -71,6 +74,16 @@
                                         }
                                     </select>
                                 </div>
+                                @* <div class="form-group mb-3">
+                                    <label>Selected Services:</label><br />
+                                    @foreach (ServiceModel ServiceName in ViewBag.ServiceList)
+                                    {
+                                        <div>
+                                            <input type="checkbox" id="@ServiceName.ServiceID" name="SelectedService" value="@ServiceName.ServiceID" />
+                                            <label>@ServiceName.ServiceName</label>
+                                        </div>
+                                    }
+                                </div> *@
                                 
                             </div>
                             <br/>

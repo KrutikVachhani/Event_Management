@@ -7,16 +7,16 @@ namespace Event_Management.Areas.Venue.Models
     {
         public int VenueID { get; set; }
         [Required(ErrorMessage = "Venue Name is Required.")]
-        public string VenueName { get; set; }
+        public string? VenueName { get; set; }
 
 
         [Required(ErrorMessage = "Location is Required.")]
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
 
         [Required(ErrorMessage = "You have to enter capacity.")]
         [Range(100,800, ErrorMessage = "Enter range between 100 to 800.")]
-        public int Capacity { get; set; }
+        public int? Capacity { get; set; }
 
 
         [Required(ErrorMessage = "Contact Person is required.")]

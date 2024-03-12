@@ -1,4 +1,5 @@
 ﻿using Event_Management.Areas.ClientEvent.Models;
+using Event_Management.Areas.Event.Models;
 using Event_Management.Areas.Venue.Models;
 using Event_Management.DAL.ClientEvent;
 using Event_Management.DAL.Event;
@@ -81,6 +82,29 @@ namespace Event_Management.Areas.ClientEvent.Controllers
             }
             ViewBag.VenueList = venueModels;
             #endregion
+
+            //#region Service DropDown
+            //string connection = this.Configuration.GetConnectionString("myConnectionString");
+            //SqlConnection sqlConnections = new SqlConnection(connection);
+            //sqlConnections.Open();
+            //SqlCommand sqlCommands = sqlConnection.CreateCommand();
+            //sqlCommands.CommandType = CommandType.StoredProcedure;
+            //sqlCommands.CommandText = "PR_Service_SelectAll";
+            //SqlDataReader sqlDataReader = sqlCommands.ExecuteReader();
+            //DataTable dataTable = new DataTable();
+            //dataTable.Load(sqlDataReader);
+
+            //List<ServiceModel> serviceModels = new List<ServiceModel>();
+
+            //foreach (DataRow dr in dataTable.Rows)
+            //{
+            //    ServiceModel service = new ServiceModel();
+            //    service.ServiceID = int.Parse(dr["ServiceID"].ToString());
+            //    service.ServiceName = dr["ServiceName"].ToString();
+            //    serviceModels.Add(service);
+            //}
+            //ViewBag.ServiceList = serviceModels;
+            //#endregion
 
             ClientEventModel eventModel = clientEventDALBase.PR_ClientEvent_SelectByID(ClientEventID);
             if (eventModel != null)
