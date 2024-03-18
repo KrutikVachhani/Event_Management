@@ -33,48 +33,6 @@
 <body>
     @* @Html.HiddenFor(x => x.EventID) *@
 
-    <!-- Header Section Begin -->
-    <header class="header-section">
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <div class="logo">
-            <a href="./index.html">
-                <img src="../manup/img/logo.png" alt="">
-            </a>
-        </div>
-        <div class="container">
-            <span></span>
-            <div class="nav-menu">
-                <nav class="mainmenu mobile-menu">
-                    <ul>
-                        <li class="active"><a>Home</a></li>
-                        <li><a asp-controller="Home" asp-action="About">About</a></li>
-                        <li>
-                            <a>Speakers</a>
-                            <ul class="dropdown">
-                                <li><a>Jayden</a></li>
-                                <li><a>Sara</a></li>
-                                <li><a>Emma</a></li>
-                                <li><a>Harriet</a></li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <form>
-                                <a asp-controller="Home" asp-action="Schedule">Schedule</a>
-                            </form>
-                        </li>
-                        <li><a asp-controller="Home" asp-action="Blog">Blog</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">Contacts</a></li>
-                    </ul>
-                </nav>
-                <a href="#" class="primary-btn top-btn"><i class="fa fa-ticket"></i> Ticket</a>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <a class="primary-btn top-btn" asp-area="SEC_User" asp-controller="SEC_User" asp-action="Logout"><i class="fa fa-ticket"></i> Login</a>
-            </div>
-            <div id="mobile-menu-wrap"></div>
-        </div>
-    </header>
-    <!-- Header End -->
 
     <div class="container">
         <main role="main" class="pb-3">

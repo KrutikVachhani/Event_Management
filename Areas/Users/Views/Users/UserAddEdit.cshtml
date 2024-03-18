@@ -7,139 +7,114 @@
 @using Event_Management.Areas.Users.Models;
 @model UserModel
 
-
-
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-    <title>Tiny Dashboard - A Bootstrap Dashboard Template</title>
-    <!-- Simple bar CSS -->
-    <link rel="stylesheet" href="~/admin/css/simplebar.css">
-    <!-- Fonts CSS -->
-    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <!-- Icons CSS -->
-    <link rel="stylesheet" href="~/admin/css/feather.css">
-    <!-- Date Range Picker CSS -->
-    <link rel="stylesheet" href="~/admin/css/daterangepicker.css">
-    <!-- App CSS -->
-    <link rel="stylesheet" href="~/admin/css/app-light.css" id="lightTheme" disabled>
-    <link rel="stylesheet" href="~/admin/css/app-dark.css" id="darkTheme">
-</head>
-<body>
-
-    <div class="row justify-content-center">
-        <div class="col-12">
-            <h2 class="page-title">Add/Edit Event</h2>
-            <form method="post" asp-area="Users" asp-controller="Users" asp-action="UsersSave" enctype="multipart/form-data">
-                <div class="card shadow mb-4">
-                    <div class="card-header">
-                        <strong class="card-title">User Details</strong>
-                    </div>
-                    @Html.HiddenFor(x => x.UserID)
-                    @Html.HiddenFor(x => x.PhotoPath)
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="col-md-12">
-                                    <label class="form-label">Upload Image</label>
-                                    <div class="card-body dropzone rounded-lg" id="tinydash-dropzone">
-                                        <div class="dz-message needsclick my-5 justify-content-center">
-                                            @if (!string.IsNullOrEmpty(Model.PhotoPath))
-                                            {
-                                                <div class="d-flex align-items-center justify-content-center">
-                                                    <div class="col-md-6 w-200px h-200px me-3 ">
-                                                        <img id="preview" alt="Preview Image" src="@Url.Content(Model.PhotoPath)" alt="Existing Image" class="img-fluid" style="width: 200px; height: 200px; object-fit:cover;  border-radius: 15px;" />
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label class="circle circle-lg bg-primary " for="uplordBtn">
-                                                            <i class="fe fe-upload fe-24 text-white"></i>
-                                                            <input type="file" name="File" accept=".png, .jpg, .jpeg" asp-for="File" onchange="previewImage(event)" id="uplordBtn" style="display:none" Required />
-                                                        </label>
-                                                        <h5 class="text-muted mt-4">Drop files here or click to upload</h5>
-                                                    </div>
+<div class="row justify-content-center">
+    <div class="col-12">
+        <h2 class="page-title">Add/Edit Event</h2>
+        <form method="post" asp-area="Users" asp-controller="Users" asp-action="UsersSave" enctype="multipart/form-data">
+            <div class="card shadow mb-4">
+                <div class="card-header">
+                    <strong class="card-title">User Details</strong>
+                </div>
+                @Html.HiddenFor(x => x.UserID)
+                @Html.HiddenFor(x => x.PhotoPath)
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <label class="form-label">Upload Image</label>
+                                <div class="card-body dropzone rounded-lg" id="tinydash-dropzone">
+                                    <div class="dz-message needsclick my-5 justify-content-center">
+                                        @if (!string.IsNullOrEmpty(Model.PhotoPath))
+                                        {
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="col-md-6 w-200px h-200px me-3 ">
+                                                    <img id="preview" alt="Preview Image" src="@Url.Content(Model.PhotoPath)" alt="Existing Image" class="img-fluid" style="width: 200px; height: 200px; object-fit:cover;  border-radius: 15px;" />
                                                 </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="d-flex align-items-center justify-content-center">
-                                                    <div class="col-md-6 w-200px h-200px me-3 ">
-                                                        <img id="preview" alt="Preview Image" style="width: 200px; height: 200px; object-fit:cover;  border-radius: 15px;">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label class="circle circle-lg bg-primary " for="uplordBtn">
-                                                            <i class="fe fe-upload fe-24 text-white"></i>
-                                                            <input type="file" name="File" accept=".png, .jpg, .jpeg" asp-for="File" onchange="previewImage(event)" id="uplordBtn" style="display:none" Required />
-                                                        </label>
-                                                        <h5 class="text-muted mt-4">Drop files here or click to upload</h5>
-                                                    </div>
+                                                <div class="col-md-6">
+                                                    <label class="circle circle-lg bg-primary " for="uplordBtn">
+                                                        <i class="fe fe-upload fe-24 text-white"></i>
+                                                        <input type="file" name="File" accept=".png, .jpg, .jpeg" asp-for="File" onchange="previewImage(event)" id="uplordBtn" style="display:none" Required />
+                                                    </label>
+                                                    <h5 class="text-muted mt-4">Drop files here or click to upload</h5>
                                                 </div>
-                                            }
-                                        </div>
-                                        <div class="d-none" id="uploadPreviewTemplate">
-                                            <div class="card mt-1 mb-0 shadow-none border">
-                                                <div class="p-2">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-auto">
-                                                            <img data-dz-thumbnail src="#" class="avatar-sm rounded bg-light" alt="">
-                                                        </div>
-                                                        <div class="col pl-0">
-                                                            <a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name></a>
-                                                            <p class="mb-0" data-dz-size></p>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <!-- Button -->
-                                                            <a href="" class="btn btn-link btn-lg text-muted" data-dz-remove>
-                                                                <i class="dripicons-cross"></i>
-                                                            </a>
-                                                        </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="col-md-6 w-200px h-200px me-3 ">
+                                                    <img id="preview" alt="Preview Image" style="width: 200px; height: 200px; object-fit:cover;  border-radius: 15px;">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="circle circle-lg bg-primary " for="uplordBtn">
+                                                        <i class="fe fe-upload fe-24 text-white"></i>
+                                                        <input type="file" name="File" accept=".png, .jpg, .jpeg" asp-for="File" onchange="previewImage(event)" id="uplordBtn" style="display:none" Required />
+                                                    </label>
+                                                    <h5 class="text-muted mt-4">Drop files here or click to upload</h5>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="d-none" id="uploadPreviewTemplate">
+                                        <div class="card mt-1 mb-0 shadow-none border">
+                                            <div class="p-2">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <img data-dz-thumbnail src="#" class="avatar-sm rounded bg-light" alt="">
+                                                    </div>
+                                                    <div class="col pl-0">
+                                                        <a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name></a>
+                                                        <p class="mb-0" data-dz-size></p>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <!-- Button -->
+                                                        <a href="" class="btn btn-link btn-lg text-muted" data-dz-remove>
+                                                            <i class="dripicons-cross"></i>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
+                            </div>
 
-                            </div> <!-- /.col -->
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label for="simpleinput">First Name</label>
-                                    <input type="text" class="form-control" placeholder="Enter User Name" asp-for="FirstName">
-                                    <span asp-validation-for="FirstName"></span>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="simpleinput">Last Name</label>
-                                    <input type="text" class="form-control" placeholder="Enter Last Name" asp-for="LastName">
-                                    <span asp-validation-for="LastName"></span>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="simpleinput">User Name</label>
-                                    <input type="text" id="simpleinput" class="form-control" placeholder="Enter User Name" asp-for="UserName">
-                                    <span asp-validation-for="UserName"></span>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="simpleinput">Password</label>
-                                    <input type="password" class="form-control" placeholder="Enter Password" asp-for="Password">
-                                    <span asp-validation-for="Password"></span>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="simpleinput">Email</label>
-                                    <input type="text" class="form-control" placeholder="Enter Email" asp-for="EmailAddress">
-                                    <span asp-validation-for="EmailAddress"></span>
-                                </div>
-                                @* <div class="form-group mb-3">
-                                <label for="simpleinput">Upload Photo</label>
-                                <input type="text" class="form-control" placeholder="Upload Photo" asp-for="PhotoPath">
-                                <span asp-validation-for="PhotoPath"></span>
-                                </div> *@
 
-                                
-                                
+                        </div> <!-- /.col -->
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="simpleinput">First Name</label>
+                                <input type="text" class="form-control" placeholder="Enter User Name" asp-for="FirstName">
+                                <span asp-validation-for="FirstName"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="simpleinput">Last Name</label>
+                                <input type="text" class="form-control" placeholder="Enter Last Name" asp-for="LastName">
+                                <span asp-validation-for="LastName"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="simpleinput">User Name</label>
+                                <input type="text" id="simpleinput" class="form-control" placeholder="Enter User Name" asp-for="UserName">
+                                <span asp-validation-for="UserName"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="simpleinput">Password</label>
+                                <input type="password" class="form-control" placeholder="Enter Password" asp-for="Password">
+                                <span asp-validation-for="Password"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="simpleinput">Email</label>
+                                <input type="text" class="form-control" placeholder="Enter Email" asp-for="EmailAddress">
+                                <span asp-validation-for="EmailAddress"></span>
+                            </div>
+                            @* <div class="form-group mb-3">
+                            <label for="simpleinput">Upload Photo</label>
+                            <input type="text" class="form-control" placeholder="Upload Photo" asp-for="PhotoPath">
+                            <span asp-validation-for="PhotoPath"></span>
+                            </div> *@
+
+
+
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
 
@@ -151,49 +126,7 @@
                         </div>
                     </div>
                 </div> <!-- / .card -->
-                </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
-
-    <script src="~/admin/js/jquery.min.js"></script>
-    <script src="~/admin/js/popper.min.js"></script>
-    <script src="~/admin/js/moment.min.js"></script>
-    <script src="~/admin/js/bootstrap.min.js"></script>
-    <script src="~/admin/js/simplebar.min.js"></script>
-    <script src='~/admin/js/daterangepicker.js'></script>
-    <script src='~/admin/js/jquery.stickOnScroll.js'></script>
-    <script src="~/admin/js/tinycolor-min.js"></script>
-    <script src="~/admin/js/config.js"></script>
-    <script src="~/admin/js/apps.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-56159088-1');
-    </script>
-    @section Scripts{
-        <script>
-            function previewImage(event) {
-                var input = event.target;
-                var image = document.getElementById('preview');
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        image.src = e.target.result;
-                    }
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-        </script>
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
-    }
-</body>
-</html>
+</div>

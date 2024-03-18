@@ -7,189 +7,134 @@
 @using Event_Management.Areas.Venue.Models;
 @model DataTable
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-    <title>Tiny Dashboard - A Bootstrap Dashboard Template</title>
-    <!-- Simple bar CSS -->
-    <link rel="stylesheet" href="~/admin/css/simplebar.css">
-    <!-- Fonts CSS -->
-    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <!-- Icons CSS -->
-    <link rel="stylesheet" href="~/admin/css/feather.css">
-    <link rel="stylesheet" href="~/admin/css/select2.css">
-    <link rel="stylesheet" href="~/admin/css/dropzone.css">
-    <link rel="stylesheet" href="~/admin/css/uppy.min.css">
-    <link rel="stylesheet" href="~/admin/css/jquery.steps.css">
-    <link rel="stylesheet" href="~/admin/css/jquery.timepicker.css">
-    <link rel="stylesheet" href="~/admin/css/quill.snow.css">
-    <!-- Date Range Picker CSS -->
-    <link rel="stylesheet" href="~/admin/css/daterangepicker.css">
-    <!-- App CSS -->
-    <link rel="stylesheet" href="~/admin/css/app-light.css" id="lightTheme" disabled>
-    <link rel="stylesheet" href="~/admin/css/app-dark.css" id="darkTheme">
-</head>
-<body>
-
-
-    <div class="row justify-content-center">
-        <div class="col-12">
-            <h2 class="mb-2 page-title">Venue List</h2>
-            <div class="row my-4">
-                <!-- Small table -->
-                <div class="col-md-12">
-                    <form method="post" asp-area="Venue" asp-controller="Venue" asp-action="VenueFilter">
-                        <div class="card shadow mb-4">
-                            <div class="card-header">
-                                <h4 class="card-title">Filter</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-6">
-                                            <label for="simpleinput">Venue Name</label>
-                                            <input type="text" id="simpleinput" class="form-control" placeholder="Venue Name" name="VenueName">
-                                        </div>
-
-                                        <div class="form-group mb-6">
-                                            <label for="simpleinput">Capacity</label>
-                                            <input type="text" class="form-control" placeholder="Enter Capacity" name="Capacity">
-                                        </div>
-
-                                    </div> <!-- /.col -->
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-6">
-                                            <label for="simpleinput">Location</label>
-                                            <input type="text" class="form-control" placeholder="Enter Location" name="Location">
-                                        </div>
+<div class="row justify-content-center">
+    <div class="col-12">
+        <h2 class="mb-2 page-title">Venue List</h2>
+        <div class="row my-4">
+            <!-- Small table -->
+            <div class="col-md-12">
+                <form method="post" asp-area="Venue" asp-controller="Venue" asp-action="VenueFilter">
+                    <div class="card shadow mb-4">
+                        <div class="card-header">
+                            <h4 class="card-title">Filter</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-6">
+                                        <label for="simpleinput">Venue Name</label>
+                                        <input type="text" id="simpleinput" class="form-control" placeholder="Venue Name" name="VenueName">
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-6">
-                                            <button value="Filter" type="submit" class="btn mb-2 btn-info">Filter</button>
-                                        </div>
+
+                                    <div class="form-group mb-6">
+                                        <label for="simpleinput">Capacity</label>
+                                        <input type="text" class="form-control" placeholder="Enter Capacity" name="Capacity">
+                                    </div>
+
+                                </div> <!-- /.col -->
+                                <div class="col-md-6">
+                                    <div class="form-group mb-6">
+                                        <label for="simpleinput">Location</label>
+                                        <input type="text" class="form-control" placeholder="Enter Location" name="Location">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-6">
+                                        <button value="Filter" type="submit" class="btn mb-2 btn-info">Filter</button>
                                     </div>
                                 </div>
                             </div>
-                        </div> <!-- / .card -->
-                    </form>
-                </div>
-                <div class="col-md-12">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <a asp-area="Venue" asp-controller="Venue" asp-action="VenueAdd" class="btn mb-2 btn-info">Add Venue</a>
-                            <!-- table -->
-                            <table class="table datatables" id="dataTable-1">
-                                <thead class="justify-content-center">
-                                    <tr>
-                                        <th></th>
-                                        <th>#</th>
-                                        <th>VenueName</th>
-                                        <th>Location</th>
-                                        <th>Capacity</th>
-                                        <th>ContactPerson</th>
-                                        <th>ContactNumber</th>
-                                        <th>Created</th>
-                                        <th>Modified</th>
-                                        <th colspan="2">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="sample_2">
-                                    @foreach (DataRow dr in Model.Rows)
-                                    {
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <label class="custom-control-label"></label>
-                                                </div>
-                                            </td>
-                                            <td>@dr["VenueID"]</td>
-                                            <td>@dr["VenueName"]</td>
-                                            <td>@dr["Location"]</td>
-                                            <td>@dr["Capacity"]</td>
-                                            <td>@dr["ContactPerson"]</td>
-                                            <td>@dr["ContactNumber"]</td>
-                                            <td>@dr["Created"]</td>
-                                            <td>@dr["Modified"]</td>
-                                            <td>
-                                                @* <a class="btn mb-2 btn-info" asp-area="Venue" asp-controller="Venue" asp-action="VenueAdd" asp-route-productid="@Convert.ToInt32(dr["VenueID"])">Edit</a> *@
-                                                <form method="post" asp-area="Venue" asp-controller="Venue" asp-action="VenueAdd">
-                                                    <input type="hidden" name="VenueID" value="@int.Parse(@dr["VenueID"].ToString())">
-                                                    <button type="submit" class="btn mb-2 btn-info">Edit</button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form method="post" asp-area="Venue" asp-controller="Venue" asp-action="VenueDelete">
-                                                    <input type="hidden" name="VenueID" value="@int.Parse(@dr["VenueID"].ToString())">
-                                                    <button type="submit" value="Delete" class="btn mb-2 btn-danger">Delete</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-
-                                    }
-                                </tbody>
-                            </table>
                         </div>
+                    </div> <!-- / .card -->
+                </form>
+            </div>
+            <div class="col-md-12">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <a asp-area="Venue" asp-controller="Venue" asp-action="VenueAdd" class="btn mb-2 btn-info">Add Venue</a>
+                        <!-- table -->
+                        <table class="table datatables" id="dataTable-1">
+                            <thead class="justify-content-center">
+                                <tr>
+                                    <th></th>
+                                    <th>#</th>
+                                    <th>VenueName</th>
+                                    <th>Location</th>
+                                    <th>Capacity</th>
+                                    <th>ContactPerson</th>
+                                    <th>ContactNumber</th>
+                                    <th>Created</th>
+                                    <th>Modified</th>
+                                    <th colspan="2">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sample_2">
+                                @foreach (DataRow dr in Model.Rows)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input">
+                                                <label class="custom-control-label"></label>
+                                            </div>
+                                        </td>
+                                        <td>@dr["VenueID"]</td>
+                                        <td>@dr["VenueName"]</td>
+                                        <td>@dr["Location"]</td>
+                                        <td>@dr["Capacity"]</td>
+                                        <td>@dr["ContactPerson"]</td>
+                                        <td>@dr["ContactNumber"]</td>
+                                        <td>@dr["Created"]</td>
+                                        <td>@dr["Modified"]</td>
+                                        <td>
+                                            @* <a class="btn mb-2 btn-info" asp-area="Venue" asp-controller="Venue" asp-action="VenueAdd" asp-route-productid="@Convert.ToInt32(dr["VenueID"])">Edit</a> *@
+                                            <form method="post" asp-area="Venue" asp-controller="Venue" asp-action="VenueAdd">
+                                                <input type="hidden" name="VenueID" value="@int.Parse(@dr["VenueID"].ToString())">
+                                                <button type="submit" class="btn mb-2 btn-info">Edit</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form method="post" asp-area="Venue" asp-controller="Venue" asp-action="VenueDelete">
+                                                <input type="hidden" name="VenueID" value="@int.Parse(@dr["VenueID"].ToString())">
+                                                <button class="button" type="submit">
+                                                    <div class="trash">
+                                                        <div class="top">
+                                                            <div class="paper"></div>
+                                                        </div>
+                                                        <div class="box"></div>
+                                                        <div class="check">
+                                                            <svg viewBox="0 0 8 6">
+                                                                <polyline points="1 3.4 2.71428571 5 7 1"></polyline>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <span>Delete</span>
+                                                </button>
+                                                @* <button type="submit" value="Delete" class="btn mb-2 btn-danger">Delete</button> *@
+                                            </form>
+                                        </td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+            <button class="button">
+                <div class="trash">
+                    <div class="top">
+                        <div class="paper"></div>
+                    </div>
+                    <div class="box"></div>
+                    <div class="check">
+                        <svg viewBox="0 0 8 6">
+                            <polyline points="1 3.4 2.71428571 5 7 1"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <span>Delete Item</span>
+            </button>
         </div>
     </div>
-
-
-
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/moment.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/simplebar.min.js"></script>
-    <script src='js/daterangepicker.js'></script>
-    <script src='js/jquery.stickOnScroll.js'></script>
-    <script src="js/tinycolor-min.js"></script>
-    <script src="js/config.js"></script>
-    <script src='js/jquery.dataTables.min.js'></script>
-    <script src='js/dataTables.bootstrap4.min.js'></script>
-
-    @section Scripts
-        {
-        <script>
-            $(document).ready(function () {
-                $("#sample_1").on("keyup", function () {
-                    var value = $(this).val().toLowerCase();
-                    $("#sample_2 tr").filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
-                });
-            });
-        </script>
-    }
-
-    <script>
-        $('#dataTable-1').DataTable(
-            {
-                autoWidth: true,
-                "lengthMenu": [
-                    [16, 32, 64, -1],
-                    [16, 32, 64, "All"]
-                ]
-            });
-    </script>
-    <script src="js/apps.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-56159088-1');
-    </script>
-</body>
-</html>
+</div>

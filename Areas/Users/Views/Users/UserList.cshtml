@@ -11,37 +11,6 @@
 @using Microsoft.EntityFrameworkCore;
 @model DataTable
 
-
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-    <title>Tiny Dashboard - A Bootstrap Dashboard Template</title>
-    <!-- Simple bar CSS -->
-    <link rel="stylesheet" href="~/admin/css/simplebar.css">
-    <!-- Fonts CSS -->
-    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <!-- Icons CSS -->
-    <link rel="stylesheet" href="~/admin/css/feather.css">
-    <link rel="stylesheet" href="~/admin/css/select2.css">
-    <link rel="stylesheet" href="~/admin/css/dropzone.css">
-    <link rel="stylesheet" href="~/admin/css/uppy.min.css">
-    <link rel="stylesheet" href="~/admin/css/jquery.steps.css">
-    <link rel="stylesheet" href="~/admin/css/jquery.timepicker.css">
-    <link rel="stylesheet" href="~/admin/css/quill.snow.css">
-    <!-- Date Range Picker CSS -->
-    <link rel="stylesheet" href="~/admin/css/daterangepicker.css">
-    <!-- App CSS -->
-    <link rel="stylesheet" href="~/admin/css/app-light.css" id="lightTheme" disabled>
-    <link rel="stylesheet" href="~/admin/css/app-dark.css" id="darkTheme">
-</head>
-<body>
-
-
     <div class="row justify-content-center">
         <div class="col-12">
             <h2 class="mb-2 page-title">User Table</h2>
@@ -238,55 +207,3 @@
             </div>
         </div>
     </div>
-
-
-    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
-    <script src="~/admin/js/jquery.min.js"></script>
-    <script src="~/admin/js/popper.min.js"></script>
-    <script src="~/admin/js/moment.min.js"></script>
-    <script src="~/admin/js/bootstrap.min.js"></script>
-    <script src="~/admin/js/simplebar.min.js"></script>
-    <script src='~/admin/js/daterangepicker.js'></script>
-    <script src='~/admin/js/jquery.stickOnScroll.js'></script>
-    <script src="~/admin/js/tinycolor-min.js"></script>
-    <script src="~/admin/js/config.js"></script>
-    @* <script src='~/admin/js/jquery.dataTables.min.js'></script> *@
-    @* <script src='~/admin/js/dataTables.bootstrap4.min.js'></script> *@
-    <script src="~/admin/js/apps.js"></script>
-
-    <script>
-        $('#dataTable-1').DataTable(
-            {
-                autoWidth: true,
-                "lengthMenu": [
-                    [8, 16, 32, -1],
-                    [8, 16, 32, "All"]
-                ]
-            });
-    </script>
-    <script>
-        function previewImage(event) {
-            var input = event.target;
-            var image = document.getElementById('preview');
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    image.src = e.target.result;
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-56159088-1');
-    </script>
-</body>
-</html>
