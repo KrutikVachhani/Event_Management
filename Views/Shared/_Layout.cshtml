@@ -32,18 +32,18 @@
 
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="../manup/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="../manup/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../manup/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="../manup/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../manup/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="../manup/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../manup/css/style.css" type="text/css">
+    <link rel="stylesheet" href="~/manup/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/manup/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/manup/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/manup/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/manup/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="~/manup/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/manup/css/style.css" type="text/css">
 </head>
 
 <body>
     @* <div id="preloder">
-        <div class="loader"></div>
+    <div class="loader"></div>
     </div> *@
     <!-- Header Section Begin -->
     <header class="header-section">
@@ -70,11 +70,20 @@
                             </ul>
                         </li>
 
-                        <li> <a asp-controller="Home" asp-action="Schedule">Schedule</a></li>
+                        <li> <a asp-area="Schedule" asp-controller="Schedule" asp-action="Schedule">Schedule</a></li>
                         <li><a asp-controller="Home" asp-action="Blog">Blog</a></li>
                         <li><a asp-controller="Home" asp-action="Contact">Contacts</a></li>
                         <li><a><i class="fa fa-ticket"></i> Ticket</a></li>
-                        <li><a asp-area="SEC_User" asp-controller="SEC_User" asp-action="Logout"><i class="fa fa-user"></i> Login</a></li>
+                        <li>
+                            @if (CommonVariables.UserName() != null)
+                            {
+                                <a asp-area="Users" asp-controller="Users" asp-action="UserProfile"><i class="fa fa-user"></i>@CommonVariables.UserName()</a>
+                            }
+                            else
+                            {
+                                <a asp-area="SEC_User" asp-controller="SEC_User" asp-action="Logout"><i class="fa fa-user"></i> Login</a>
+                            }
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -157,13 +166,13 @@
     </footer>
     <!-- Footer Section End -->
     <!-- Js Plugins -->
-    <script src="../manup/js/jquery-3.3.1.min.js"></script>
-    <script src="../manup/js/bootstrap.min.js"></script>
-    <script src="../manup/js/jquery.magnific-popup.min.js"></script>
-    <script src="../manup/js/jquery.countdown.min.js"></script>
-    <script src="../manup/js/jquery.slicknav.js"></script>
-    <script src="../manup/js/owl.carousel.min.js"></script>
-    <script src="../manup/js/main.js"></script>
+    <script src="~/manup/js/jquery-3.3.1.min.js"></script>
+    <script src="~/manup/js/bootstrap.min.js"></script>
+    <script src="~/manup/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/manup/js/jquery.countdown.min.js"></script>
+    <script src="~/manup/js/jquery.slicknav.js"></script>
+    <script src="~/manup/js/owl.carousel.min.js"></script>
+    <script src="~/manup/js/main.js"></script>
 </body>
 
 </html>

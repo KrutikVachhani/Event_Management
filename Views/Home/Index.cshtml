@@ -4,6 +4,7 @@
 @using System.Data;
 @using System.Data.SqlClient;
 @using Event_Management.Areas.Event.Models;
+@using Event_Management.Areas.Payment.Models;
 @model DataTable
 @using System.Data;
 
@@ -351,59 +352,29 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-8">
-                <div class="price-item">
-                    <h4>1 Day Pass</h4>
-                    <div class="pi-price">
-                        <h2><span>$</span>129</h2>
+            @foreach(DataRow dr in Model.Rows)
+            {
+                <div class="col-lg-4 col-md-8">
+                    <div class="price-item">
+                        <h4>1 Day Pass</h4>
+                        <div class="pi-price">
+                            <h2><span>$</span>@dr["Price"]</h2>
+                        </div>
+                        <ul>
+                            <li>One Day Conference Ticket</li>
+                            <li>Coffee-break</li>
+                            <li>Lunch and Networking</li>
+                            <li>Keynote talk</li>
+                            <li>Talk to the Editors Session</li>
+                        </ul>
+                        <form asp-area="Payment" asp-controller="Payment" asp-action="PaymentAdd" asp-route-priceid="@dr["PriceID"]">
+                            <input type="hidden" name="PriceID" value="@int.Parse(@dr["PriceID"].ToString())" />
+                            <button type="submit" class="price-btn"> Get Ticket<span class="arrow_right"></span></button>
+                        </form>
                     </div>
-                    <ul>
-                        <li>One Day Conference Ticket</li>
-                        <li>Coffee-break</li>
-                        <li>Lunch and Networking</li>
-                        <li>Keynote talk</li>
-                        <li>Talk to the Editors Session</li>
-                    </ul>
-                    <a href="#" class="price-btn">Get Ticket <span class="arrow_right"></span></a>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-8">
-                <div class="price-item top-rated">
-                    <div class="tr-tag">
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <h4>Full Pass</h4>
-                    <div class="pi-price">
-                        <h2><span>$</span>199</h2>
-                    </div>
-                    <ul>
-                        <li>One Day Conference Ticket</li>
-                        <li>Coffee-break</li>
-                        <li>Lunch and Networking</li>
-                        <li>Keynote talk</li>
-                        <li>Talk to the Editors Session</li>
-                        <li>Lunch and Networking</li>
-                        <li>Keynote talk</li>
-                    </ul>
-                    <a href="#" class="price-btn">Get Ticket <span class="arrow_right"></span></a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-8">
-                <div class="price-item">
-                    <h4>Group Pass</h4>
-                    <div class="pi-price">
-                        <h2><span>$</span>79</h2>
-                    </div>
-                    <ul>
-                        <li>One Day Conference Ticket</li>
-                        <li>Coffee-break</li>
-                        <li>Lunch and Networking</li>
-                        <li>Keynote talk</li>
-                        <li>Talk to the Editors Session</li>
-                    </ul>
-                    <a href="#" class="price-btn">Get Ticket <span class="arrow_right"></span></a>
-                </div>
-            </div>
+            }
+            
         </div>
     </div>
 </section>

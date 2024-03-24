@@ -2,6 +2,7 @@
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data.Common;
 using System.Data;
+using Event_Management.BAL;
 
 namespace Event_Management.Controllers
 {
@@ -11,32 +12,27 @@ namespace Event_Management.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult Schedule()
-        {
             try
             {
                 SqlDatabase sqlDatabase = new SqlDatabase(connectionstr);
-                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Event_SelectAll");
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Price_SelectAll");
                 DataTable dataTable = new DataTable();
 
                 using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
                 {
                     dataTable.Load(dataReader);
                 }
-                return View(dataTable);
+                return View("Index", dataTable);
             }
             catch (Exception ex)
             {
                 return null;
             }
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
         }
 
         public IActionResult Contact()

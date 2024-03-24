@@ -9,8 +9,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
 using Event_Management.Areas.Venue.Models;
-using Pages = Event_Management.CF.Pages;
 using DocumentFormat.OpenXml.Bibliography;
+using Event_Management.BAL;
 
 namespace Event_Management.Areas.Users.Controllers
 {
@@ -73,6 +73,33 @@ namespace Event_Management.Areas.Users.Controllers
             DataTable dataTable = userDALBase.PR_Users_SelectAll();
 
             return View(dataTable);
+        }
+        #endregion
+
+        #region Admin List
+        public IActionResult AdminList()
+        {
+            DataTable dataTable = userDALBase.PR_Admin_SelectAll();
+
+            return View("UserList", dataTable);
+        }
+        #endregion
+
+        #region Client List
+        public IActionResult ClientList()
+        {
+            DataTable dataTable = userDALBase.PR_Client_SelectAll();
+
+            return View("UserList", dataTable);
+        }
+        #endregion
+
+        #region Customer List
+        public IActionResult CustomerList()
+        {
+            DataTable dataTable = userDALBase.PR_Customer_SelectAll();
+
+            return View("UserList", dataTable);
         }
         #endregion
 
@@ -210,5 +237,7 @@ namespace Event_Management.Areas.Users.Controllers
             return View();
         }
         #endregion
+
+        
     }
 }

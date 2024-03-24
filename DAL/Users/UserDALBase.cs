@@ -33,6 +33,72 @@ namespace Event_Management.DAL.Users
         }
         #endregion
 
+        #region Admin SelectAll
+        public DataTable PR_Admin_SelectAll()
+        {
+            try
+            {
+                SqlDatabase sqlDatabase = new SqlDatabase(connectionstr);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Admin_SelectAll");
+                DataTable dataTable = new DataTable();
+
+                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+                {
+                    dataTable.Load(dataReader);
+                }
+                return dataTable;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Client SelectAll
+        public DataTable PR_Client_SelectAll()
+        {
+            try
+            {
+                SqlDatabase sqlDatabase = new SqlDatabase(connectionstr);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Client_SelectAll");
+                DataTable dataTable = new DataTable();
+
+                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+                {
+                    dataTable.Load(dataReader);
+                }
+                return dataTable;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Customer_SelectAll
+        public DataTable PR_Customer_SelectAll()
+        {
+            try
+            {
+                SqlDatabase sqlDatabase = new SqlDatabase(connectionstr);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Customer_SelectAll");
+                DataTable dataTable = new DataTable();
+
+                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+                {
+                    dataTable.Load(dataReader);
+                }
+                return dataTable;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
         #region SelectByID
         public UserModel PR_Users_SelectByID(int UserID)
         {

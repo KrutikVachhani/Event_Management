@@ -25,8 +25,8 @@
     <Folder Include="Areas\ClientEvent\Data\" />
     <Folder Include="Areas\Feedback\Controllers\" />
     <Folder Include="Areas\Feedback\Views\" />
-    <Folder Include="Areas\Schedule\Controllers\" />
-    <Folder Include="Areas\Schedule\Views\" />
+    <Folder Include="Areas\Payment\Data\" />
+    <Folder Include="Areas\Payment\Models\" />
     <Folder Include="Areas\SEC_Admin\Models\" />
     <Folder Include="Areas\SEC_Client\Models\" />
   </ItemGroup>
