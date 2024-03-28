@@ -10,6 +10,8 @@ namespace Event_Management.Controllers
     {
         public static string connectionstr = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("myConnectionString");
 
+        [Route("")]
+        [Route("index")]
         public IActionResult Index()
         {
             try
@@ -30,7 +32,26 @@ namespace Event_Management.Controllers
             }
         }
 
-        public IActionResult Privacy()
+        public IActionResult BuyTicket()
+        {
+            try
+            {
+                SqlDatabase sqlDatabase = new SqlDatabase(connectionstr);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Price_SelectAll");
+                DataTable dataTable = new DataTable();
+
+                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+                {
+                    dataTable.Load(dataReader);
+                }
+                return View("BuyTicket", dataTable);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public IActionResult Speakers()
         {
             return View();
         }

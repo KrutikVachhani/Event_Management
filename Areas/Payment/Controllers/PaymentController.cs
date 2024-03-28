@@ -3,9 +3,11 @@ using Event_Management.Areas.Venue.Models;
 using Event_Management.DAL.Payment;
 using Event_Management.DAL.Venue;
 using Microsoft.AspNetCore.Mvc;
+using Event_Management.BAL;
 
 namespace Event_Management.Areas.Payment.Controllers
 {
+    [CheckAccess]
     [Area("Payment")]
     [Route("Payment/[Controller]/[Action]")]
     public class PaymentController : Controller

@@ -238,6 +238,11 @@ namespace Event_Management.Areas.Users.Controllers
         }
         #endregion
 
-        
+        #region User Profile
+        public IActionResult UserSideProfile()
+        {
+            return View();
+        }
+        #endregion
     }
 }

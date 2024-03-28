@@ -1,0 +1,75 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using System.Data;
+@using System.Data.SqlClient;
+@using Event_Management.BAL;
+@using Event_Management.Areas.Users.Models;
+@model UserModel
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+                <span class="subheading">Profile</span>
+                <h2 class="mb-4"><span>User</span>  Profile</h2>
+            </div>
+        </div>
+
+        <div class="row mt-5 align-items-center">
+            <div class="col-md-3 text-center mb-5">
+                <div class="avatar avatar-xl">
+                    <img src="@Url.Content(CommonVariables.PhotoPath())" alt="..." class="avatar-img rounded-circle" style="width: 100px; height: 100px; object-fit:cover;  border-radius: 10px;" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="row align-items-center">
+                    <div class="col-md-7">
+                        <h4 class="mb-1">@CommonVariables.UserName()</h4>
+                        <p class="small mb-3"><span class="badge badge-dark">Gujarat, India</span></p>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-7">
+                        <p class="text-muted"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit nisl ullamcorper, rutrum metus in, congue lectus. In hac habitasse platea dictumst. Cras urna quam, malesuada vitae risus at, pretium blandit sapien. </p>
+                    </div>
+                    <div class="col">
+                        <p class="small mb-0 text-muted">Nec Urna Suscipit Ltd</p>
+                        <p class="small mb-0 text-muted">P.O. Box 464, 5975 Eget Avenue</p>
+                        <p class="small mb-0 text-muted">(537) 315-1481</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="firstname">Firstname</label>
+                <input type="text" class="form-control" value="@CommonVariables.FirstName()" asp-for="FirstName">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="lastname">Lastname</label>
+                <input type="text" class="form-control" value="@CommonVariables.LastName()" asp-for="LastName">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail4">Email</label>
+            <input type="text" class="form-control" value="@CommonVariables.EmailAddress()" asp-for="EmailAddress">
+        </div>
+        <div class="form-group">
+            <label for="inputAddress5">UserName</label>
+            <input type="text" id="simpleinput" class="form-control" value="@CommonVariables.UserName()" asp-for="UserName">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputCompany5">Password</label>
+                <input type="password" class="form-control" value="@CommonVariables.Password()" asp-for="Password">
+            </div>
+        </div>
+        <div class="form-group">
+            <a asp-area="SEC_User" asp-controller="SEC_User" asp-action="Logout" class="btn btn-danger">Logout</a>
+        </div>
+
+    </div>
+</section>

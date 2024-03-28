@@ -6,155 +6,42 @@
 @model PaymentModel
 
 @Html.HiddenFor(x=>x.PriceID)
-<section class="contact-from-section spad">
+<section class="ftco-section">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2>Paymet Details</h2>
-                    @* <p>Fill out the form below to recieve a free and confidential intial consultation.</p> *@
-                </div>
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+                <span class="subheading">Payment</span>
+                <h2 class="mb-4"><span>Payment</span>  Details</h2>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <form method="post" asp-area="Payment" asp-controller="Payment" asp-action="PaymentSave" class="comment-form contact-form">
-                    <div class="col">
-                        <div class="col-lg-4">
-                            <input type="text" asp-for="PriceID" value="@Model.PriceID">
-                        </div>
-                        <div class="col-lg-4">
-                            <label for="simpleinput">Card Number</label>
-                            <input type="text" placeholder="Enter Card Number" asp-for="CardNumber">
-                        </div>
-                        <div class="col-lg-4">
-                            <label for="simpleinput">Card Holder Name</label>
-                            <input type="text" placeholder="Enter Card Holder Name" asp-for="CardHolderName">
-                        </div>
-                        <div class="col-lg-4">
-                            <label for="simpleinput">Expirt Date</label>
-                            <input type="date" placeholder="Expiry Date" asp-for="CardExpiryDate">
-                        </div>
-                        <div class="col-lg-4">
-                            <label for="simpleinput">CVV Number</label>
-                            <input type="text" placeholder="Enter CVV Number" asp-for="CardCVVNumber" />
-                        </div>
-                        <div class="col-lg-12 text-center">
-                            <button type="submit" class="site-btn">Pay</button>
-                        </div>
+        <div class="row block-9" style="padding-left:235px">
+            <div class="col-md-9">
+                <form method="post" asp-area="Payment" asp-controller="Payment" asp-action="PaymentSave" class="bg-light p-5 contact-form">
+                    <input type="hidden" class="form-control" asp-for="PriceID" value="@Model.PriceID" />
+                    <div class="form-group">
+                        <label>Card Number</label>
+                        <input type="text" class="form-control" asp-for="CardNumber" placeholder="Enter Card Number">
+                    </div>
+                    <div class="form-group">
+                        <label>Card Holder Name</label>
+                        <input type="text" class="form-control" asp-for="CardHolderName" placeholder="Enter Card Holder Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Expiry Date</label>
+                        <input type="date" class="form-control" asp-for="CardExpiryDate" placeholder="Enter Expiry Date">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" class="form-control" asp-for="CardCVVNumber" placeholder="Enter CVV Number">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn mb-2 btn-primary">Pay Now</button>
+                        <a asp-controller="Home" asp-action="BuyTicket" class="btn mb-2 btn-danger">Cancel</a>
                     </div>
                 </form>
+
             </div>
+
         </div>
     </div>
 </section>
-
-
-@*
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-    <title>Tiny Dashboard - A Bootstrap Dashboard Template</title>
-    <!-- Simple bar CSS -->
-    <link rel="stylesheet" href="~/admin/css/simplebar.css">
-    <!-- Fonts CSS -->
-    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <!-- Icons CSS -->
-    <link rel="stylesheet" href="~/admin/css/feather.css">
-    <link rel="stylesheet" href="~/admin/css/select2.css">
-    <link rel="stylesheet" href="~/admin/css/dropzone.css">
-    <link rel="stylesheet" href="~/admin/css/uppy.min.css">
-    <link rel="stylesheet" href="~/admin/css/jquery.steps.css">
-    <link rel="stylesheet" href="~/admin/css/jquery.timepicker.css">
-    <link rel="stylesheet" href="~/admin/css/quill.snow.css">
-    <!-- Date Range Picker CSS -->
-    <link rel="stylesheet" href="~/admin/css/daterangepicker.css">
-    <!-- App CSS -->
-    <link rel="stylesheet" href="~/admin/css/app-light.css" id="lightTheme" disabled>
-    <link rel="stylesheet" href="~/admin/css/app-dark.css" id="darkTheme">
-</head>
-<body class="vertical">
-    <div class="wrapper">
-        @Html.HiddenFor(x=>x.PriceID)
-<div class="row justify-content-center">
-    <div class="col-12">
-        <h2 class="page-title">Payment Details</h2>
-        <form method="post" asp-area="Payment" asp-controller="Payment" asp-action="PaymentSave">
-            <div class="card shadow mb-4">
-                <div class="card-header">
-                    <strong class="card-title">Enter Card Details</strong>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" asp-for="PriceID" value="@Model.PriceID" />
-                            <div class="form-group mb-3">
-                                <label for="simpleinput">Card Number</label>
-                                <input type="text" id="simpleinput" class="form-control" asp-for="CardNumber" placeholder="Enter Card Number">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="simpleinput">Card Holder Name</label>
-                                <input type="text" class="form-control" asp-for="CardHolderName" placeholder="Enter Card Holder Name">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="simpleinput">Expiry Date</label>
-                                <input type="date" class="form-control" asp-for="CardExpiryDate" placeholder="Enter Expiry Date">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="simpleinput">CVV</label>
-                                <input type="text" class="form-control" asp-for="CardCVVNumber" placeholder="Enter CVV Number">
-                            </div>
-                            <div class="form-group mb-3">
-                                <button type="submit" class="btn mb-2 btn-info">Save</button>
-                                <a asp-area="Payment" asp-controller="Payment" asp-action="PaymentSave" class="btn mb-2 btn-info">Cancel</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-</div>
-
-    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
-    <script src="~/admin/js/jquery.min.js"></script>
-    <script src="~/admin/js/popper.min.js"></script>
-    <script src="~/admin/js/bootstrap.min.js"></script>
-    <script src="~/admin/js/moment.min.js"></script>
-    <script src="~/admin/js/simplebar.min.js"></script>
-    <script src='~/admin/js/daterangepicker.js'></script>
-    <script src='~/admin/js/jquery.stickOnScroll.js'></script>
-    <script src="~/admin/js/tinycolor-min.js"></script>
-    <script src="~/admin/js/config.js"></script>
-    <script src="~/admin/js/d3.min.js"></script>
-    <script src="~/admin/js/topojson.min.js"></script>
-    <script src="~/admin/js/datamaps.all.min.js"></script>
-    <script src="~/admin/js/datamaps-zoomto.js"></script>
-    <script src="~/admin/js/datamaps.custom.js"></script>
-    <script src="~/admin/js/Chart.min.js"></script>
-    <script src='~/admin/js/jquery.dataTables.min.js'></script>
-    <script>
-        /* defind global options */
-        Chart.defaults.global.defaultFontFamily = base.defaultFontFamily;
-        Chart.defaults.global.defaultFontColor = colors.mutedColor;
-    </script>
-    <script src="~/admin/js/gauge.min.js"></script>
-    <script src="~/admin/js/jquery.sparkline.min.js"></script>
-    <script src="~/admin/js/apexcharts.min.js"></script>
-    <script src="~/admin/js/apexcharts.custom.js"></script>
-    <script src='~/admin/js/jquery.mask.min.js'></script>
-    <script src='~/admin/js/select2.min.js'></script>
-    <script src='~/admin/js/jquery.steps.min.js'></script>
-    <script src='~/admin/js/jquery.validate.min.js'></script>
-    <script src='~/admin/js/jquery.timepicker.js'></script>
-    <script src='~/admin/js/dropzone.min.js'></script>
-    <script src='~/admin/js/uppy.min.js'></script>
-    <script src='~/admin/js/quill.min.js'></script>
-</body>
-</html> *@
