@@ -77,9 +77,9 @@ namespace Event_Management.Areas.Comment.Controllers
             bool isSuccess = commentDALBase.PR_Comment_Delete(CommentID);
             if (isSuccess)
             {
-                return RedirectToAction("CommentView");
+                return RedirectToAction("CommentList");
             }
-            return RedirectToAction("CommentView");
+            return RedirectToAction("CommentList");
         }
         #endregion
     }

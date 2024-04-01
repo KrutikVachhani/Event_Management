@@ -49,7 +49,11 @@
                     <li class="nav-item cta pd-2">
                         @if (CommonVariables.UserName() != null)
                         {
-                            <a asp-area="Users" asp-controller="Users" asp-action="UserSideProfile" class="nav-link">@CommonVariables.UserName()</a>
+                            @* <form method="post" asp-area="Users" asp-controller="Users" asp-action="UserEdit">
+                                <input type="hidden" name="UserID" value="@CommonVariables.UserID()">
+                                <button type="submit" class="btn btn-primary">@CommonVariables.UserName()</button>
+                            </form> *@
+                            <a asp-area="Users" asp-controller="Users" asp-action="UserSideProfile" asp-route-UserID="@CommonVariables.UserID()" class="nav-link">@CommonVariables.UserName()</a>
                         }
                         else
                         {

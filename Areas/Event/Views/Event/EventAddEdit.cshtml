@@ -52,7 +52,7 @@
                                 @foreach (ServiceModel ServiceName in ViewBag.ServiceList)
                                 {
                                     <div>
-                                        <input type="checkbox" id="@ServiceName.ServiceID" name="SelectedService" value="@ServiceName.ServiceID" />
+                                        <input type="checkbox" id="@ServiceName.ServiceID" name="SelectedService" value="@ServiceName.ServiceName" />
                                         <label>@ServiceName.ServiceName</label>
                                     </div>
                                 }

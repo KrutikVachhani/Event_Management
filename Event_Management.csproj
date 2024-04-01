@@ -29,7 +29,6 @@
     <Folder Include="Areas\Payment\Models\" />
     <Folder Include="Areas\SEC_Admin\Models\" />
     <Folder Include="Areas\SEC_Client\Models\" />
-    <Folder Include="Areas\Service\Data\" />
   </ItemGroup>
 
 </Project>

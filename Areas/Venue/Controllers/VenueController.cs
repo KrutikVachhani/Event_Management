@@ -49,9 +49,10 @@ namespace Event_Management.Areas.Venue.Controllers
             if (ModelState.IsValid)
             {
                 if (venueDALBase.VenueSave(venueModel))
-
+                {
+                    TempData["Message"] = "Data Inserted Successfully";
                     return RedirectToAction("VenueList");
-
+                }
             }
             return View("VenueAddEdit");
         }
@@ -92,7 +93,7 @@ namespace Event_Management.Areas.Venue.Controllers
                 ObjCmd.Parameters.AddWithValue("@VenueName", model.VenueName);
             }
 
-            if (model.Capacity == 0)
+            if (model.Capacity == null)
             {
                 ObjCmd.Parameters.AddWithValue("@Capacity", DBNull.Value);
             }

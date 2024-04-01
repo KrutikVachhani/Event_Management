@@ -50,9 +50,10 @@ namespace Event_Management.Areas.Service.Controllers
             if (ModelState.IsValid)
             {
                 if (serviceDALBase.ServiceSave(serviceModel))
-
+                {
+                    TempData["Save"] = "Service Inserted Successfully.";
                     return RedirectToAction("ServiceList");
-
+                }
             }
             return View("ServiceAddEdit");
         }

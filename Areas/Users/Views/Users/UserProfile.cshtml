@@ -20,11 +20,13 @@
                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Notifications</a>
                 </li>
             </ul>
-            <form>
+            
                 <div class="row mt-5 align-items-center">
                     <div class="col-md-3 text-center mb-5">
                         <div class="avatar avatar-xl">
-                            <img src="@Url.Content(CommonVariables.PhotoPath())" alt="..." class="avatar-img rounded-circle" style="width: 100px; height: 100px; object-fit:cover;  border-radius: 10px;" />
+                            @* <img src="@Url.Content(CommonVariables.PhotoPath())" alt="..." class="avatar-img rounded-circle" style="width: 100px; height: 100px; object-fit:cover;  border-radius: 10px;" /> *@
+                        <img id="preview" alt="Preview Image" src="@Url.Content(CommonVariables.PhotoPath())" alt="Existing Image" class="img-fluid" style="width: 200px; height: 200px; object-fit:cover;  border-radius: 15px;" />
+                        <input type="file" name="File" accept=".png, .jpg, .jpeg" asp-for="File" onchange="previewImage(event)" id="uplordBtn" style="display:none" Required />
                         </div>
                     </div>
                     <div class="col">
@@ -47,48 +49,50 @@
                     </div>
                 </div>
                 <hr class="my-4">
+            <form asp-area="Users" asp-controller="Users" asp-action="UsersSave">
+                <input type="hidden" value="@CommonVariables.UserID()" asp-for="UserID" />
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="firstname">Firstname</label>
-                        <input type="text" class="form-control" placeholder="@CommonVariables.FirstName()" asp-for="FirstName">
+                        <input type="text" class="form-control" value="@CommonVariables.FirstName()" asp-for="FirstName">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="lastname">Lastname</label>
-                        <input type="text" class="form-control" placeholder="@CommonVariables.LastName()" asp-for="LastName">
+                        <input type="text" class="form-control" value="@CommonVariables.LastName()" asp-for="LastName">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail4">Email</label>
-                    <input type="text" class="form-control" placeholder="@CommonVariables.EmailAddress()" asp-for="EmailAddress">
+                    <input type="text" class="form-control" value="@CommonVariables.EmailAddress()" asp-for="EmailAddress">
                 </div>
                 <div class="form-group">
                     <label for="inputAddress5">UserName</label>
-                    <input type="text" id="simpleinput" class="form-control" placeholder="@CommonVariables.UserName()" asp-for="UserName">
+                    <input type="text" id="simpleinput" class="form-control" value="@CommonVariables.UserName()" asp-for="UserName">
                 </div>
-                <div class="form-row">
+                @* <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputCompany5">Password</label>
-                        <input type="password" class="form-control" placeholder="@CommonVariables.Password()" asp-for="Password">
+                        <input type="password" class="form-control" value="@CommonVariables.Password()" asp-for="Password">
                     </div>
-                </div>
+                </div> *@
                 <hr class="my-4">
                 <div class="row mb-4">
-                    <form asp-area="Users" asp-controller="Users" asp-action="UpdatePassword">
+                    
                         <div class="col-md-6">
                             @* <div class="form-group">
                             <label for="inputPassword4">Old Password</label>
                             <input type="password" class="form-control" id="inputPassword5">
                             </div> *@
                             <div class="form-group">
-                                <label for="inputPassword5">New Password</label>
-                                <input type="password" class="form-control" id="inputPassword5" asp-for="Password">
+                                <label for="inputCompany5">Password</label>
+                                <input type="password" class="form-control" value="@CommonVariables.Password()" asp-for="Password">
                             </div>
-                            <div class="form-group">
+                            @* <div class="form-group">
                                 <label for="inputPassword6">Confirm Password</label>
                                 <input type="password" class="form-control" id="inputPassword6" asp-for="Password">
-                            </div>
+                            </div> *@
                         </div>
-                    </form>
+                    
                     <div class="col-md-6">
                         <p class="mb-2">Password requirements</p>
                         <p class="small text-muted mb-2"> To create a new password, you have to meet all of the following requirements: </p>

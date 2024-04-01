@@ -118,6 +118,21 @@ namespace Event_Management.Areas.Users.Controllers
         }
         #endregion
 
+        #region Edit User
+        public IActionResult UserEdit(int UserID)
+        {
+            UserModel userModel = userDALBase.PR_Users_SelectByID(UserID);
+            if (userModel != null)
+            {
+                return View("UserSideProfile", userModel);
+            }
+            else
+            {
+                return View("UserSideProfile");
+            }
+        }
+        #endregion
+
         #region User Save
         public IActionResult UsersSave(UserModel userModel)
         {
@@ -130,6 +145,34 @@ namespace Event_Management.Areas.Users.Controllers
             }
             return View("UserAddEdit" +
                 "");
+        }
+        #endregion
+
+        #region User Save
+        public IActionResult EditProfile(UserModel userModel)
+        {
+            if (ModelState.IsValid)
+            {
+                if (userDALBase.UsersSave(userModel))
+
+                    return RedirectToAction("UserProfile", "Users");
+
+            }
+            return View("UserProfile");
+        }
+        #endregion
+
+        #region User Save
+        public IActionResult EditUserProfile(UserModel userModel)
+        {
+            if (ModelState.IsValid)
+            {
+                if (userDALBase.UsersSave(userModel))
+
+                    return RedirectToAction("UserSideProfile");
+
+            }
+            return View("UserSideProfile");
         }
         #endregion
 

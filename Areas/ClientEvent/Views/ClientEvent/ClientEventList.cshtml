@@ -5,6 +5,7 @@
 @using System.Data;
 @using System.Data.SqlClient;
 @using Event_Management.Areas.ClientEvent.Models;
+@using Event_Management.Areas.Venue.Models;
 @using Event_Management.BAL;
 @model DataTable
 
@@ -25,10 +26,14 @@
                                         <label for="simpleinput">Event Name</label>
                                         <input type="text" id="simpleinput" class="form-control" placeholder="Venue Name" name="CEventName">
                                     </div>
-                                    <div class="form-group mb-6">
-                                        <label for="simpleinput">Venue Name</label>
-                                        <input type="text" id="simpleinput" class="form-control" placeholder="Venue Name" name="CVenueName">
-                                    </div>
+                                    <label for="example-select">Select Venue</label>
+                                    <select class="form-control" id="VenueID" name="VenueID">
+                                        <option value="">- - -</option>
+                                        @foreach (VenueModel VenueName in ViewBag.VenueList)
+                                        {
+                                            <option value="@VenueName.VenueID">@VenueName.VenueName</option>
+                                        }
+                                    </select>
 
 
                                 </div> <!-- /.col -->
@@ -69,6 +74,7 @@
                                     <th>EventDateTime</th>
                                     <th>IsPrivate</th>
                                     <th>Venue Name</th>
+                                    <th>Services</th>
                                     <th>Created</th>
                                     <th>Modified</th>
                                     <th colspan="2">Action</th>
@@ -89,6 +95,7 @@
                                         <td>@dr["CEventDateTime"]</td>
                                         <td>@dr["CIsPrivate"]</td>
                                         <td>@dr["VenueName"]</td>
+                                        <td>@dr["SelectedService"]</td>
                                         <td>@dr["Created"]</td>
                                         <td>@dr["Modified"]</td>
                                         <td>
