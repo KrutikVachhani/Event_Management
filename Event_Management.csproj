@@ -11,20 +11,26 @@
     <PackageReference Include="EnterpriseLibrary.Common" Version="6.0.1304" />
     <PackageReference Include="EnterpriseLibrary.Data" Version="6.0.1304" />
     <PackageReference Include="EnterpriseLibrary.Data.NetCore" Version="6.3.2" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.2" />
+    <PackageReference Include="MailKit" Version="4.10.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.27">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Practices.EnterpriseLibrary.2008" Version="4.1.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
+    <PackageReference Include="Razorpay" Version="3.1.4" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Areas\ClientEvent\Data\" />
     <Folder Include="Areas\Feedback\Controllers\" />
     <Folder Include="Areas\Feedback\Views\" />
+    <Folder Include="Areas\OTPVerification\Controllers\" />
+    <Folder Include="Areas\OTPVerification\Data\" />
+    <Folder Include="Areas\OTPVerification\Models\" />
+    <Folder Include="Areas\OTPVerification\Views\" />
     <Folder Include="Areas\Payment\Data\" />
     <Folder Include="Areas\Payment\Models\" />
     <Folder Include="Areas\SEC_Admin\Models\" />

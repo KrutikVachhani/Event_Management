@@ -36,8 +36,9 @@
                                 <li>One Speakers</li>
                                 <li>Papers</li>
                             </ul>
-                            <form asp-area="Payment" asp-controller="Payment" asp-action="PaymentAdd" asp-route-priceid="@dr["PriceID"]">
+                            <form asp-area="Payment" asp-controller="Payment" asp-action="InitiatePayment">
                                 <input type="hidden" name="PriceID" value="@int.Parse(@dr["PriceID"].ToString())" />
+                                <input type="hidden" name="Price" value="@int.Parse(dr["Price"].ToString())" />
                                 <button type="submit" class="btn btn-primary d-block px-2 py-3"> Get Ticket</button>
                             </form>
                         </div>

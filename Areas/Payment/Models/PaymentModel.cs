@@ -1,4 +1,6 @@
-﻿namespace Event_Management.Areas.Payment.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Event_Management.Areas.Payment.Models
 {
     public class PaymentModel
     {
@@ -21,5 +23,9 @@
         public int PriceID { get; set; }
 
         public int Price { get; set; }
+        [NotMapped]
+        public string TransactionId { get; set; }
+        [NotMapped]
+        public string OrderId { get; set; }
     }
 }
