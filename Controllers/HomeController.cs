@@ -51,6 +51,11 @@ namespace Event_Management.Controllers
                 return null;
             }
         }
+
+        public IActionResult OTP()
+        {
+            return View();
+        }
         public IActionResult Speakers()
         {
             return View();

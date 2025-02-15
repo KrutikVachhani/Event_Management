@@ -91,10 +91,10 @@ namespace Event_Management.Areas.SEC_User.Controllers
                 }
                 else if (HttpContext.Session.GetString("UserName") != null && HttpContext.Session.GetString("Password") != null)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("OTP", "OTP");
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("OTP", "OTPVerification");
         }
         #endregion
 

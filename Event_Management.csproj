@@ -21,6 +21,7 @@
     <PackageReference Include="Microsoft.Practices.EnterpriseLibrary.2008" Version="4.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
     <PackageReference Include="Razorpay" Version="3.1.4" />
+    <PackageReference Include="Twilio" Version="7.8.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,7 +31,7 @@
     <Folder Include="Areas\OTPVerification\Controllers\" />
     <Folder Include="Areas\OTPVerification\Data\" />
     <Folder Include="Areas\OTPVerification\Models\" />
-    <Folder Include="Areas\OTPVerification\Views\" />
+    <Folder Include="Areas\OTPVerification\Views\OTPVerification\" />
     <Folder Include="Areas\Payment\Data\" />
     <Folder Include="Areas\Payment\Models\" />
     <Folder Include="Areas\SEC_Admin\Models\" />
