@@ -32,6 +32,33 @@ namespace Event_Management.DAL.SCE_User
         }
         #endregion
 
+        //#region Check For Email Exist
+
+        //public bool dbo_PR_User_PR_User_SelectByEmail(string EmailAddress)
+        //{
+        //    try
+        //    {
+        //        SqlDatabase sqlDB = new SqlDatabase(connectionstr);
+        //        DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_User_SelectByEmail");
+        //        sqlDB.AddInParameter(dbCMD, "EmailAddress", SqlDbType.VarChar, EmailAddress);
+        //        DataTable dt = new DataTable();
+        //        using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
+        //        {
+        //            dt.Load(dr);
+        //        }
+        //        if(dt.Rows.Count > 0)
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return false;
+        //    }
+        //}
+
+        //#endregion
+
 
         #region User_Register
         public bool dbo_PR_SEC_User_Register(string UserName, string Password, string FirstName, string LastName, string PhotoPath, string EmailAddress)
@@ -39,8 +66,8 @@ namespace Event_Management.DAL.SCE_User
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(connectionstr);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_User_SelectUserName");
-                sqlDB.AddInParameter(dbCMD, "UserName", SqlDbType.VarChar, UserName);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_User_SelectByEmail");
+                sqlDB.AddInParameter(dbCMD, "EmailAddress", SqlDbType.VarChar, EmailAddress);
                 DataTable dataTable = new DataTable();
                 using (IDataReader dataReader = sqlDB.ExecuteReader(dbCMD))
                 {

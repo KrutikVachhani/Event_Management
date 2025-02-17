@@ -1,0 +1,1151 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using System.Data;
+@using System.Data.SqlClient;
+@using Event_Management.Areas.Event.Models;
+@using Event_Management.Areas.Payment.Models;
+
+<div class="hero-wrap js-fullheight" style="background-image: url('../event/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+            <div class="col-xl-10 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> Developer <br><span>Conference 2019</span></h1>
+                <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">December 21-24, 2019. Paris, Italy</p>
+                <div id="timer" class="d-flex mb-3">
+                    @* <div class="time" id="days"></div> *@
+                    <div class="time pl-4" id="hours"></div>
+                    <div class="time pl-4" id="minutes"></div>
+                    <div class="time pl-4" id="seconds"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section services-section bg-light">
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block">
+                    <div class="icon"><span class="flaticon-placeholder"></span></div>
+                    <div class="media-body">
+                        <h3 class="heading mb-3">Venue</h3>
+                        <p>	203 Fake St. Mountain View, San Francisco, California, USA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block">
+                    <div class="icon"><span class="flaticon-world"></span></div>
+                    <div class="media-body">
+                        <h3 class="heading mb-3">Transport</h3>
+                        <p>A small river named Duden flows by their place and supplies.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block">
+                    <div class="icon"><span class="flaticon-hotel"></span></div>
+                    <div class="media-body">
+                        <h3 class="heading mb-3">Hotel</h3>
+                        <p>A small river named Duden flows by their place and supplies.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block">
+                    <div class="icon"><span class="flaticon-cooking"></span></div>
+                    <div class="media-body">
+                        <h3 class="heading mb-3">Restaurant</h3>
+                        <p>A small river named Duden flows by their place and supplies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-counter img" id="section-counter">
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-md-6 d-flex">
+                <div class="img d-flex align-self-stretch" style="background-image:url(../event/images/about.jpg);"></div>
+            </div>
+            <div class="col-md-6 pl-md-5 py-5">
+                <div class="row justify-content-start pb-3">
+                    <div class="col-md-12 heading-section ftco-animate">
+                        <span class="subheading">Fun Facts</span>
+                        <h2 class="mb-4"><span>Fun</span> Facts</h2>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 justify-content-center counter-wrap ftco-animate">
+                        <div class="block-18 text-center py-4 bg-light mb-4">
+                            <div class="text">
+                                <div class="icon d-flex justify-content-center align-items-center">
+                                    <span class="flaticon-guest"></span>
+                                </div>
+                                <strong class="number" data-number="30">0</strong>
+                                <span>Speakers</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 justify-content-center counter-wrap ftco-animate">
+                        <div class="block-18 text-center py-4 bg-light mb-4">
+                            <div class="text">
+                                <div class="icon d-flex justify-content-center align-items-center">
+                                    <span class="flaticon-handshake"></span>
+                                </div>
+                                <strong class="number" data-number="200">0</strong>
+                                <span>Sponsor</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 justify-content-center counter-wrap ftco-animate">
+                        <div class="block-18 text-center py-4 bg-light mb-4">
+                            <div class="text">
+                                <div class="icon d-flex justify-content-center align-items-center">
+                                    <span class="flaticon-chair"></span>
+                                </div>
+                                <strong class="number" data-number="2500">0</strong>
+                                <span>Total Seats</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 justify-content-center counter-wrap ftco-animate">
+                        <div class="block-18 text-center py-4 bg-light mb-4">
+                            <div class="text">
+                                <div class="icon d-flex justify-content-center align-items-center">
+                                    <span class="flaticon-idea"></span>
+                                </div>
+                                <strong class="number" data-number="40">0</strong>
+                                <span>Topics</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+                <span class="subheading">Speaker</span>
+                <h2 class="mb-4"><span>Our</span> Speakers</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 ftco-animate">
+                <div class="carousel-testimony owl-carousel">
+                    <div class="item">
+                        <div class="speaker">
+                            <img src="../event/images/speaker-1.jpg" class="img-fluid" alt="Colorlib HTML5 Template">
+                            <div class="text text-center py-3">
+                                <h3>John Adams</h3>
+                                <span class="position">Web Developer</span>
+                                <ul class="ftco-social mt-3">
+                                    <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                                    <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                                    <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="speaker">
+                            <img src="../event/images/speaker-2.jpg" class="img-fluid" alt="Colorlib HTML5 Template">
+                            <div class="text text-center py-3">
+                                <h3>Paul George</h3>
+                                <span class="position">Web Developer</span>
+                                <ul class="ftco-social mt-3">
+                                    <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                                    <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                                    <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="speaker">
+                            <img src="../event/images/speaker-3.jpg" class="img-fluid" alt="Colorlib HTML5 Template">
+                            <div class="text text-center py-3">
+                                <h3>James Smith</h3>
+                                <span class="position">Web Developer</span>
+                                <ul class="ftco-social mt-3">
+                                    <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                                    <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                                    <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="speaker">
+                            <img src="../event/images/speaker-4.jpg" class="img-fluid" alt="Colorlib HTML5 Template">
+                            <div class="text text-center py-3">
+                                <h3>Angelie Crawford</h3>
+                                <span class="position">Web Developer</span>
+                                <ul class="ftco-social mt-3">
+                                    <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                                    <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                                    <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="speaker">
+                            <img src="../event/images/speaker-5.jpg" class="img-fluid" alt="Colorlib HTML5 Template">
+                            <div class="text text-center py-3">
+                                <h3>Jackie Spears</h3>
+                                <span class="position">Entrepreneur</span>
+                                <ul class="ftco-social mt-3">
+                                    <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                                    <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                                    <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+                <span class="subheading">Schedule</span>
+                <h2 class="mb-4"><span>Event</span> Schedule</h2>
+            </div>
+        </div>
+        <div class="ftco-search">
+            <div class="row">
+                <div class="col-md-12 nav-link-wrap">
+                    <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link ftco-animate active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Day 01 <span>21 Dec. 2019</span></a>
+
+                        <a class="nav-link ftco-animate" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Day 02 <span>22 Dec. 2019</span></a>
+
+                        <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Day 03 <span>23 Dec. 2019</span></a>
+
+                        <a class="nav-link ftco-animate" id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4" role="tab" aria-controls="v-pills-4" aria-selected="false">Day 04 <span>24 Dec. 2019</span></a>
+
+                    </div>
+                </div>
+                <div class="col-md-12 tab-wrap">
+
+                    <div class="tab-content" id="v-pills-tabContent">
+
+                        <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
+                            <div class="speaker-wrap ftco-animate d-flex">
+                                <div class="img speaker-img" style="background-image: url(../event/images/person_1.jpg);"></div>
+                                <div class="text pl-md-5">
+                                    <span class="time">08: - 10:00</span>
+                                    <h2><a href="#">Introduction to Wordpress 5.0</a></h2>
+                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                                    <h3 class="speaker-name">&mdash; <a href="#">Brett Morgan</a> <span class="position">Founder of Wordpress</span></h3>
+                                </div>
+                            </div>
+                            <div class="speaker-wrap ftco-animate d-flex">
+                                <div class="img speaker-img" style="background-image: url(../event/images/person_2.jpg);"></div>
+                                <div class="text pl-md-5">
+                                    <span class="time">08: - 10:00</span>
+                                    <h2><a href="#">Best Practices For Programming WordPress</a></h2>
+                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                                    <h3 class="speaker-name">&mdash; <a href="#">Brett Morgan</a> <span class="position">Founder of Wordpress</span></h3>
+                                </div>
+                            </div>
+                            <div class="speaker-wrap ftco-animate d-flex">
+                                <div class="img speaker-img" style="background-image: url(../event/images/person_3.jpg);"></div>
+                                <div class="text pl-md-5">
+                                    <span class="time">08: - 10:00</span>
+                                    <h2><a href="#">Web Performance For Third Party Scripts</a></h2>
+                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                                    <h3 class="speaker-name">&mdash; <a href="#">Brett Morgan</a> <span class="position">Founder of Wordpress</span></h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
+                            <div class="speaker-wrap ftco-animate d-flex">
+                                <div class="img speaker-img" style="background-image: url(../event/images/person_1.jpg);"></div>
+                                <div class="text pl-md-5">
+                                    <span class="time">08: - 10:00</span>
+                                    <h2><a href="#">Introduction to Wordpress 5.0</a></h2>
+                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                                    <h3 class="speaker-name">&mdash; <a href="#">Brett Morgan</a> <span class="position">Founder of Wordpress</span></h3>
+                                </div>
+                            </div>
+                            <div class="speaker-wrap ftco-animate d-flex">
+                                <div class="img speaker-img" style="background-image: url(../event/images/person_2.jpg);"></div>
+                                <div class="text pl-md-5">
+                                    <span class="time">08: - 10:00</span>
+                                    <h2><a href="#">Best Practices For Programming WordPress</a></h2>
+                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                                    <h3 class="speaker-name">&mdash; <a href="#">Brett Morgan</a> <span class="position">Founder of Wordpress</span></h3>
+                                </div>
+                            </div>
+                            <div class="speaker-wrap ftco-animate d-flex">
+                                <div class="img speaker-img" style="background-image: url(../event/images/person_3.jpg);"></div>
+                                <div class="text pl-md-5">
+                                    <span class="time">08: - 10:00</span>
+                                    <h2><a href="#">Web Performance For Third Party Scripts</a></h2>
+                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                                    <h3 class="speaker-name">&mdash; <a href="#">Brett Morgan</a> <span class="position">Founder of Wordpress</span></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
+                            <div class="speaker-wrap ftco-animate d-flex">
+                                <div class="img speaker-img" style="background-image: url(../event/images/person_1.jpg);"></div>
+                                <div class="text pl-md-5">
+                                    <span class="time">08: - 10:00</span>
+                                    <h2><a href="#">Introduction to Wordpress 5.0</a></h2>
+                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                                    <h3 class="speaker-name">&mdash; <a href="#">Brett Morgan</a> <span class="position">Founder of Wordpress</span></h3>
+                                </div>
+                            </div>
+                            <div class="speaker-wrap ftco-animate d-flex">
+                                <div class="img speaker-img" style="background-image: url(../event/images/person_2.jpg);"></div>
+                                <div class="text pl-md-5">
+                                    <span class="time">08: - 10:00</span>
+                                    <h2><a href="#">Best Practices For Programming WordPress</a></h2>
+                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                                    <h3 class="speaker-name">&mdash; <a href="#">Brett Morgan</a> <span class="position">Founder of Wordpress</span></h3>
+                                </div>
+                            </div>
+                            <div class="speaker-wrap ftco-animate d-flex">
+                                <div class="img speaker-img" style="background-image: url(../event/images/person_3.jpg);"></div>
+                                <div class="text pl-md-5">
+                                    <span class="time">08: - 10:00</span>
+                                    <h2><a href="#">Web Performance For Third Party Scripts</a></h2>
+                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                                    <h3 class="speaker-name">&mdash; <a href="#">Brett Morgan</a> <span class="position">Founder of Wordpress</span></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-4" role="tabpanel" aria-labelledby="v-pills-day-4-tab">
+                            <div class="speaker-wrap ftco-animate d-flex">
+                                <div class="img speaker-img" style="background-image: url(../event/images/person_1.jpg);"></div>
+                                <div class="text pl-md-5">
+                                    <span class="time">08: - 10:00</span>
+                                    <h2><a href="#">Introduction to Wordpress 5.0</a></h2>
+                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                                    <h3 class="speaker-name">&mdash; <a href="#">Brett Morgan</a> <span class="position">Founder of Wordpress</span></h3>
+                                </div>
+                            </div>
+                            <div class="speaker-wrap ftco-animate d-flex">
+                                <div class="img speaker-img" style="background-image: url(../event/images/person_2.jpg);"></div>
+                                <div class="text pl-md-5">
+                                    <span class="time">08: - 10:00</span>
+                                    <h2><a href="#">Best Practices For Programming WordPress</a></h2>
+                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                                    <h3 class="speaker-name">&mdash; <a href="#">Brett Morgan</a> <span class="position">Founder of Wordpress</span></h3>
+                                </div>
+                            </div>
+                            <div class="speaker-wrap ftco-animate d-flex">
+                                <div class="img speaker-img" style="background-image: url(../event/images/person_3.jpg);"></div>
+                                <div class="text pl-md-5">
+                                    <span class="time">08: - 10:00</span>
+                                    <h2><a href="#">Web Performance For Third Party Scripts</a></h2>
+                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                                    <h3 class="speaker-name">&mdash; <a href="#">Brett Morgan</a> <span class="position">Founder of Wordpress</span></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="ftco-section testimony-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+                <span class="subheading">Testimonial</span>
+                <h2 class="mb-4"><span>Happy</span> Clients</h2>
+            </div>
+        </div>
+        <div class="row ftco-animate">
+            <div class="col-md-12">
+                <div class="carousel-testimony owl-carousel ftco-owl">
+                    <div class="item">
+                        <div class="testimony-wrap text-center py-4 pb-5">
+                            <div class="user-img mb-4" style="background-image: url(../event/images/person_1.jpg)">
+                                <span class="quote d-flex align-items-center justify-content-center">
+                                    <i class="icon-quote-left"></i>
+                                </span>
+                            </div>
+                            <div class="text">
+                                <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                <p class="name">Roger Scott</p>
+                                <span class="position">Marketing Manager</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimony-wrap text-center py-4 pb-5">
+                            <div class="user-img mb-4" style="background-image: url(../event/images/person_2.jpg)">
+                                <span class="quote d-flex align-items-center justify-content-center">
+                                    <i class="icon-quote-left"></i>
+                                </span>
+                            </div>
+                            <div class="text">
+                                <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                <p class="name">Roger Scott</p>
+                                <span class="position">Interface Designer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimony-wrap text-center py-4 pb-5">
+                            <div class="user-img mb-4" style="background-image: url(../event/images/person_3.jpg)">
+                                <span class="quote d-flex align-items-center justify-content-center">
+                                    <i class="icon-quote-left"></i>
+                                </span>
+                            </div>
+                            <div class="text">
+                                <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                <p class="name">Roger Scott</p>
+                                <span class="position">UI Designer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimony-wrap text-center py-4 pb-5">
+                            <div class="user-img mb-4" style="background-image: url(../event/images/person_1.jpg)">
+                                <span class="quote d-flex align-items-center justify-content-center">
+                                    <i class="icon-quote-left"></i>
+                                </span>
+                            </div>
+                            <div class="text">
+                                <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                <p class="name">Roger Scott</p>
+                                <span class="position">Web Developer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimony-wrap text-center py-4 pb-5">
+                            <div class="user-img mb-4" style="background-image: url(../event/images/person_1.jpg)">
+                                <span class="quote d-flex align-items-center justify-content-center">
+                                    <i class="icon-quote-left"></i>
+                                </span>
+                            </div>
+                            <div class="text">
+                                <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                <p class="name">Roger Scott</p>
+                                <span class="position">System Analyst</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate text-center">
+                <span class="subheading">Pricing Tables</span>
+                <h2 class="mb-1"><span>Our</span> Ticket Pricing</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 ftco-animate">
+                <div class="block-7">
+                    <div class="text-center">
+                        <h2 class="heading">Personal</h2>
+                        <span class="price"><sup>$</sup> <span class="number">85</span></span>
+                        <span class="excerpt d-block">per Month</span>
+
+                        <h3 class="heading-2 my-4">Enjoy All The Features</h3>
+
+                        <ul class="pricing-text mb-5">
+                            <li>Conference Seats</li>
+                            <li>Free Wifi</li>
+                            <li>Coffee Breaks</li>
+                            <li>Lunch</li>
+                            <li>Workshops</li>
+                            <li>One Speakers</li>
+                            <li>Papers</li>
+                        </ul>
+
+                        <a href="#" class="btn btn-primary d-block px-2 py-3">Buy Ticket</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 ftco-animate">
+                <div class="block-7">
+                    <div class="text-center">
+                        <h2 class="heading">Small Team</h2>
+                        <span class="price"><sup>$</sup> <span class="number">200</span></span>
+                        <span class="excerpt d-block">per Month</span>
+
+                        <h3 class="heading-2 my-4">Enjoy All The Features</h3>
+
+                        <ul class="pricing-text mb-5">
+                            <li>Conference Seats</li>
+                            <li>Free Wifi</li>
+                            <li>Coffee Breaks</li>
+                            <li>Lunch</li>
+                            <li>Workshops</li>
+                            <li>One Speakers</li>
+                            <li>Papers</li>
+                        </ul>
+
+                        <a href="#" class="btn btn-primary d-block px-2 py-3">Buy Ticket</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 ftco-animate">
+                <div class="block-7">
+                    <div class="text-center">
+                        <h2 class="heading">Family Pack</h2>
+                        <span class="price"><sup>$</sup> <span class="number">499</span></span>
+                        <span class="excerpt d-block">per Month</span>
+
+                        <h3 class="heading-2 my-4">Enjoy All The Features</h3>
+
+                        <ul class="pricing-text mb-5">
+                            <li>Conference Seats</li>
+                            <li>Free Wifi</li>
+                            <li>Coffee Breaks</li>
+                            <li>Lunch</li>
+                            <li>Workshops</li>
+                            <li>One Speakers</li>
+                            <li>Papers</li>
+                        </ul>
+
+                        <a href="#" class="btn btn-primary d-block px-2 py-3">Buy Ticket</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section text-center ftco-animate">
+                <span class="subheading">Our Blog</span>
+                <h2><span>Recent</span> Blog</h2>
+            </div>
+        </div>
+        <div class="row d-flex">
+            <div class="col-md-4 d-flex ftco-animate">
+                <div class="blog-entry justify-content-end">
+                    <a href="blog-single.html" class="block-20" style="background-image: url('../event/images/image_1.jpg');">
+                    </a>
+                    <div class="text p-4 float-right d-block">
+                        <div class="d-flex align-items-center pt-2 mb-4">
+                            <div class="one">
+                                <span class="day">07</span>
+                            </div>
+                            <div class="two">
+                                <span class="yr">2019</span>
+                                <span class="mos">January</span>
+                            </div>
+                        </div>
+                        <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
+                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex ftco-animate">
+                <div class="blog-entry justify-content-end">
+                    <a href="blog-single.html" class="block-20" style="background-image: url('../event/images/image_2.jpg');">
+                    </a>
+                    <div class="text p-4 float-right d-block">
+                        <div class="d-flex align-items-center pt-2 mb-4">
+                            <div class="one">
+                                <span class="day">07</span>
+                            </div>
+                            <div class="two">
+                                <span class="yr">2019</span>
+                                <span class="mos">January</span>
+                            </div>
+                        </div>
+                        <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
+                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex ftco-animate">
+                <div class="blog-entry">
+                    <a href="blog-single.html" class="block-20" style="background-image: url('../event/images/image_3.jpg');">
+                    </a>
+                    <div class="text p-4 float-right d-block">
+                        <div class="d-flex align-items-center pt-2 mb-4">
+                            <div class="one">
+                                <span class="day">06</span>
+                            </div>
+                            <div class="two">
+                                <span class="yr">2019</span>
+                                <span class="mos">January</span>
+                            </div>
+                        </div>
+                        <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
+                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section-parallax">
+    <div class="parallax-img d-flex align-items-center">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+                    <h2>Subcribe to our Newsletter</h2>
+                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+                    <div class="row d-flex justify-content-center mt-4 mb-4">
+                        <div class="col-md-8">
+                            <form action="#" class="subscribe-form">
+                                <div class="form-group d-flex">
+                                    <input type="text" class="form-control" placeholder="Enter email address">
+                                    <input type="submit" value="Subscribe" class="submit px-3">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-gallery">
+    <div class="container-wrap">
+        <div class="row no-gutters">
+            <div class="col-md-3 ftco-animate">
+                <a href="../event/images/image_1.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(../event/images/image_1.jpg);">
+                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                        <span class="icon-instagram"></span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 ftco-animate">
+                <a href="../event/images/image_2.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(../event/images/image_2.jpg);">
+                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                        <span class="icon-instagram"></span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 ftco-animate">
+                <a href="../event/images/image_3.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(../event/images/image_3.jpg);">
+                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                        <span class="icon-instagram"></span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 ftco-animate">
+                <a href="../event/images/image_4.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(../event/images/image_4.jpg);">
+                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                        <span class="icon-instagram"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+
+@* @using System.Data;
+@using System.Data.SqlClient;
+@using Event_Management.Areas.Event.Models;
+@using Event_Management.Areas.Payment.Models;
+@model DataTable
+@using System.Data;
+
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+
+<!-- Hero Section Begin -->
+<section class="hero-section set-bg" data-setbg="../manup/img/hero.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="hero-text">
+                    <span>5 to 9 may 2019, mardavall hotel, New York</span>
+                    <h2>Change Your Mind<br /> To Become Sucess</h2>
+                    <a href="#" class="primary-btn">Buy Ticket</a>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <img src="../manup/img/hero-right.png" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+<!-- Counter Section Begin -->
+<section class="counter-section bg-gradient">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="counter-text">
+                    <span>Conference Date</span>
+                    <h3>Count Every Second <br />Until the Event</h3>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="cd-timer" id="countdown">
+                    <div class="cd-item">
+                        <span>40</span>
+                        <p>Days</p>
+                    </div>
+                    <div class="cd-item">
+                        <span>18</span>
+                        <p>Hours</p>
+                    </div>
+                    <div class="cd-item">
+                        <span>46</span>
+                        <p>Minutes</p>
+                    </div>
+                    <div class="cd-item">
+                        <span>32</span>
+                        <p>Seconds</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Counter Section End -->
+<!-- Home About Section Begin -->
+<section class="home-about-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="ha-pic">
+                    <img src="../manup/img/h-about.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="ha-text">
+                    <h2>About Conference</h2>
+                    <p>
+                        When I first got into the online advertising business, I was looking for the magical
+                        combination that would put my website into the top search engine rankings, catapult me to
+                        the forefront of the minds or individuals looking to buy my product, and generally make me
+                        rich beyond my wildest dreams! After succeeding in the business for this long, I’m able to
+                        look back on my old self with this kind of thinking and shake my head.
+                    </p>
+                    <ul>
+                        <li><span class="icon_check"></span> Write On Your Business Card</li>
+                        <li><span class="icon_check"></span> Advertising Outdoors</li>
+                        <li><span class="icon_check"></span> Effective Advertising Pointers</li>
+                        <li><span class="icon_check"></span> Kook 2 Directory Add Url Free</li>
+                    </ul>
+                    <a href="#" class="ha-btn">Discover Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Home About Section End -->
+<!-- Team Member Section Begin -->
+<section class="team-member-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>Who’s speaking</h2>
+                    <p>These are our communicators, you can see each person information</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="member-item set-bg" data-setbg="https://indusscrolls.com/wp-content/uploads/2023/04/comedian.jpg">
+        <div class="mi-social">
+            <div class="mi-social-inner bg-gradient">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="mi-text">
+            <h5>Yash Rathi</h5>
+            <span>Comedian</span>
+        </div>
+    </div>
+    <div class="member-item set-bg" data-setbg="https://images.news18.com/ibnlive/uploads/2023/09/untitled-2023-09-30t104024.633-2023-09-1f4299431f22b53a1c24e6bbc6ce54c2.jpg">
+        <div class="mi-social">
+            <div class="mi-social-inner bg-gradient">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="mi-text">
+            <h5>GurleenPannu</h5>
+            <span>Comedian</span>
+        </div>
+    </div>
+    <div class="member-item set-bg" data-setbg="https://pbs.twimg.com/profile_images/1641508263068852225/60E1spfk_400x400.jpg">
+        <div class="mi-social">
+            <div class="mi-social-inner bg-gradient">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="mi-text">
+            <h5>Anubhav Singh Bassi</h5>
+            <span>Actor, Comedian</span>
+        </div>
+    </div>
+    <div class="member-item set-bg" data-setbg="https://i0.wp.com/deadant.co/wp-content/uploads/2023/02/Upmanyu-scaled.jpg?fit=2560%2C1449&ssl=1">
+        <div class="mi-social">
+            <div class="mi-social-inner bg-gradient">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="mi-text">
+            <h5>Abhishek Upmanyu</h5>
+            <span>Comedian</span>
+        </div>
+    </div>
+    <div class="member-item set-bg" data-setbg="https://yt3.googleusercontent.com/ytc/AIf8zZQuvCKHL9nBBN95DOXWn0d8eB913BDNLU3dvFgUNQ=s900-c-k-c0x00ffffff-no-rj">
+        <div class="mi-social">
+            <div class="mi-social-inner bg-gradient">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="mi-text">
+            <h5>Aakash Gupta</h5>
+            <span>Comedian</span>
+        </div>
+    </div>
+    <div class="member-item set-bg" data-setbg="https://www.sydneyoperahouse.com/sites/default/files/collaborodam_assets/EventName_16x9_Inline.jpg">
+        <div class="mi-social">
+            <div class="mi-social-inner bg-gradient">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="mi-text">
+            <h5>Zakir Khan</h5>
+            <span>Speaker, Comedian</span>
+        </div>
+    </div>
+    <div class="member-item set-bg" data-setbg="https://assets.telegraphindia.com/telegraph/2023/Jan/1672637658_rahul-dua_1.jpg">
+        <div class="mi-social">
+            <div class="mi-social-inner bg-gradient">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="mi-text">
+            <h5>Rahul Dua</h5>
+            <span>Anchor, Comedian</span>
+        </div>
+    </div>
+    <div class="member-item set-bg" data-setbg="https://st1.bollywoodlife.com/wp-content/uploads/2023/10/Munawar-Faruqui-Bigg-Boss-17.jpg">
+        <div class="mi-social">
+            <div class="mi-social-inner bg-gradient">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="mi-text">
+            <h5>Munawar Faruquei</h5>
+            <span>Actor, Comedian</span>
+        </div>
+    </div>
+    <div class="member-item set-bg" data-setbg="https://media.insider.in/image/upload/c_crop,g_custom/v1646661269/izmwzmid8ykcidfiaevo.jpg">
+        <div class="mi-social">
+            <div class="mi-social-inner bg-gradient">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="mi-text">
+            <h5>Cirayu Mistry</h5>
+            <span>Comedian</span>
+        </div>
+    </div>
+    <div class="member-item set-bg" data-setbg="https://yt3.googleusercontent.com/ytc/AIf8zZQfH_GrsGqRHxXALEcZAYAHeTjvD7aVx3aGjYTGTg=s900-c-k-c0x00ffffff-no-rj">
+        <div class="mi-social">
+            <div class="mi-social-inner bg-gradient">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="mi-text">
+            <h5>Harsh Gujaral</h5>
+            <span>Comedian</span>
+        </div>
+    </div>
+</section>
+<!-- Team Member Section End -->
+
+<!-- Schedule Section Begin -->
+<section class="schedule-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>Our Schedule</h2>
+                    <p>Do not miss anything topic about the event</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="schedule-tab">
+                    @* <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">
+                    <h5>Day 1</h5>
+                    <p>May 04, 2019</p>
+                    </a>
+                    </li>
+
+                    <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">
+                    <h5>Day 2</h5>
+                    <p>May 05, 2019</p>
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">
+                    <h5>Day 3</h5>
+                    <p>May 06, 2019</p>
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">
+                    <h5>Day 4</h5>
+                    <p>May 07, 2019</p>
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tabs-5" role="tab">
+                    <h5>Day 5</h5>
+                    <p>May 08, 2019</p>
+                    </a>
+                    </li>
+                    </ul><!-- Tab panes --> 
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="st-content">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="sc-pic">
+                                                <img src="../manup/img/schedule/schedule-1.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="sc-text">
+                                                <h4>Dealing with Difficult People</h4>
+                                                <ul>
+                                                    <li><i class="fa fa-user"></i> John Smith</li>
+                                                    <li>
+                                                        <i class="fa fa-envelope"></i> john@Colorlib.com
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <ul class="sc-widget">
+                                                <li><i class="fa fa-clock-o"></i> 08:00 am - 10:00 AM</li>
+                                                <li>
+                                                    <i class="fa fa-map-marker"></i> 59 Breanne Canyon Suite, USA
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Schedule Section End -->
+<!-- Pricing Section Begin -->
+<section class="pricing-section set-bg spad" data-setbg="../manup/img/pricing-bg.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>Ticket Pricing</h2>
+                    <p>Get your event ticket plan</p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            @foreach(DataRow dr in Model.Rows)
+            {
+                <div class="col-lg-4 col-md-8">
+                    <div class="price-item">
+                        <h4>1 Day Pass</h4>
+                        <div class="pi-price">
+                            <h2><span>$</span>@dr["Price"]</h2>
+                        </div>
+                        <ul>
+                            <li>One Day Conference Ticket</li>
+                            <li>Coffee-break</li>
+                            <li>Lunch and Networking</li>
+                            <li>Keynote talk</li>
+                            <li>Talk to the Editors Session</li>
+                        </ul>
+                        <form asp-area="Payment" asp-controller="Payment" asp-action="PaymentAdd" asp-route-priceid="@dr["PriceID"]">
+                            <input type="hidden" name="PriceID" value="@int.Parse(@dr["PriceID"].ToString())" />
+                            <button type="submit" class="price-btn"> Get Ticket<span class="arrow_right"></span></button>
+                        </form>
+                    </div>
+                </div>
+            }
+            
+        </div>
+    </div>
+</section>
+<!-- Pricing Section End -->
+<!-- latest BLog Section Begin -->
+<section class="latest-blog spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>Latest News</h2>
+                    <p>Do not miss anything topic abput the event</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="latest-item set-bg large-item" data-setbg="../manup/img/blog/latest-b/latest-1.jpg">
+                    <div class="li-tag">Marketing</div>
+                    <div class="li-text">
+                        <h4><a href="./blog-details.html">Improve You Business Cards And Enchan Your Sales</a></h4>
+                        <span><i class="fa fa-clock-o"></i> 19th May, 2019</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="latest-item set-bg" data-setbg="../manup/img/blog/latest-b/latest-2.jpg">
+                    <div class="li-tag">Experience</div>
+                    <div class="li-text">
+                        <h5><a href="./blog-details.html">All users on MySpace will know that there are millions of people out there.</a></h5>
+                        <span><i class="fa fa-clock-o"></i> 19th May, 2019</span>
+                    </div>
+                </div>
+                <div class="latest-item set-bg" data-setbg="../manup/img/blog/latest-b/latest-3.jpg">
+                    <div class="li-tag">Marketing</div>
+                    <div class="li-text">
+                        <h5><a href="./blog-details.html">A Pocket PC is a handheld computer, which features many of the same capabilities.</a></h5>
+                        <span><i class="fa fa-clock-o"></i> 19th May, 2019</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- latest BLog Section End -->
+<!-- Newslatter Section Begin -->
+<section class="newslatter-section">
+    <div class="container">
+        <div class="newslatter-inner set-bg" data-setbg="../manup/img/newslatter-bg.jpg">
+            <div class="ni-text">
+                <h3>Subscribe Newsletter</h3>
+                <p>Subscribe to our newsletter and don’t miss anything</p>
+            </div>
+            <form action="#" class="ni-form">
+                <input type="text" placeholder="Your email">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</section>
+<!-- Newslatter Section End -->
+<!-- Contact Section Begin -->
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-title">
+                    <h2>Location</h2>
+                    <p>Get directions to our event center</p>
+                </div>
+                <div class="cs-text">
+                    <div class="ct-address">
+                        <span>Address:</span>
+                        <p>Darshan University <br />Rajkot-morbi Highway</p>
+                    </div>
+                    <ul>
+                        <li>
+                            <span>Phone:</span>
+                            (+91) 9913324627
+                        </li>
+                        <li>
+                            <span>Email:</span>
+                            info.manup@manup.com
+                        </li>
+                    </ul>
+                    <div class="ct-links">
+                        <span>Website:</span>
+                        <a href="https://krutikvachhani23753.wordpress.com">https://krutikvachhani23753.wordpress.com</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="cs-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52901.38789495531!2d-118.19465514866786!3d34.03523211493029!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2cf71ad83ff9f%3A0x518b28657f4543b7!2sEast%20Los%20Angeles%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1579763856144!5m2!1sen!2sbd"
+                            height="400" style="border:0;" allowfullscreen=""></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Section End -->
+ *@

@@ -21,6 +21,11 @@ namespace Event_Management.Controllers
             return View();
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         #region SendOTPByEmail
         [HttpPost]
         public async Task<ActionResult> SendOTP(string email)
@@ -41,7 +46,7 @@ namespace Event_Management.Controllers
             await _emailService.SendEmailAsync(email, "Your OTP Code", message);
 
             //return Json(new { success = true, message = "OTP sent successfully!" });
-            return View("OTP");
+            return View("OTPVerify");
         }
         #endregion
 
@@ -71,53 +76,5 @@ namespace Event_Management.Controllers
             return View("Index", "Home");
         }
         #endregion
-
-        //#region SendOTPBySMS
-
-        //private static Dictionary<string, (string otp, DateTime expiry)> otpStorage = new Dictionary<string, (string, DateTime)>();
-        //private SmsService _smsService = new SmsService();
-
-        //[HttpPost]
-        //public async Task<IActionResult> SendOtp(string phoneNumber)
-        //{
-        //    if (string.IsNullOrEmpty(phoneNumber))
-        //    {
-        //        ViewBag.Message = "Phone number is required.";
-        //        return View("OTP"); ;
-        //    }
-
-        //    ViewBag.phonenumber = phoneNumber;
-
-        //    string otp = new Random().Next(100000, 999999).ToString(); // Generate 6-digit OTP
-        //    //otpStorage[phoneNumber] = otp;
-        //    await _smsService.SendSms(phoneNumber, otp);
-
-        //    ViewBag.Message = "OTP sent successfully!";
-        //    return View("OTP");
-        //}
-
-
-        //[HttpPost]
-        //public async Task<IActionResult> VerifyOTP(string phoneNumber, string otp)
-        //{
-        //    if (string.IsNullOrEmpty(phoneNumber) || string.IsNullOrEmpty(otp))
-        //    {
-        //        ViewBag.Message = "Phone number and OTP are required.";
-        //        return View("OTP");
-        //    }
-
-        //    if (otpStorage.ContainsKey(phoneNumber))
-        //    {
-        //        otpStorage.Remove(phoneNumber); // Remove OTP after verification
-        //        ViewBag.Message = "OTP verified successfully!";
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = "Invalid OTP. Please try again.";
-        //    }
-
-        //    return View("OTP");
-        //}
-        //#endregion
     }
 }

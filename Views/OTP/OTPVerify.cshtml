@@ -1,0 +1,31 @@
+﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using System.Data;
+@using System.Data.SqlClient;
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate text-center">
+                <h2>OTP Verification</h2>
+                <br/>
+                @* <form action="@Url.Action("SendOTP", "OTP")" method="post"> *@
+                @*     @* <label>Email:</label> *@
+                @*     <input type="email" placeholder="Enter Email Address" name="email" required /> *@
+                @*     <br/> *@
+                @*     <br/> *@
+                @*     <button class="btn btn-md btn-primary" type="submit">Send OTP</button> *@
+                @* </form> *@
+
+                <form action="@Url.Action("VerifyOTP", "OTP")" method="post">
+                    @* <label>Enter OTP:</label> *@
+                    <input type="text" placeholder="Enter OTP" name="otp" required />
+                    <input class="form-control form-control-lg" type="hidden" name="email" value="@ViewBag.Email" />
+                    <button class="btn btn-lg btn-primary" type="submit">Verify OTP</button>
+                </form>
+            </div>
+        </div>
+        </div>
+        </section>

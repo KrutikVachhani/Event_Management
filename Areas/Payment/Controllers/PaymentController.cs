@@ -15,6 +15,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using DocumentFormat.OpenXml.Drawing.Charts;
+using DocumentFormat.OpenXml.EMMA;
+using Twilio.Types;
 //using System.Web.Mvc;
 
 namespace Event_Management.Areas.Payment.Controllers
@@ -72,14 +74,14 @@ namespace Event_Management.Areas.Payment.Controllers
         }
         #endregion
 
-        public IActionResult InitiatePayment()
+        public IActionResult InitiatePayment(int PriceID, int Price)
         {
             Random _random = new Random();
             string TransactionId = _random.Next(0, 10000).ToString();
 
             //decimal amount = Convert.ToDecimal(_PaymentDetails.Price) * 100;
             Dictionary<string, object> input = new Dictionary<string, object>();
-            input.Add("amount", 50000); // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            input.Add("amount", Price*100); // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
             input.Add("currency", "INR");
             input.Add("receipt", TransactionId);
 

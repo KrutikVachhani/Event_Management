@@ -6,6 +6,7 @@
 @model SEC_UserModel
 
 
+
 <div class="wrapper vh-100">
     <div class="row align-items-center h-100">
         <form class="col-lg-6 col-md-8 col-10 mx-auto" asp-area="SEC_User" asp-controller="SEC_User" asp-action="Register">
@@ -20,6 +21,13 @@
               </svg>
                 </a>
                 <h2 class="my-3">Register</h2>
+                @* <h2>alert(@ViewBag.Msg)</h2> *@
+                @if(ViewBag.Msg !=null){
+                    <script type="text/javascript">window.onload = function(){
+                        alert("@ViewBag.Msg");
+                    }
+                        </script>
+                }
             </div>
             <div class="form-group">
                 <label>UserName</label>

@@ -91,7 +91,8 @@ namespace Event_Management.Areas.SEC_User.Controllers
                 }
                 else if (HttpContext.Session.GetString("UserName") != null && HttpContext.Session.GetString("Password") != null)
                 {
-                    return RedirectToAction("OTP", "OTP");
+                    //return RedirectToAction("OTP", "OTP");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             return RedirectToAction("OTP", "OTPVerification");
@@ -117,6 +118,7 @@ namespace Event_Management.Areas.SEC_User.Controllers
             }
             else
             {
+                ViewBag.Msg = "Email Already Exist!";
                 return RedirectToAction("SEC_UserRegister");
             }
         }
