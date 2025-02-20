@@ -75,6 +75,7 @@ namespace Event_Management.Areas.Event.Controllers
             {
                 return RedirectToAction("EventList");
             }
+            //return RedirectToAction("EventByID");
         }
         #endregion
 

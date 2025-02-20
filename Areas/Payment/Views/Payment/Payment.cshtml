@@ -19,7 +19,18 @@
 </head>
 
 <body>
-    <button id="rzp-button1">Pay with Razorpay</button>
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5 pb-3">
+                <div class="col-md-7 heading-section ftco-animate text-center">
+                    <h1 class="text-center text-bold">Payment Options</h1>
+                    <br/>
+                    <button class="btn btn-lg btn-primary" id="rzp-button1">Pay with Razorpay</button>
+
+                </div>
+            </div>
+        </div>
+    </section>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
         var orderId = "@ViewBag.orderid"

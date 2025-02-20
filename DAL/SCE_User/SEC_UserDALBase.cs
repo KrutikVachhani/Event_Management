@@ -2,20 +2,23 @@
 using System.Data.Common;
 using System.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using System.Data.SqlClient;
 
 namespace Event_Management.DAL.SCE_User
 {
     public class SEC_UserDALBase : DAL_Helper
     {
         #region SelectByUserNamePassword
-        public DataTable dbo_PR_User_SelectByUserNamePassword(string UserName, string Password)
+        public DataTable dbo_PR_User_SelectByUserNamePassword(string EmailAddress, string Password)
         {
             try
             {
+                string hashedPassword = dbo_PR_User_GetPassword(EmailAddress);
                 SqlDatabase sqlDB = new SqlDatabase(connectionstr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_User_SelectByUserNamePassword");
-                sqlDB.AddInParameter(dbCMD, "UserName", SqlDbType.VarChar, UserName);
-                sqlDB.AddInParameter(dbCMD, "Password", SqlDbType.VarChar, Password);
+                sqlDB.AddInParameter(dbCMD, "EmailAddress", SqlDbType.VarChar, EmailAddress);
+
+                sqlDB.AddInParameter(dbCMD, "Password", SqlDbType.VarChar, hashedPassword);
 
                 DataTable dt = new DataTable();
                 using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
@@ -32,32 +35,34 @@ namespace Event_Management.DAL.SCE_User
         }
         #endregion
 
-        //#region Check For Email Exist
+        #region GetPassword
 
-        //public bool dbo_PR_User_PR_User_SelectByEmail(string EmailAddress)
-        //{
-        //    try
-        //    {
-        //        SqlDatabase sqlDB = new SqlDatabase(connectionstr);
-        //        DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_User_SelectByEmail");
-        //        sqlDB.AddInParameter(dbCMD, "EmailAddress", SqlDbType.VarChar, EmailAddress);
-        //        DataTable dt = new DataTable();
-        //        using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
-        //        {
-        //            dt.Load(dr);
-        //        }
-        //        if(dt.Rows.Count > 0)
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return false;
-        //    }
-        //}
+        public string dbo_PR_User_GetPassword(string EmailAddress)
+        {
+            try
+            {
+                string result = null;
+                SqlDatabase sqlDB = new SqlDatabase(connectionstr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_User_GetPassword");
+                sqlDB.AddInParameter(dbCMD, "EmailAddress", SqlDbType.VarChar, EmailAddress);
+                DataTable dt = new DataTable();
 
-        //#endregion
+                using (IDataReader reader = sqlDB.ExecuteReader(dbCMD))
+                {
+                    if (reader.Read())
+                    {
+                        result = reader.GetString(0);
+                    }
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        #endregion
 
 
         #region User_Register
@@ -102,5 +107,7 @@ namespace Event_Management.DAL.SCE_User
             }
         }
         #endregion
+
+
     }
 }

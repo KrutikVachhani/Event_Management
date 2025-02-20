@@ -5,6 +5,7 @@ using Event_Management.Areas.SEC_User.Models;
 using System.Configuration;
 using Event_Management.DAL.SCE_User;
 using Event_Management.BAL;
+using BCrypt.Net;
 
 namespace Event_Management.Areas.SEC_User.Controllers
 {
@@ -41,7 +42,7 @@ namespace Event_Management.Areas.SEC_User.Controllers
         {
             string error = null;
 
-            if (sEC_UserModel.UserName == null)
+            if (sEC_UserModel.EmailAddress == null)
             {
                 error += "User Name is required";
             }
@@ -58,7 +59,7 @@ namespace Event_Management.Areas.SEC_User.Controllers
             else
             {
                 SEC_UserDAL sEC_UserDAL = new SEC_UserDAL();
-                DataTable dt = sEC_UserDAL.dbo_PR_User_SelectByUserNamePassword(sEC_UserModel.UserName, sEC_UserModel.Password);
+                DataTable dt = sEC_UserDAL.dbo_PR_User_SelectByUserNamePassword(sEC_UserModel.EmailAddress, sEC_UserModel.Password);
                 if (dt.Rows.Count > 0)
                 {
                     foreach (DataRow dr in dt.Rows)
@@ -111,6 +112,8 @@ namespace Event_Management.Areas.SEC_User.Controllers
         public IActionResult Register(SEC_UserModel sEC_UserModel)
         {
             SEC_UserDAL sEC_UserDAL = new SEC_UserDAL();
+            sEC_UserModel.Password = BCrypt.Net.BCrypt.HashPassword(sEC_UserModel.Password);
+
             bool IsSuccess = sEC_UserDAL.dbo_PR_SEC_User_Register(sEC_UserModel.UserName, sEC_UserModel.Password, sEC_UserModel.FirstName, sEC_UserModel.LastName, sEC_UserModel.PhotoPath, sEC_UserModel.EmailAddress);
             if (IsSuccess)
             {
