@@ -177,7 +177,7 @@
                         <div class="block-7">
                             <div class="text-center">
                                 <h2 class="heading">Personal</h2>
-                                <span class="price"><sup>$</sup> <span class="number">85</span></span>
+                                <span class="price"><sup>₹</sup> <span class="number">199</span></span>
                                 <span class="excerpt d-block">per Month</span>
 
                                 <h3 class="heading-2 my-4">Enjoy All The Features</h3>
@@ -191,8 +191,11 @@
                                     <li>One Speakers</li>
                                     <li>Papers</li>
                                 </ul>
+                                <form asp-area="Payment" asp-controller="Payment" asp-action="InitiatePayment">
+                                    <input type="hidden" name="Price" value="199" />
+                                    <button type="submit" class="btn btn-primary d-block px-2 py-3"> Get Ticket</button>
+                                </form>
 
-                                <a href="#" class="btn btn-primary d-block px-2 py-3">Buy Ticket</a>
                             </div>
                         </div>
                     </div>
@@ -200,7 +203,7 @@
                         <div class="block-7">
                             <div class="text-center">
                                 <h2 class="heading">Small Team</h2>
-                                <span class="price"><sup>$</sup> <span class="number">200</span></span>
+                                <span class="price"><sup>₹</sup> <span class="number">499</span></span>
                                 <span class="excerpt d-block">per Month</span>
 
                                 <h3 class="heading-2 my-4">Enjoy All The Features</h3>
@@ -215,7 +218,10 @@
                                     <li>Papers</li>
                                 </ul>
 
-                                <a href="#" class="btn btn-primary d-block px-2 py-3">Buy Ticket</a>
+                                <form asp-area="Payment" asp-controller="Payment" asp-action="InitiatePayment">
+                                    <input type="hidden" name="Price" value="499" />
+                                    <button type="submit" class="btn btn-primary d-block px-2 py-3"> Get Ticket</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -223,7 +229,7 @@
                         <div class="block-7">
                             <div class="text-center">
                                 <h2 class="heading">Family Pack</h2>
-                                <span class="price"><sup>$</sup> <span class="number">499</span></span>
+                                <span class="price"><sup>₹</sup> <span class="number">999</span></span>
                                 <span class="excerpt d-block">per Month</span>
 
                                 <h3 class="heading-2 my-4">Enjoy All The Features</h3>
@@ -238,7 +244,10 @@
                                     <li>Papers</li>
                                 </ul>
 
-                                <a href="#" class="btn btn-primary d-block px-2 py-3">Buy Ticket</a>
+                                <form asp-area="Payment" asp-controller="Payment" asp-action="InitiatePayment">
+                                    <input type="hidden" name="Price" value="999" />
+                                    <button type="submit" class="btn btn-primary d-block px-2 py-3"> Get Ticket</button>
+                                </form>
                             </div>
                         </div>
                     </div>

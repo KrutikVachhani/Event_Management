@@ -109,7 +109,14 @@ namespace Event_Management.Areas.Payment.Controllers
             model.TransactionId = razorpay_payment_id;
             model.OrderId = razorpay_order_id;
 
-            return View("PaymentSuccesfull", model);
+            if(paymentDALBase.PaymentSave(model))
+            {
+                return View("PaymentSuccesfull", model);
+            }
+            else
+            {
+                return View("PaymentSuccesfull", model);
+            }
         }
 
     }

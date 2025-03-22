@@ -6,6 +6,7 @@ using System.Configuration;
 using Event_Management.DAL.SCE_User;
 using Event_Management.BAL;
 using BCrypt.Net;
+using BCrypt;
 
 namespace Event_Management.Areas.SEC_User.Controllers
 {
@@ -32,6 +33,13 @@ namespace Event_Management.Areas.SEC_User.Controllers
 
         #region User Register Page
         public IActionResult SEC_UserRegister()
+        {
+            return View();
+        }
+        #endregion
+
+        #region User Password Forgot Password Page
+        public IActionResult SEC_UserForgotPassword()
         {
             return View();
         }
@@ -64,6 +72,7 @@ namespace Event_Management.Areas.SEC_User.Controllers
                 {
                     foreach (DataRow dr in dt.Rows)
                     {
+
                         Console.WriteLine(dr);
                         HttpContext.Session.SetString("UserID", dr["UserID"].ToString());
                         HttpContext.Session.SetString("UserName", dr["UserName"].ToString());
@@ -112,7 +121,8 @@ namespace Event_Management.Areas.SEC_User.Controllers
         public IActionResult Register(SEC_UserModel sEC_UserModel)
         {
             SEC_UserDAL sEC_UserDAL = new SEC_UserDAL();
-            sEC_UserModel.Password = BCrypt.Net.BCrypt.HashPassword(sEC_UserModel.Password);
+            
+            //sEC_UserModel.Password = sEC_UserDAL.HashPassword(sEC_UserModel.Password);
 
             bool IsSuccess = sEC_UserDAL.dbo_PR_SEC_User_Register(sEC_UserModel.UserName, sEC_UserModel.Password, sEC_UserModel.FirstName, sEC_UserModel.LastName, sEC_UserModel.PhotoPath, sEC_UserModel.EmailAddress);
             if (IsSuccess)
@@ -124,6 +134,24 @@ namespace Event_Management.Areas.SEC_User.Controllers
                 ViewBag.Msg = "Email Already Exist!";
                 return RedirectToAction("SEC_UserRegister");
             }
+        }
+        #endregion
+
+        #region Update Password
+
+        public IActionResult UpdatePassword(string EmailAddress, string Password)
+        {
+            SEC_UserDAL sEC_UserDAL = new SEC_UserDAL();
+            bool isSuccess = sEC_UserDAL.dbo_PR_User_UpdatePassword(EmailAddress, Password);
+            if (isSuccess)
+            {
+                return RedirectToAction("SEC_UserLogin");
+            }
+            else
+            {
+                return RedirectToAction("SEC_UserForgotPassword");
+            }
+
         }
         #endregion
     }

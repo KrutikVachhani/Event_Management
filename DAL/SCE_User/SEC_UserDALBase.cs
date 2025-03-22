@@ -3,6 +3,12 @@ using System.Data.Common;
 using System.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data.SqlClient;
+using Event_Management.Areas.SEC_User.Models;
+using System.Net.Mail;
+using System;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Security.Policy;
 
 namespace Event_Management.DAL.SCE_User
 {
@@ -13,12 +19,12 @@ namespace Event_Management.DAL.SCE_User
         {
             try
             {
-                string hashedPassword = dbo_PR_User_GetPassword(EmailAddress);
+                //string hashedPassword = dbo_PR_User_GetPassword(EmailAddress);
                 SqlDatabase sqlDB = new SqlDatabase(connectionstr);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_User_SelectByUserNamePassword");
                 sqlDB.AddInParameter(dbCMD, "EmailAddress", SqlDbType.VarChar, EmailAddress);
 
-                sqlDB.AddInParameter(dbCMD, "Password", SqlDbType.VarChar, hashedPassword);
+                sqlDB.AddInParameter(dbCMD, "Password", SqlDbType.VarChar, Password);
 
                 DataTable dt = new DataTable();
                 using (IDataReader dr = sqlDB.ExecuteReader(dbCMD))
@@ -64,7 +70,6 @@ namespace Event_Management.DAL.SCE_User
 
         #endregion
 
-
         #region User_Register
         public bool dbo_PR_SEC_User_Register(string UserName, string Password, string FirstName, string LastName, string PhotoPath, string EmailAddress)
         {
@@ -108,6 +113,76 @@ namespace Event_Management.DAL.SCE_User
         }
         #endregion
 
+        #region UpdatePassword
 
+        public bool dbo_PR_User_UpdatePassword(string EmailAddress, string Password)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(connectionstr);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("dbo.PR_User_UpdatePassword");
+                sqlDB.AddInParameter(dbCMD, "EmailAddress", SqlDbType.VarChar, EmailAddress);
+                sqlDB.AddInParameter(dbCMD, "Password", SqlDbType.VarChar, Password);
+                DataTable dt = new DataTable();
+
+                bool isSuccess = Convert.ToBoolean(sqlDB.ExecuteNonQuery(dbCMD));
+                return isSuccess;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region Hash Password
+        public string HashPassword(string password)
+        {
+            byte[] salt = new byte[16];
+            using(var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(salt);
+            }
+
+            byte[] hashed = Rfc2898DeriveBytes.Pbkdf2(
+                password: password,
+                salt: salt,
+                iterations: 100000,
+                hashAlgorithm: HashAlgorithmName.SHA256,
+                outputLength:32
+                );
+            return BitConverter.ToString(salt).Replace("-", "") + ":" + BitConverter.ToString(hashed).Replace("-", "");
+        }
+
+        #endregion
+
+        #region Verify Password
+
+        public bool VerifyPassword(string password, string storedPassword)
+        {
+            string[] parts = storedPassword.Trim().Split(':');
+            if(parts.Length != 2) return false;
+            try
+            {
+                byte[] salt = Convert.FromBase64String(parts[0]);
+                byte[] hashBytes = Convert.FromBase64String(parts[1]);
+
+                byte[] hash = Rfc2898DeriveBytes.Pbkdf2(
+                    password: password,
+                    salt: salt,
+                    iterations: 100000,
+                    hashAlgorithm: HashAlgorithmName.SHA256,
+                    outputLength: 32);
+
+                return CryptographicOperations.FixedTimeEquals(hash, hashBytes);
+            }
+            catch(FormatException ex)
+            {
+                return false;
+            }
+        }
+
+        #endregion
     }
 }

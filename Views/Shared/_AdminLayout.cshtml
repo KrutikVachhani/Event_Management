@@ -83,17 +83,19 @@
                         <polygon class="st0" points="78,105 15,105 24,87 87,87 	" />
                         <polygon class="st0" points="96,69 33,69 42,51 105,51 	" />
                         <polygon class="st0" points="78,33 15,33 24,15 87,15 	" />
-                        <span>Manup</span>
+                        @* <span>Eventalk</span> *@
                 </g>
               </svg>
                     </a>
                 </div>
-                <div class="navbar-nav flex-fill w-100 mb-2">
-                    <a asp-area="SEC_Admin" asp-controller="SEC_Admin" asp-action="SEC_AdminView" class="nav-link">
-                        <i class="fe fe-home fe-16"></i>
-                        <span class="ml-3 item-text">Dashboard</span>
-                    </a>
-                </div>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item w-100">
+                        <a class="nav-link" asp-area="SEC_Admin" asp-controller="SEC_Admin" asp-action="SEC_AdminView">
+                            <i class="fe fe-home fe-16"></i>
+                            <span class="ml-3 item-text">Dashboard</span>
+                        </a>
+                    </li>
+                </ul>
                 <p class="text-muted nav-heading mt-4 mb-1">
                     <span>Components</span>
                 </p>

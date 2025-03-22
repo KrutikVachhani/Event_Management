@@ -8,12 +8,12 @@
 @model DataTable
 
 
-
+<h1>Hello, @CommonVariables.UserName()</h1>
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="row">
                 <div class="col-md-6 col-xl-3 mb-4">
-                <a asp-area="Users" asp-controller="Users" asp-action="UserList">
+                <a asp-area="Users" asp-controller="Users" asp-action="UserList" style="text-decoration:none">
                     <div class="card shadow">
                         <div class="card-body">
                             <div class="row align-items-center">
@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="col-md-6 col-xl-3 mb-4">
-                    <a asp-area="Users" asp-controller="Users" asp-action="AdminList">
+                <a asp-area="Users" asp-controller="Users" asp-action="AdminList" style="text-decoration:none">
                     <div class="card shadow">
                         <div class="card-body">
                             <div class="row align-items-center">
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="col-md-6 col-xl-3 mb-4">
-                    <a asp-area="Users" asp-controller="Users" asp-action="ClientList">
+                <a asp-area="Users" asp-controller="Users" asp-action="ClientList" style="text-decoration:none">
                     <div class="card shadow">
                         <div class="card-body">
                             <div class="row align-items-center">
@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="col-md-6 col-xl-3 mb-4">
-                    <a asp-area="Users" asp-controller="Users" asp-action="CustomerList">
+                <a asp-area="Users" asp-controller="Users" asp-action="CustomerList" style="text-decoration:none">
                     <div class="card shadow">
                         <div class="card-body">
                             <div class="row align-items-center">
@@ -99,7 +99,7 @@
 
             <div class="row">
                 <div class="col-md-6 col-xl-3 mb-4">
-                    <a asp-area="Event" asp-controller="Event" asp-action="EventList">
+                <a asp-area="Event" asp-controller="Event" asp-action="EventList" style="text-decoration:none">
                     <div class="card shadow">
                         <div class="card-body">
                             <div class="row align-items-center">
@@ -120,7 +120,7 @@
                 </div>
 
                 <div class="col-md-6 col-xl-3 mb-4">
-                    <a asp-area="Service" asp-controller="Service" asp-action="ServiceList">
+                <a asp-area="Service" asp-controller="Service" asp-action="ServiceList" style="text-decoration:none">
                     <div class="card shadow">
                         <div class="card-body">
                             <div class="row align-items-center">
@@ -141,7 +141,7 @@
                 </div>
 
                 <div class="col-md-6 col-xl-3 mb-4">
-                    <a asp-area="Venue" asp-controller="Venue" asp-action="VenueList">
+                <a asp-area="Venue" asp-controller="Venue" asp-action="VenueList" style="text-decoration:none">
                     <div class="card shadow">
                         <div class="card-body">
                             <div class="row align-items-center">
@@ -162,7 +162,7 @@
                 </div>
 
                 <div class="col-md-6 col-xl-3 mb-4">
-                    <a asp-area="Comment" asp-controller="Comment" asp-action="CommentList">
+                <a asp-area="Comment" asp-controller="Comment" asp-action="CommentList" style="text-decoration:none">
                     <div class="card shadow">
                         <div class="card-body">
                             <div class="row align-items-center">
@@ -184,4 +184,4 @@
             </div>
         </div>
     </div>
-    <h1>@CommonVariables.UserName()</h1>
+    

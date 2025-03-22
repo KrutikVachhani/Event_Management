@@ -48,27 +48,23 @@ namespace Event_Management.DAL.Payment
             SqlDatabase sqlDatabase = new SqlDatabase(connectionstr);
             try
             {
-                if (paymentModel.CardDetailID == null)
+                if (paymentModel.PaymentID == null)
                 {
-                    DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_CardDetails_Insert");
+                    DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_PaymentInsert");
                     sqlDatabase.AddInParameter(dbCommand, "@UserID", DbType.Int32, CommonVariables.UserID());
                     sqlDatabase.AddInParameter(dbCommand, "@PriceID", DbType.Int32, paymentModel.PriceID);
-                    sqlDatabase.AddInParameter(dbCommand, "@CardNumber", DbType.String, paymentModel.CardNumber);
-                    sqlDatabase.AddInParameter(dbCommand, "@CardHolderName", DbType.String, paymentModel.CardHolderName);
-                    sqlDatabase.AddInParameter(dbCommand, "@CardExpiryDate", DbType.DateTime, paymentModel.CardExpiryDate);
-                    sqlDatabase.AddInParameter(dbCommand, "@CardCVVNumber", DbType.Int32, paymentModel.CardCVVNumber);
+                    sqlDatabase.AddInParameter(dbCommand, "@OrderID", DbType.String, paymentModel.OrderId);
+                    sqlDatabase.AddInParameter(dbCommand, "@TransactionID", DbType.String, paymentModel.TransactionId);
                     bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
                     return isSuccess;
                 }
                 else
                 {
                     DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Venue_Update");
-                    sqlDatabase.AddInParameter(dbCommand, "@CardDetailID", DbType.Int32, paymentModel.CardDetailID);
+                    sqlDatabase.AddInParameter(dbCommand, "@CardDetailID", DbType.Int32, paymentModel.PaymentID);
                     sqlDatabase.AddInParameter(dbCommand, "@UserID", DbType.Int32, paymentModel.UserID);
-                    sqlDatabase.AddInParameter(dbCommand, "@CardNumber", DbType.String, paymentModel.CardNumber);
-                    sqlDatabase.AddInParameter(dbCommand, "@CardHolderName", DbType.String, paymentModel.CardHolderName);
-                    sqlDatabase.AddInParameter(dbCommand, "@CardExpiryDate", DbType.DateTime, paymentModel.CardExpiryDate);
-                    sqlDatabase.AddInParameter(dbCommand, "@CardCVVNumber", DbType.Int32, paymentModel.CardCVVNumber);
+                    sqlDatabase.AddInParameter(dbCommand, "@OrderID", DbType.String, paymentModel.OrderId);
+                    sqlDatabase.AddInParameter(dbCommand, "@TransactionID", DbType.String, paymentModel.TransactionId);
                     bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
                     return isSuccess;
                 }

@@ -27,5 +27,7 @@ namespace Event_Management.Areas.Payment.Models
         public string TransactionId { get; set; }
         [NotMapped]
         public string OrderId { get; set; }
+
+        public int? PaymentID { get; set; }
     }
 }
