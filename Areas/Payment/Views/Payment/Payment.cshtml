@@ -1,4 +1,5 @@
-﻿@* @model Event_Management.Areas.Payment.Models.PaymentModel *@
+﻿@using Event_Management.BAL
+@* @model Event_Management.Areas.Payment.Models.PaymentModel *@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,6 +16,7 @@
         <input id="razorpay_payment_id" type="hidden" name="razorpay_payment_id" />
         <input id="razorpay_order_id" type="hidden" name="razorpay_order_id" />
         <input id="razorpay_signature" type="hidden" name="razorpay_signature" />
+        <input type="text" value="@CommonVariables.UserID()" />
     </form>
 </head>
 

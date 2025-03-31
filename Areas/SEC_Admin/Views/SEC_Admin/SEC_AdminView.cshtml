@@ -182,6 +182,29 @@
                     </a>
                 </div>
             </div>
+
+            <div class="row">
+            <div class="col-md-6 col-xl-3 mb-4">
+                <a asp-area="Payment" asp-controller="Payment" asp-action="PaymentList" style="text-decoration:none">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    @foreach (DataRow dr in Model.Rows)
+                                    {
+                                        <span class="h2 mb-0">@dr["CountPayments"]</span>
+                                    }
+                                    <p class="small text-muted mb-0">Total Tickets</p>
+                                </div>
+                                <div class="col-auto">
+                                    <span class="fe fe-32 fe-align-left text-muted mb-0"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
         </div>
     </div>
     

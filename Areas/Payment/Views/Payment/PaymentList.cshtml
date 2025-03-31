@@ -1,0 +1,185 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@using System.Data;
+@using System.Data.SqlClient;
+@using Event_Management.Areas.Payment.Models;
+@* @using Event_Management.CF; *@
+@using Microsoft.EntityFrameworkCore;
+@model DataTable
+
+<div class="row justify-content-center">
+    <div class="col-12">
+        <h2 class="mb-2 page-title">Payment List</h2>
+        @* <p class="card-text">DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, built upon the foundations of progressive enhancement, that adds all of these advanced features to any HTML table. </p> *@
+        <div class="row my-4">
+
+            <div class="col-md-12">
+                <form method="post" asp-area="Payment" asp-controller="Payment" asp-action="PaymentFilter">
+                    <div class="card shadow mb-4">
+                        <div class="card-header">
+                            <h4 class="card-title">Filter</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-6">
+                                        <label for="simpleinput">Price</label>
+                                        <input type="number" id="simpleinput" class="form-control" placeholder="Price" name="Price">
+                                    </div>
+                                </div> <!-- /.col -->
+                                <div class="col-md-6">
+                                    <div class="form-group mb-6">
+                                        <label for="simpleinput">Payment Date</label>
+                                        <input type="date" id="simpleinput" class="form-control" placeholder="Payment Date" name="PaymentDate">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+
+                                        <button value="Filter" type="submit" class="btn mb-2 btn-info">Search</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- / .card -->
+                </form>
+            </div>
+
+            <div class="col-md-12">
+                <div class="card shadow">
+                    <div class="card-body">
+
+                        <a class="btn btn-success mb-2" asp-area="Payment" asp-controller="Payment" asp-action="ExportStudentsToExcel">Export Excel</a>
+                        <div id="dataTable-1_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            @* <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                <div class="dataTables_length" id="dataTable-1_length">
+                                <label>
+                                Show
+                                <select name="dataTable-1_length" aria-controls="dataTable-1" class="custom-select custom-select-sm form-control form-control-sm"><option value="16">16</option><option value="32">32</option><option value="64">64</option><option value="-1">All</option></select> entries
+                                </label>
+                                </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                <div id="dataTable-1_filter" class="dataTables_filter">
+                                <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable-1"></label>
+                                </div>
+                                </div>
+                                </div> *@
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table datatables dataTable no-footer" id="dataTable-1" role="grid" aria-describedby="dataTable-1_info">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>PaymentID</th>
+                                                <th>UserID</th>
+                                                <th>Price</th>
+                                                <th>OrderID</th>
+                                                <th>TransactionID</th>
+                                                <th>Payment Date</th>
+                                                <th colspan="2">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (DataRow dr in Model.Rows)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <label class="custom-control-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>@dr["PaymentID"]</td>
+                                                    <td>@dr["UserID"]</td>
+                                                    <td>@dr["Price"]</td>
+                                                    <td>@dr["OrderID"]</td>
+                                                    <td>@dr["TransactionID"]</td>
+                                                    <td>@dr["PaymentDate"]</td>
+                                                    <td>
+                                                        <form method="post" asp-area="Users" asp-controller="Users" asp-action="UserDelete">
+                                                            <input type="hidden" name="UserID" value="@int.Parse(@dr["PaymentID"].ToString())">
+                                                            <button type="submit" value="Delete" class="btn mb-2 btn-danger">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            @* <div class="row">
+                                <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="dataTable-1_info" role="status" aria-live="polite">Showing 1 to 16 of 63 entries</div>
+                                </div>
+                                <div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTable-1_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dataTable-1_previous"><a href="#" aria-controls="dataTable-1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTable-1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable-1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable-1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable-1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item next" id="dataTable-1_next"><a href="#" aria-controls="dataTable-1" data-dt-idx="5" tabindex="0" class="page-link">Next</a></li></ul></div></div>
+                                </div> *@
+                        </div>
+
+                        <br />
+                        <!-- table -->
+                        @* <table class="table datatables" id="dataTable-1">
+                            <thead>
+                            <tr>
+                            <th></th>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>User Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email Address</th>
+                            <th>Created</th>
+                            <th>Modified</th>
+                            <th colspan="2">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (DataRow dr in Model.Rows)
+                            {
+                            <tr>
+                            <td>
+                            <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label"></label>
+                            </div>
+                            </td>
+                            <td>@dr["UserID"]</td>
+                            <td>
+                            <a class="symbol symbol-50px">
+                            <img src="@Url.Content(@dr["PhotoPath"].ToString())" style="width: 100px; height: 100px; object-fit:cover;  border-radius: 10px;" />
+                            </a>
+                            </td>
+                            <td>@dr["UserName"]</td>
+                            <td>@dr["FirstName"]</td>
+                            <td>@dr["LastName"]</td>
+                            <td>@dr["EmailAddress"]</td>
+                            <td>@dr["Created"]</td>
+                            <td>@dr["Modified"]</td>
+                            <td>
+
+                            <form method="post" asp-area="Users" asp-controller="Users" asp-action="UserAdd">
+                            <input type="hidden" name="UserID" value="@int.Parse(@dr["UserID"].ToString())">
+                            <button type="submit" class="btn mb-2 btn-info">Edit</button>
+                            </form>
+                            </td>
+                            <td>
+                            <form method="post" asp-area="Users" asp-controller="Users" asp-action="UserDelete">
+                            <input type="hidden" name="UserID" value="@int.Parse(@dr["UserID"].ToString())">
+                            <button type="submit" value="Delete" class="btn mb-2 btn-danger">Delete</button>
+                            </form>
+                            </td>
+                            </tr>
+                            }
+                            </tbody>
+                            </table> *@
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

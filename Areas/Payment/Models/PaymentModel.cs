@@ -29,5 +29,7 @@ namespace Event_Management.Areas.Payment.Models
         public string OrderId { get; set; }
 
         public int? PaymentID { get; set; }
+
+        public DateOnly? PaymentDate { get; set; }
     }
 }
