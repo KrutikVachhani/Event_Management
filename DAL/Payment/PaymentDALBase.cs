@@ -166,7 +166,7 @@ namespace Event_Management.DAL.Payment
         }
         #endregion
 
-        #region
+        #region Payment Filter
 
         public DataTable PaymentFilter(PaymentModel model)
         {
@@ -175,11 +175,11 @@ namespace Event_Management.DAL.Payment
 
             if (model.Price == null)
             {
-                sqlDatabase.AddInParameter(dbCommand, "Price", DbType.String, DBNull.Value);
+                sqlDatabase.AddInParameter(dbCommand, "Price", DbType.Int32, DBNull.Value);
             }
             else
             {
-                sqlDatabase.AddInParameter(dbCommand, "Price", DbType.String, model.Price);
+                sqlDatabase.AddInParameter(dbCommand, "Price", DbType.Int32, model.Price);
             }
 
             if (model.PaymentDate == null)
@@ -198,6 +198,27 @@ namespace Event_Management.DAL.Payment
                 dt.Load(dataReader);
             }
             return dt;
+        }
+
+        #endregion
+
+        #region Find Unique User
+
+        public int PR_Payment_Find(int UserID)
+        {
+            PaymentModel paymentModel = new PaymentModel();
+            try
+            {
+                SqlDatabase sqlDatabase = new SqlDatabase(connectionstr);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Price_SelectByID");
+                sqlDatabase.AddInParameter(dbCommand, "@UserID", DbType.Int32, UserID);
+                int isSuccess = Convert.ToInt32(sqlDatabase.ExecuteNonQuery(dbCommand));
+                return isSuccess;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
 
         #endregion
